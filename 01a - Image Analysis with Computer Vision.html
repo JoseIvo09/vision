@@ -4,6 +4,31 @@
   <meta charset="UTF-8">
   <title>Visão Computacional com Azure</title>
   <link rel="stylesheet" href="CSS/estilos.css">
+
+  <style>
+    .botoes-finais {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+
+    .botao-link {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #0008D6; /* azul marinho */
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .botao-link:hover {
+      background-color: #001233;
+    }
   </style>
 </head>
 <body>
@@ -113,10 +138,16 @@ vision.show_image_analysis(image_path, analysis)
 <li line="125"> Detectar logotipos </li>
 <li line="126"> Fazer OCR (leitura de texto) </li>
  </ul>
-<p line="128"> Para saber mais, veja a <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/" line="128"> Documentação do Computer Vision </a> </p>
- <pre>
-<h2 id="exercícios" line="130"> <a href="Prova_01a.html" class="header_no_underline" line="130"> Exercícios </a> </h2>
-<h2 id="inicio" line="131"> <a href="index.html" class="header_no_underline" line="131"> Início </a> </h2>
- </pre>
+  <p>Para saber mais, veja a 
+    <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/">
+      Documentação do Computer Vision
+    </a>
+  </p>
+
+  <!-- Botões final da página -->
+  <div class="botoes-finais">
+    <a href="Prova_01a.html" class="botao-link">Exercícios</a>
+    <a href="index.html" class="botao-link">Início</a>
+  </div>
 </body>
 </html>
