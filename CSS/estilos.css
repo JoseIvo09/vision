@@ -16,6 +16,7 @@ h1, h2, h3 {
 figure {
   margin: 2rem 0;
   text-align: center;
+  transform: scale(1.4); /* Aumenta o tamanho do botão */
 }
 
 figcaption {
