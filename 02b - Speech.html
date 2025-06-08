@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8"> 
+  <title>Discurso </title>
+  <link rel="stylesheet" href="css/estilos.css"> 
+   </style>
+ </head>
+<body>
+<h1 id="discurso" line="0"> <a href="#discurso" class="header_no_underline" line="0"> Discurso </a> </h1>
+<p line="2"> Cada vez mais, esperamos ser capazes de se comunicar com os sistemas de inteligência artificial (AI) conversando com eles, geralmente com a expectativa de uma resposta falada. </p>
+<p line="4"> <img src="./images/speech.jpg" alt="Um robô falando" line="4" /> </p>
+<p line="6"> <em line="6"> Reconhecimento de fala </em> (um sistema de IA interpretando a linguagem falada) e <em line="6"> Síntese de fala </em> (Um sistema de IA que gera uma resposta falada) são os principais componentes de uma solução de IA habilitada para fala. </p>
+<h2 id="crie-um-recurso-de-serviços-cognitivos" line="8"> <a href="#crie-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="8"> Crie um recurso de serviços cognitivos </a> </h2>
+<p line="10"> Para criar software que possa interpretar a fala audível e responder verbalmente, você pode usar o <strong line="10"> Discurso </strong> Serviço cognitivo, que fornece uma maneira simples de transcrever a linguagem falada em texto e vice-versa. </p>
+<p line="12"> Se você ainda não possui um, use as seguintes etapas para criar um <strong line="12"> Serviços cognitivos </strong> Recurso em sua assinatura do Azure: </p>
+<ol line="14"> 
+<li line="14"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="14"> https://portal.azure.com </a>, fazendo login com sua conta da Microsoft. </li>
+<li line="15"> Clique no Botão <strong line="15"> ＋ Crie um recurso </strong>, pesquise <em line="15"> Serviços cognitivos </em> e criar um <strong line="15"> Serviços cognitivos </strong> Recurso com as seguintes configurações:
+<ul line="16"> 
+<li line="16"> <strong line="16"> Nome </strong>: <em line="16"> Digite um nome único </em>. </li>
+<li line="17"> <strong line="17"> Subscrição </strong>: <em line="17"> Sua assinatura do Azure </em>. </li>
+<li line="18"> <strong line="18"> Localização </strong>: <em line="18"> Qualquer local disponível </em>. </li>
+<li line="19"> <strong line="19"> Nível de preço </strong>: S0 </li>
+<li line="20"> <strong line="20"> Grupo de recursos </strong>: <em line="20"> Crie um grupo de recursos com um nome único </em>. </li>
+ </ul>
+ </li>
+<li line="21"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no <strong line="21"> Visão geral </strong> página, clique no link para gerenciar as chaves do serviço. Você precisará do terminal e das chaves para conectar -se ao seu recurso de serviços cognitivos dos aplicativos do cliente. </li>
+ </ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="23"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="23"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos </a> </h3>
+<p line="25"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação: </p>
+<ol line="27"> 
+<li line="27"> No portal do Azure, no <strong line="27"> Chaves e terminal </strong> página para seu recurso de serviço cognitivo, copie o <strong line="27"> Chave1 </strong> para o seu recurso e cole -o no código abaixo, substituindo <strong line="27"> Your_cog_key </strong>. </li>
+<li line="28"> Copie o <strong line="28"> Endpoint </strong> para o seu recurso e colar -o no código abaixo, substituindo <strong line="28"> Your_cog_endpoint </strong>. </li>
+<li line="29"> Copie o <strong line="29"> Localização </strong> para o seu recurso e colar -o no código abaixo, substituindo <strong line="29"> Your_cog_region </strong>. </li>
+<li line="30"> Execute o código abaixo clicando no <strong line="30"> Execute a célula </strong> (▷) botão à esquerda da célula. </li>
+ </ol>
+<pre line="32"> <code class="language-python" line="32"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+cog_region = 'YOUR_COG_REGION'
+
+print('Ready to use cognitive services in {} using key {}'.format(cog_region, cog_key))
+ </code> </pre>
+<p line="40"> Para usar o serviço de fala em seu recurso de serviços cognitivos, você precisar </p>
+<pre line="42"> <code class="language-python" line="42"> ! pip install azure.cognitiveservices.speech
+ </code> </pre>
+<h2 id="reconhecimento-de-fala" line="46"> <a href="#reconhecimento-de-fala" class="header_no_underline" line="46"> Reconhecimento de fala </a> </h2>
+<p line="48"> Suponha que você queira construir um sistema de automação residencial que aceite instruções faladas, como &ldquo;Ligue a luz&rdquo; ou &ldquo;Desligue a luz&rdquo;. Seu aplicativo precisa ser capaz de receber a entrada baseada em áudio (sua instrução falada) e interpretá-la transcrevendo-a para o texto que ele pode analisar e analisar. </p>
+<p line="50"> Agora você está pronto para transcrever algum discurso. A entrada pode ser um microfone ou um arquivo de áudio. Nesse caso, você usará um arquivo de áudio. </p>
+<p line="52"> Execute a célula abaixo para usar os recursos de fala para texto do serviço de fala para transcrever o áudio. </p>
+<pre line="54"> <code class="language-python" line="54"> import os
+import IPython
+from azure.cognitiveservices.speech import SpeechConfig, SpeechRecognizer, AudioConfig
+
+# Get spoken command from audio file
+file_name = 'light-on.wav'
+audio_file = os.path.join('data', 'speech', file_name)
+
+# Configure speech recognizer
+speech_config = SpeechConfig(cog_key, cog_region)
+audio_config = AudioConfig(filename=audio_file) # Use file instead of default (microphone)
+speech_recognizer = SpeechRecognizer(speech_config, audio_config)
+
+# Use a one-time, synchronous call to transcribe the speech
+speech = speech_recognizer.recognize_once()
+
+# Play audio and show transcribed text
+IPython.display.display(IPython.display.Audio(audio_file, autoplay=True),
+                        IPython.display.HTML(speech.text))
+
+ </code> </pre>
+<p line="77"> Tente alterar o <strong line="77"> file_name </strong> variável para <em line="77"> Light-off.wav </em>, e execute a célula novamente. O serviço deve poder transcrever os dois arquivos corretamente para o texto. </p>
+<h2 id="síntese-de-fala" line="79"> <a href="#síntese-de-fala" class="header_no_underline" line="79"> Síntese de fala </a> </h2>
+<p line="81"> Então agora você viu como o serviço de fala pode ser usado para transcrever a fala em texto; Mas e o oposto? Como você pode converter texto em fala? </p>
+<p line="83"> Bem, vamos supor que seu sistema de automação residencial interpretou um comando para ligar a luz. Uma resposta apropriada pode ser reconhecer o comando verbalmente (além de realmente executar a tarefa comandada!) </p>
+<pre line="85"> <code class="language-python" line="85"> import os
+import IPython
+from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesizer, AudioConfig
+
+# Get text to be spoken
+response_text = 'Turning the light on.'
+
+# Configure speech synthesis
+speech_config = SpeechConfig(cog_key, cog_region)
+output_file = os.path.join('data', 'speech', 'response.wav')
+audio_output = AudioConfig(filename=output_file) # Use a file instead of default (speakers)
+speech_synthesizer = SpeechSynthesizer(speech_config, audio_output)
+
+# Transcribe text into speech
+result = speech_synthesizer.speak_text(response_text)
+
+# Play the output audio file
+IPython.display.display(IPython.display.Audio(output_file, autoplay=True),
+                        IPython.display.Image(data=os.path.join(&quot;data&quot;, &quot;speech&quot; , response_text.lower() + 'jpg')))
+ </code> </pre>
+<p line="107"> Tente alterar o <strong line="107"> Response_text </strong> variável para <em line="107"> Desligando a luz </em>. (incluindo o período no final) e execute a célula novamente para ouvir o resultado. </p>
+<h2 id="saber-mais" line="109"> <a href="#saber-mais" class="header_no_underline" line="109"> Saber mais </a> </h2>
+<p line="111"> Você viu um exemplo muito simples de usar o serviço cognitivo da fala neste notebook. Você pode aprender mais sobre<a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/index-speech-to-text" line="111"> fala para texto </a>e<a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/index-text-to-speech" line="111"> Texto para fala </a>na documentação do serviço de fala. </p>
+<p line="113"> <a href="02c%20-%20Translation.html" line="113"> Próxima Aula </a> </p>
+<pre line="115"> <code line="115">  </code>
+<p><a href="index.html">Início</a></p>
+ </pre>
+ </body>
+ </html>

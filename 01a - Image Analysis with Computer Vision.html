@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visão Computacional com Azure</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="image-analysis-with-the-computer-vision-service" line="0"> <a href="#image-analysis-with-the-computer-vision-service" class="header_no_underline" line="0"> Image Analysis with the Computer Vision Service </a> </h1>
+<p line="2"> <img src="./images/computer_vision.jpg" alt="A robot holding a picture" line="2" /> </p>
+<p line="4"> <em line="4"> Computer Vision </em> é um ramo da inteligência artificial (IA) que explora o desenvolvimento de sistemas de IA que podem &ldquo;ver&rdquo; o mundo, seja em tempo real por meio de uma câmera ou analisando imagens e vídeos. Isso é possível porque imagens digitais são essencialmente apenas arrays de valores numéricos de pixels, e podemos usar esses valores como <em line="4"> features </em> para treinar modelos de machine learning que classificam imagens, detectam objetos e até geram descrições de fotos. </p>
+<h2 id="use-o-serviço-cognitivo-de-visão-computacional" line="6"> <a href="#use-o-serviço-cognitivo-de-visão-computacional" class="header_no_underline" line="6"> Use o Serviço Cognitivo de Visão Computacional </a> </h2>
+<p line="8"> O Microsoft Azure inclui vários <em line="8"> serviços cognitivos </em> que encapsulam funções comuns de IA, incluindo alguns que ajudam a construir soluções de visão computacional. </p>
+<p line="10"> O serviço cognitivo <em line="10"> Computer Vision </em> é um bom ponto de partida para nossa exploração de visão computacional no Azure. Ele usa modelos pré-treinados para analisar imagens e extrair informações. </p>
+<p line="12"> Por exemplo, suponha que a Northwind Traders deseje implementar uma &ldquo;loja inteligente&rdquo;, na qual serviços de IA monitoram a loja para identificar clientes que precisam de ajuda e direcionam funcionários para atendê-los. Usando o serviço Computer Vision, imagens capturadas por câmeras podem ser analisadas para fornecer descrições úteis do que está sendo retratado. </p>
+<h3 id="criar-um-recurso-de-serviços-cognitivos" line="14"> <a href="#criar-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="14"> Criar um recurso de Serviços Cognitivos </a> </h3>
+<p line="16"> Vamos começar criando um recurso de <strong line="16"> Serviços Cognitivos </strong> na sua assinatura Azure: </p>
+<ol line="18"> 
+<li line="18"> 
+<p line="18"> Em outra aba do navegador, abra o portal do Azure: <a href="https://portal.azure.com" line="18"> https://portal.azure.com </a> e faça login com sua conta Microsoft. </p>
+ </li>
+<li line="19"> 
+<p line="19"> Clique em <strong line="19"> ＋Criar um recurso </strong>, procure por <em line="19"> Cognitive Services </em> e crie um recurso com as seguintes configurações: </p>
+<ul line="21"> 
+<li line="21"> <strong line="21"> Nome </strong>: <em line="21"> Informe um nome exclusivo </em> </li>
+<li line="22"> <strong line="22"> Assinatura </strong>: <em line="22"> Sua assinatura Azure </em> </li>
+<li line="23"> <strong line="23"> Localização </strong>: <em line="23"> Escolha uma região disponível </em> </li>
+<li line="24"> <strong line="24"> Camada de preços </strong>: S0 </li>
+<li line="25"> <strong line="25"> Grupo de recursos </strong>: <em line="25"> Crie um grupo com nome exclusivo </em> </li>
+ </ul>
+ </li>
+<li line="26"> 
+<p line="26"> Aguarde a conclusão da implantação. Vá para o recurso e, na página <strong line="26"> Visão geral </strong>, clique no link para gerenciar as chaves do serviço. Você precisará do endpoint e das chaves para conectar seu aplicativo cliente ao recurso. </p>
+ </li>
+ </ol>
+<h3 id="obter-a-chave-e-o-endpoint-do-recurso" line="28"> <a href="#obter-a-chave-e-o-endpoint-do-recurso" class="header_no_underline" line="28"> Obter a Chave e o Endpoint do recurso </a> </h3>
+<p line="30"> Para usar o recurso de serviços cognitivos, as aplicações precisam do <em line="30"> endpoint </em> e da <em line="30"> chave de autenticação </em>: </p>
+<ol line="32"> 
+<li line="32"> No portal do Azure, vá para a página <strong line="32"> Chaves e Endpoint </strong> do recurso e copie a <strong line="32"> Chave1 </strong>, substituindo <strong line="32"> YOUR_COG_KEY </strong> no código abaixo. </li>
+<li line="33"> Copie o <strong line="33"> endpoint </strong> do recurso e substitua <strong line="33"> YOUR_COG_ENDPOINT </strong>. </li>
+<li line="34"> Execute o código abaixo selecionando a célula e clicando no botão <strong line="34"> Executar célula </strong> (▶) à esquerda da célula. </li>
+ </ol>
+<pre line="36"> <code class="language-python" line="36"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+
+print('Ready to use cognitive services at {} using key {}'.format(cog_endpoint, cog_key))
+ </code> </pre>
+<p line="43"> Agora que configurou a chave e o endpoint, você pode usar o serviço para analisar uma imagem. </p>
+<p line="45"> Para isso no Python, instale o pacote: </p>
+<pre line="47"> <code class="language-python" line="47"> !pip install azure-cognitiveservices-vision-computervision
+ </code> </pre>
+<p line="51"> Agora você está pronto! </p>
+<p line="53"> Execute o código abaixo para obter uma descrição de uma imagem localizada em <em line="53"> /data/vision/store_cam1.jpg </em>: </p>
+<pre line="55"> <code class="language-python" line="55"> from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+from python_code import vision
+import os
+%matplotlib inline
+
+# Caminho da imagem
+image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
+
+# Cliente do serviço
+computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
+
+# Obter descrição
+image_stream = open(image_path, &quot;rb&quot;)
+description = computervision_client.describe_image_in_stream(image_stream)
+
+# Mostrar imagem e legenda
+vision.show_image_caption(image_path, description)
+ </code> </pre>
+<p line="76"> Isso parece razoavelmente preciso. </p>
+<p line="78"> Vamos tentar com outra imagem: </p>
+<pre line="80"> <code class="language-python" line="80"> # Caminho da nova imagem
+image_path = os.path.join('data', 'vision', 'store_cam2.jpg')
+
+# Obter descrição
+image_stream = open(image_path, &quot;rb&quot;)
+description = computervision_client.describe_image_in_stream(image_stream)
+
+# Mostrar imagem e legenda
+vision.show_image_caption(image_path, description)
+ </code> </pre>
+<p line="92"> Mais uma vez, a legenda sugerida parece bastante precisa. </p>
+<h2 id="analisar-características-da-imagem" line="94"> <a href="#analisar-características-da-imagem" class="header_no_underline" line="94"> Analisar características da imagem </a> </h2>
+<p line="96"> Até agora, você usou o serviço para gerar legendas descritivas. Mas ele pode fazer muito mais. Pode, por exemplo: </p>
+<ul line="98"> 
+<li line="98"> Detectar objetos comuns e suas localizações </li>
+<li line="99"> Detectar rostos e estimar idade </li>
+<li line="100"> Detectar conteúdo adulto, sugestivo ou violento </li>
+<li line="101"> Gerar tags para facilitar buscas </li>
+ </ul>
+<p line="103"> Execute o código abaixo para analisar uma imagem de um cliente: </p>
+<pre line="105"> <code class="language-python" line="105"> # Caminho da imagem
+image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
+
+# Características a serem analisadas
+features = ['Description', 'Tags', 'Adult', 'Objects', 'Faces']
+
+# Analisar imagem
+image_stream = open(image_path, &quot;rb&quot;)
+analysis = computervision_client.analyze_image_in_stream(image_stream, visual_features=features)
+
+# Mostrar resultados
+vision.show_image_analysis(image_path, analysis)
+ </code> </pre>
+<h2 id="saiba-mais" line="120"> <a href="#saiba-mais" class="header_no_underline" line="120"> Saiba Mais </a> </h2>
+<p line="122"> Além das funcionalidades já vistas, o serviço também pode: </p>
+<ul line="124"> 
+<li line="124"> Identificar celebridades </li>
+<li line="125"> Detectar logotipos </li>
+<li line="126"> Fazer OCR (leitura de texto) </li>
+ </ul>
+<p line="128"> Para saber mais, veja a <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/" line="128"> Documentação do Computer Vision </a> </p>
+ <pre>
+<p><a href="Prova_01a.html"> Exercícios</a></p>
+<p><a href="index.html"> Início</a></p>
+ </pre>
+</body>
+</html>

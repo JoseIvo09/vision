@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova: 01c - Object Detection</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Prova: 01c - Object Detection</h1>
+    <div class="alerta">
+      ⚠️  Atenção   ⚠️
+Para passar para a próxima aula é necessário acertar no mínimo 15 questões
+    </div>
+    
+    <form id="quizForm" onsubmit="event.preventDefault(); corrigir();">
+
+      <div class="pergunta ativa" id="q1">
+  <p><strong>1. O que é detecção de objetos?</strong></p>
+  <label><input type="radio" name="q1" value="a"> Uma técnica para ampliar imagens</label><br>
+  <label><input type="radio" name="q1" value="b"> Um algoritmo de tradução automática</label><br>
+  <label><input type="radio" name="q1" value="c"> Uma forma de classificar sentimentos em textos</label><br>
+  <label><input type="radio" name="q1" value="d"> Uma forma de visão computacional que identifica objetos em imagens</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+</div>
+
+<div class="pergunta" id="q2">
+  <p><strong>2. O que a detecção de objetos usa para indicar a localização dos objetos?</strong></p>
+  <label><input type="radio" name="q2" value="a"> Vetores de movimento</label><br>
+  <label><input type="radio" name="q2" value="b"> Máscaras semânticas</label><br>
+  <label><input type="radio" name="q2" value="c"> Caixas delimitadoras</label><br>
+  <label><input type="radio" name="q2" value="d"> Coordenadas GPS</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q3">
+  <p><strong>3. Para que tipo de aplicação um supermercado pode usar detecção de objetos?</strong></p>
+  <label><input type="radio" name="q3" value="a"> Criar um catálogo de imagens</label><br>
+  <label><input type="radio" name="q3" value="b"> Análise de sentimento</label><br>
+  <label><input type="radio" name="q3" value="c"> Sistema de checkout automatizado</label><br>
+  <label><input type="radio" name="q3" value="d"> Previsão de clima</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q4">
+  <p><strong>4. Qual serviço do Azure permite criar modelos personalizados de detecção de objetos?</strong></p>
+  <label><input type="radio" name="q4" value="a"> Azure Speech</label><br>
+  <label><input type="radio" name="q4" value="b"> Azure Bot Service</label><br>
+  <label><input type="radio" name="q4" value="c"> Visão Customizada</label><br>
+  <label><input type="radio" name="q4" value="d"> Azure Maps</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q5">
+  <p><strong>5. O que é necessário criar antes de treinar um modelo de detecção de objetos no Azure?</strong></p>
+  <label><input type="radio" name="q5" value="a"> Um servidor dedicado</label><br>
+  <label><input type="radio" name="q5" value="b"> Um recurso de visão personalizada no portal do Azure</label><br>
+  <label><input type="radio" name="q5" value="c"> Um banco de dados SQL</label><br>
+  <label><input type="radio" name="q5" value="d"> Um recurso de reconhecimento facial</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q6">
+  <p><strong>6. O que o recurso “Visão personalizada” permite fazer?</strong></p>
+  <label><input type="radio" name="q6" value="a"> Gerar gráficos 3D</label><br>
+  <label><input type="radio" name="q6" value="b"> Criar APIs de linguagem natural</label><br>
+  <label><input type="radio" name="q6" value="c"> Treinar e publicar modelos de visão personalizados</label><br>
+  <label><input type="radio" name="q6" value="d"> Configurar redes privadas virtuais</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q7">
+  <p><strong>7. O que é necessário fazer com as imagens antes de treinar o modelo?</strong></p>
+  <label><input type="radio" name="q7" value="a"> Compactá-las em ZIP</label><br>
+  <label><input type="radio" name="q7" value="b"> Editar suas cores</label><br>
+  <label><input type="radio" name="q7" value="c"> Marcar objetos com caixas delimitadoras e tags</label><br>
+  <label><input type="radio" name="q7" value="d"> Adicionar trilhas sonoras</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q8">
+  <p><strong>8. Onde é feito o upload e a marcação das imagens para detecção de objetos?</strong></p>
+  <label><input type="radio" name="q8" value="a"> Visual Studio Code</label><br>
+  <label><input type="radio" name="q8" value="b"> GitHub</label><br>
+  <label><input type="radio" name="q8" value="c"> Portal do Custom Vision</label><br>
+  <label><input type="radio" name="q8" value="d"> Microsoft Excel</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q9">
+  <p><strong>9. Quais são exemplos de tags usadas na marcação de imagens neste projeto?</strong></p>
+  <label><input type="radio" name="q9" value="a"> Casa, carro, árvore</label><br>
+  <label><input type="radio" name="q9" value="b"> Maçã, banana e laranja</label><br>
+  <label><input type="radio" name="q9" value="c"> Céu, nuvem, sol</label><br>
+  <label><input type="radio" name="q9" value="d"> Gato, cachorro, rato</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q10">
+  <p><strong>10. O que acontece após marcar todas as imagens?</strong></p>
+  <label><input type="radio" name="q10" value="a"> O modelo é automaticamente publicado</label><br>
+  <label><input type="radio" name="q10" value="b"> As imagens são deletadas</label><br>
+  <label><input type="radio" name="q10" value="c"> O projeto é exportado para PDF</label><br>
+  <label><input type="radio" name="q10" value="d"> O modelo pode ser treinado</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q11">
+  <p><strong>11. O que o Azure faz durante o processo de treinamento?</strong></p>
+  <label><input type="radio" name="q11" value="a"> Baixa novas imagens automaticamente</label><br>
+  <label><input type="radio" name="q11" value="b"> Ajusta a câmera para capturar mais fotos</label><br>
+  <label><input type="radio" name="q11" value="c"> Cria um modelo com base nas imagens e marcações fornecidas</label><br>
+  <label><input type="radio" name="q11" value="d"> Gera um vídeo com os exemplos</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q12">
+  <p><strong>12. Qual das opções a seguir é verdadeira sobre a avaliação do modelo?</strong></p>
+  <label><input type="radio" name="q12" value="a"> A avaliação não é necessária</label><br>
+  <label><input type="radio" name="q12" value="b"> A avaliação mostra métricas como precisão e recall</label><br>
+  <label><input type="radio" name="q12" value="c"> A avaliação só é possível após 100 treinamentos</label><br>
+  <label><input type="radio" name="q12" value="d"> A avaliação é feita com dados aleatórios da internet</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q13">
+  <p><strong>13. O que representa uma boa precisão em um modelo de detecção de objetos?</strong></p>
+  <label><input type="radio" name="q13" value="a"> O modelo acerta com frequência o que foi treinado</label><br>
+  <label><input type="radio" name="q13" value="b"> O modelo demora mais para prever</label><br>
+  <label><input type="radio" name="q13" value="c"> O modelo usa menos imagens</label><br>
+  <label><input type="radio" name="q13" value="d"> O modelo ignora imagens incorretas</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q14">
+  <p><strong>14. Após treinar e avaliar o modelo, qual é o próximo passo?</strong></p>
+  <label><input type="radio" name="q14" value="a"> Desinstalar o recurso</label><br>
+  <label><input type="radio" name="q14" value="b"> Publicar o modelo</label><br>
+  <label><input type="radio" name="q14" value="c"> Traduzir o modelo para outro idioma</label><br>
+  <label><input type="radio" name="q14" value="d"> Iniciar outro projeto automaticamente</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q15">
+  <p><strong>15. Como é possível testar o modelo publicado?</strong></p>
+  <label><input type="radio" name="q15" value="a"> Usando a URL e a chave de previsão na aba “Provas”</label><br>
+  <label><input type="radio" name="q15" value="b"> Através do Paint</label><br>
+  <label><input type="radio" name="q15" value="c"> Através do PowerPoint</label><br>
+  <label><input type="radio" name="q15" value="d"> Apenas com comandos de voz</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q16">
+  <p><strong>16. O que é uma caixa delimitadora na detecção de objetos?</strong></p>
+  <label><input type="radio" name="q16" value="a"> Um filtro visual usado na câmera</label><br>
+  <label><input type="radio" name="q16" value="b"> Uma borda decorativa para imagens</label><br>
+  <label><input type="radio" name="q16" value="c"> Uma área que marca a localização do objeto identificado</label><br>
+  <label><input type="radio" name="q16" value="d"> Um campo de texto para descrição do objeto</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q17">
+  <p><strong>17. Qual é o nome do portal onde se cria um projeto de Visão Customizada?</strong></p>
+  <label><input type="radio" name="q17" value="a"> Azure DevOps</label><br>
+  <label><input type="radio" name="q17" value="b"> Power BI</label><br>
+  <label><input type="radio" name="q17" value="c"> Custom Vision</label><br>
+  <label><input type="radio" name="q17" value="d"> Visual Studio Code</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q18">
+  <p><strong>18. Qual o domínio recomendado ao criar um projeto para frutas no Azure Custom Vision?</strong></p>
+  <label><input type="radio" name="q18" value="a"> Alimentos e bebidas</label><br>
+  <label><input type="radio" name="q18" value="b"> Detecção de pessoas</label><br>
+  <label><input type="radio" name="q18" value="c"> Geral</label><br>
+  <label><input type="radio" name="q18" value="d"> Clima</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q19">
+  <p><strong>19. O que é necessário fazer antes de treinar o modelo de detecção de objetos?</strong></p>
+  <label><input type="radio" name="q19" value="a"> Publicar o projeto</label><br>
+  <label><input type="radio" name="q19" value="b"> Marcar as imagens com caixas delimitadoras</label><br>
+  <label><input type="radio" name="q19" value="c"> Executar código Python</label><br>
+  <label><input type="radio" name="q19" value="d"> Compartilhar o projeto com outro usuário</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q20">
+  <p><strong>20. Qual é o objetivo principal de usar o serviço Custom Vision com Python?</strong></p>
+  <label><input type="radio" name="q20" value="a"> Criar vídeos animados com IA</label><br>
+  <label><input type="radio" name="q20" value="b"> Detectar objetos automaticamente em imagens</label><br>
+  <label><input type="radio" name="q20" value="c"> Desenhar gráficos interativos</label><br>
+  <label><input type="radio" name="q20" value="d"> Traduzir documentos em lote</label><br><br>
+  <button type="button" onclick="anterior()">Anterior</button>
+        <button type="submit">Finalizar</button>
+      </div>
+
+    </form>
+    <div id="resultado"></div>
+      <div class="linkProximaAula" id="linkProximaAula" style="display: none; text-align: center; margin-top: 20px;">
+      <a href="01d%20-%20Face%20Analysis.html">Próxima Aula</a></div>
+  </main>
+   <script src="js/script01c.js"></script> 
+</body>
+</html>

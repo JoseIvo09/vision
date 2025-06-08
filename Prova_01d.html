@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova: 01d - Face Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Prova: 01d - Face Analysis</h1>
+    <div class="alerta">
+      ⚠️  Atenção   ⚠️
+Para passar para a próxima aula é necessário acertar no mínimo 15 questões
+    </div>
+    
+    <form id="quizForm" onsubmit="event.preventDefault(); corrigir();">
+
+      <div class="pergunta ativa" id="q1">
+  <p><strong>1. O que é visão computacional?</strong></p>
+  <label><input type="radio" name="q1" value="a"> Um programa de edição de vídeo</label><br>
+  <label><input type="radio" name="q1" value="b"> Um modelo para reconhecimento de voz</label><br>
+  <label><input type="radio" name="q1" value="c"> Uma área da IA que interpreta imagens e vídeos</label><br>
+  <label><input type="radio" name="q1" value="d"> Um hardware para câmeras inteligentes</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+</div>
+
+<div class="pergunta" id="q2">
+  <p><strong>2. Qual serviço do Azure é especializado em visão computacional?</strong></p>
+  <label><input type="radio" name="q2" value="a"> Azure Text Analytics</label><br>
+  <label><input type="radio" name="q2" value="b"> Azure Bot Service</label><br>
+  <label><input type="radio" name="q2" value="c"> Computer Vision</label><br>
+  <label><input type="radio" name="q2" value="d"> Azure SQL Vision</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q3">
+  <p><strong>3. Qual serviço do Azure é usado especificamente para detecção e análise facial?</strong></p>
+  <label><input type="radio" name="q3" value="a"> Azure Face</label><br>
+  <label><input type="radio" name="q3" value="b"> Azure Text Analytics</label><br>
+  <label><input type="radio" name="q3" value="c"> Azure Bot Framework</label><br>
+  <label><input type="radio" name="q3" value="d"> Azure Maps</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q4">
+  <p><strong>4. Qual etapa vem primeiro ao usar o serviço Face no Azure?</strong></p>
+  <label><input type="radio" name="q4" value="a"> Detectar emoções</label><br>
+  <label><input type="radio" name="q4" value="b"> Criar recurso de serviços cognitivos</label><br>
+  <label><input type="radio" name="q4" value="c"> Treinar grupo de pessoas</label><br>
+  <label><input type="radio" name="q4" value="d"> Identificar rostos</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q5">
+  <p><strong>5.  Onde você pode encontrar a chave e o endpoint do serviço Face no portal do Azure?</strong></p>
+  <label><input type="radio" name="q5" value="a"> No menu Diagnóstico</label><br>
+  <label><input type="radio" name="q5" value="b"> Na seção de segurança</label><br>
+  <label><input type="radio" name="q5" value="c"> Na página 'Chaves e terminal'</label><br>
+  <label><input type="radio" name="q5" value="d"> Na galeria de imagens</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q6">
+  <p><strong>6. Qual biblioteca Python permite utilizar o serviço Face do Azure?</strong></p>
+  <label><input type="radio" name="q6" value="a"> azure-ai-language-text</label><br>
+  <label><input type="radio" name="q6" value="b"> azure-cognitiveservices-vision-face</label><br>
+  <label><input type="radio" name="q6" value="c"> azure-storage-blob</label><br>
+  <label><input type="radio" name="q6" value="d"> azure-ml-core</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q7">
+  <p><strong>7. Qual atributo facial o serviço Face pode analisar?</strong></p>
+  <label><input type="radio" name="q7" value="a"> Tamanho do corpo</label><br>
+  <label><input type="radio" name="q7" value="b"> Altura da pessoa</label><br>
+  <label><input type="radio" name="q7" value="c"> Emoção e idade</label><br>
+  <label><input type="radio" name="q7" value="d"> Velocidade de movimento</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q8">
+  <p><strong>8. O que é necessário para usar a API Face em um script Python?</strong></p>
+  <label><input type="radio" name="q8" value="a"> Nome do recurso</label><br>
+  <label><input type="radio" name="q8" value="b"> Endpoint e chave de acesso</label><br>
+  <label><input type="radio" name="q8" value="c"> Senha do Azure</label><br>
+  <label><input type="radio" name="q8" value="d"> Chave SSH</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q9">
+  <p><strong>9. O que cada rosto detectado pelo serviço Face recebe?</strong></p>
+  <label><input type="radio" name="q9" value="a"> Chave de criptografia</label><br>
+  <label><input type="radio" name="q9" value="b"> Número de série</label><br>
+  <label><input type="radio" name="q9" value="c"> ID exclusivo</label><br>
+  <label><input type="radio" name="q9" value="d"> Localização GPS</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q10">
+  <p><strong>10. Qual função pode ser usada para encontrar rostos semelhantes?</strong></p>
+  <label><input type="radio" name="q10" value="a"> face_client.find_faces()</label><br>
+  <label><input type="radio" name="q10" value="b"> face_client.search_faces()</label><br>
+  <label><input type="radio" name="q10" value="c"> face_client.face.find_similar()</label><br>
+  <label><input type="radio" name="q10" value="d"> face_client.compare_faces()</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q11">
+  <p><strong>11. Para que serve um grupo de pessoas no serviço Face?</strong></p>
+  <label><input type="radio" name="q11" value="a"> Armazenar imagens de lojas</label><br>
+  <label><input type="radio" name="q11" value="b"> Organizar dados de clientes</label><br>
+  <label><input type="radio" name="q11" value="c"> Treinar o serviço para reconhecer pessoas</label><br>
+  <label><input type="radio" name="q11" value="d"> Salvar chaves de API</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q12">
+  <p><strong>12. O que deve ser feito após adicionar fotos de pessoas a um grupo?</strong></p>
+  <label><input type="radio" name="q12" value="a"> Excluir o grupo</label><br>
+  <label><input type="radio" name="q12" value="b"> Enviar para o suporte</label><br>
+  <label><input type="radio" name="q12" value="c"> Treinar o grupo</label><br>
+  <label><input type="radio" name="q12" value="d"> Compartilhar o link</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q13">
+  <p><strong>13. O que o método 'face_client.person_group.train()' faz?</strong></p>
+  <label><input type="radio" name="q13" value="a"> Envia alertas</label><br>
+  <label><input type="radio" name="q13" value="b"> Analisa emoções</label><br>
+  <label><input type="radio" name="q13" value="c"> Treina o modelo de reconhecimento facial</label><br>
+  <label><input type="radio" name="q13" value="d"> Gera relatórios</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q14">
+  <p><strong>14. Como o Face identifica pessoas em uma nova imagem?</strong></p>
+  <label><input type="radio" name="q14" value="a"> Comparando tamanhos de rosto</label><br>
+  <label><input type="radio" name="q14" value="b"> Usando IDs de rosto e grupo de pessoas treinado</label><br>
+  <label><input type="radio" name="q14" value="c"> Verificando cor dos olhos</label><br>
+  <label><input type="radio" name="q14" value="d"> Com base na localização</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q15">
+  <p><strong>15. Qual a utilidade dos atributos 'age' e 'emotion' na análise facial?</strong></p>
+  <label><input type="radio" name="q15" value="a"> Calcular impostos</label><br>
+  <label><input type="radio" name="q15" value="b"> Analisar produtos</label><br>
+  <label><input type="radio" name="q15" value="c"> Entender características faciais</label><br>
+  <label><input type="radio" name="q15" value="d"> Traduzir falas</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q16">
+  <p><strong>16. Qual cenário representa uma boa aplicação do reconhecimento facial com Azure Face?</strong></p>
+  <label><input type="radio" name="q16" value="a"> Filtrar spam em e-mails</label><br>
+  <label><input type="radio" name="q16" value="b"> Verificar acesso de funcionários autorizados</label><br>
+  <label><input type="radio" name="q16" value="c"> Criar um blog pessoal</label><br>
+  <label><input type="radio" name="q16" value="d"> Sincronizar agenda com o Outlook</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q17">
+  <p><strong>17. Qual comando instala o pacote Face da Microsoft?</strong></p>
+  <label><input type="radio" name="q17" value="a"> pip install azure</label><br>
+  <label><input type="radio" name="q17" value="b"> pip install azure-cognitiveservices-vision-face</label><br>
+  <label><input type="radio" name="q17" value="c"> npm install azure-face</label><br>
+  <label><input type="radio" name="q17" value="d"> conda install azure</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q18">
+  <p><strong>18. O que acontece se você tentar identificar rostos antes de treinar o grupo de pessoas?</strong></p>
+  <label><input type="radio" name="q18" value="a"> Tudo funciona normalmente</label><br>
+  <label><input type="radio" name="q18" value="b"> O sistema ignora os rostos</label><br>
+  <label><input type="radio" name="q18" value="c"> O reconhecimento falha</label><br>
+  <label><input type="radio" name="q18" value="d"> A API é reiniciada</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q19">
+  <p><strong>19. Como as emoções são representadas na análise facial?</strong></p>
+  <label><input type="radio" name="q19" value="a"> Códigos binários</label><br>
+  <label><input type="radio" name="q19" value="b"> Cores RGB</label><br>
+  <label><input type="radio" name="q19" value="c"> Pontuações para cada emoção</label><br>
+  <label><input type="radio" name="q19" value="d"> Nomes aleatórios</label><br>
+  <br><button type="button" onclick="proxima()">Próxima</button>
+  <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q20">
+  <p><strong>20. Qual imagem seria ideal para treinar uma pessoa no serviço Face?</strong></p>
+  <label><input type="radio" name="q20" value="a"> Foto borrada</label><br>
+  <label><input type="radio" name="q20" value="b"> Imagem com óculos escuros</label><br>
+  <label><input type="radio" name="q20" value="c"> Diversas fotos com expressões e poses diferentes</label><br>
+  <label><input type="radio" name="q20" value="d"> Uma única selfie</label><br>
+<br><button type="button" onclick="anterior()">Anterior</button>
+        <button type="submit">Finalizar</button>
+      </div>
+
+    </form>
+    <div id="resultado"></div>
+      <div class="linkProximaAula" id="linkProximaAula" style="display: none; text-align: center; margin-top: 20px;">
+      <a href="01e%20-%20Optical%20Character%20Recognition.html">Próxima Aula</a></div>
+  </main>
+   <script src="js/script01d.js"></script> 
+</body>
+</html>

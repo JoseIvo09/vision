@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8"> 
+  <title>Entendimento da linguagem </title>
+  <link rel="stylesheet" href="css/estilos.css"> 
+   </style>
+ </head>
+<body>
+<h1 id="entendimento-da-linguagem" line="0"> <a href="#entendimento-da-linguagem" class="header_no_underline" line="0"> Entendimento da linguagem </a> </h1>
+<p line="2"> Cada vez mais, esperamos que os computadores possam usar a IA para entender comandos falados ou digitados em linguagem natural. Por exemplo, convém implementar um sistema de automação residencial que permita controlar dispositivos em sua casa usando comandos de voz como &ldquo;Switch on the Light&rdquo; ou &ldquo;colocar o ventilador em&rdquo; e peça a um dispositivo movido a IA entender o comando e tomar as medidas apropriadas. </p>
+<p line="4"> <img src="./images/language_understanding.jpg" alt="Um robô ouvindo" line="4" /> </p>
+<h2 id="criar-recursos-de-criação-e-previsão" line="6"> <a href="#criar-recursos-de-criação-e-previsão" class="header_no_underline" line="6"> Criar recursos de criação e previsão </a> </h2>
+<p line="8"> Os serviços cognitivos do Microsoft incluem o serviço de compreensão do idioma, que permite definir<em line="8"> intenções </em>que são aplicados a<em line="8"> entidades </em>baseado em<em line="8"> enunciados </em>. Você pode usar um<strong line="8"> Entendimento da linguagem </strong>ou<strong line="8"> Serviços cognitivos </strong>recurso para<em line="8"> publicar </em>um aplicativo de entendimento de idiomas, mas você deve criar um separado<strong line="8"> Entendimento da linguagem </strong>recurso para<em line="8"> autor </em>o aplicativo. </p>
+<ol line="10"> 
+<li line="10"> Em outra guia do navegador, abra o portal do Azure em<a href="https://portal.azure.com" line="10"> https://portal.azure.com </a>, assinando com sua conta da Microsoft. </li>
+<li line="11"> Clique**+ Crie um recurso**e procurar por<em line="11"> Entendimento da linguagem </em>. </li>
+<li line="12"> Na lista de serviços, clique<strong line="12"> Entendimento da linguagem </strong>. </li>
+<li line="13"> No<strong line="13"> Entendimento da linguagem </strong>lâmina, clique<strong line="13"> Criar </strong>. </li>
+<li line="14"> No<strong line="14"> Criar </strong>lâmina, insira os seguintes detalhes e clique<strong line="14"> Criar </strong> </li>
+ </ol>
+<ul line="15"> 
+<li line="15"> <strong line="15"> Criar opção </strong>: Ambos </li>
+<li line="16"> <strong line="16"> Nome </strong>:<em line="16"> Um nome único para o seu serviço </em> </li>
+<li line="17"> <strong line="17"> Subscrição </strong>:<em line="17"> Selecione sua assinatura do Azure </em> </li>
+<li line="18"> <strong line="18"> Grupo de recursos </strong>:<em line="18"> Selecione um grupo de recursos existente ou crie um novo </em> </li>
+<li line="19"> <strong line="19"> Localização de autor </strong>:<em line="19"> Selecione qualquer local disponível </em> </li>
+<li line="20"> <strong line="20"> Camada de preços de criação </strong>: F0 </li>
+<li line="21"> <strong line="21"> Localização do tempo de execução </strong>:<em line="21"> O mesmo que a localização da criação </em> </li>
+<li line="22"> <strong line="22"> Tier de preços de tempo de execução </strong>: F0 </li>
+ </ul>
+<ol start="6" line="23"> 
+<li line="23"> Aguarde os recursos a serem criados e observe que dois recursos de compreensão do idioma são provisionados; um para autoria e outro para previsão. Você pode visualizá -los navegando para o grupo de recursos onde os criou. </li>
+ </ol>
+<h3 id="crie-um-aplicativo-de-compreensão-do-idioma" line="25"> <a href="#crie-um-aplicativo-de-compreensão-do-idioma" class="header_no_underline" line="25"> Crie um aplicativo de compreensão do idioma </a> </h3>
+<p line="27"> Para implementar o entendimento da linguagem natural com o entendimento da linguagem, você cria um aplicativo; e depois adicione entidades, intenções e enunciados para definir os comandos que você deseja que o aplicativo entenda: </p>
+<ol line="29"> 
+<li line="29"> Em uma nova guia do navegador, abra o portal de compreensão do idioma em<a href="https://www.luis.ai" line="29"> https://www.luis.ai </a>, e entre no uso da conta da Microsoft associada à sua assinatura do Azure. Se for a primeira vez que você assina o portal de entendimento de idiomas, pode ser necessário conceder ao aplicativo algumas permissões para acessar os detalhes da sua conta. Em seguida, complete o<em line="29"> Bem-vindo </em>Etapas selecionando os recursos de criação de idiomas existentes que você acabou de criar em sua assinatura do Azure. </li>
+<li line="30"> Abra o<strong line="30"> Meus aplicativos </strong>Página e selecione sua assinatura e Recurso de Autoridade de Entendimento de Idiomas. Em seguida, crie um novo aplicativo para conversar com as seguintes configurações: </li>
+ </ol>
+<ul line="31"> 
+<li line="31"> <strong line="31"> Nome </strong>: Automação residencial </li>
+<li line="32"> <strong line="32"> Cultura </strong>: Inglês </li>
+<li line="33"> <strong line="33"> Descrição </strong>: Automação caseira simples </li>
+<li line="34"> <strong line="34"> Recurso de previsão </strong>:<em line="34"> Seu recurso de previsão de compreensão do idioma </em> </li>
+ </ul>
+<ol start="3" line="35"> 
+<li line="35"> Se um painel com dicas para criar um aplicativo de compreensão eficaz do idioma for exibido, feche -o. </li>
+ </ol>
+<h3 id="criar-uma-entidade" line="37"> <a href="#criar-uma-entidade" class="header_no_underline" line="37"> Criar uma entidade </a> </h3>
+<p line="39"> Um<em line="39"> entidade </em>é algo com o qual seu modelo de idioma pode identificar e fazer algo. Nesse caso, seu aplicativo de compreensão do idioma será usado para controlar vários<em line="39"> dispositivos </em>no escritório, como luzes ou fãs; Então você criará um<em line="39"> dispositivo </em>Entidade que inclui uma lista dos tipos de dispositivo com os quais você deseja que o aplicativo funcione. Para cada tipo de dispositivo, você criará um sublista que identifica o nome do dispositivo (por exemplo<em line="39"> luz </em>) e quaisquer sinônimos que possam ser usados para se referir a esse tipo de dispositivo (por exemplo<em line="39"> lâmpada </em>). </p>
+<ol line="41"> 
+<li line="41"> Na página de compreensão do idioma para o seu aplicativo, no painel à esquerda, clique<strong line="41"> Entidades </strong>. Em seguida, clique<strong line="41"> Criar </strong>e criar uma nova entidade chamada<strong line="41"> dispositivo </strong>, selecione o<strong line="41"> Lista </strong>digite e clique<strong line="41"> Criar </strong>. </li>
+<li line="42"> No<strong line="42"> Liste itens </strong>página, abaixo<strong line="42"> Valores normalizados </strong>, tipo<strong line="42"> luz </strong>, depois pressione Enter. </li>
+<li line="43"> Depois do<strong line="43"> luz </strong>o valor foi agregado, em<strong line="43"> Sinônimos </strong>, tipo<strong line="43"> lâmpada </strong>e pressione Enter. </li>
+<li line="44"> Adicione um segundo item de lista nomeado<strong line="44"> fã </strong>com o sinônimo<strong line="44"> E </strong>. </li>
+ </ol>
+<h3 id="criar-intenções" line="46"> <a href="#criar-intenções" class="header_no_underline" line="46"> Criar intenções </a> </h3>
+<p line="48"> Um<em line="48"> intenção </em>É uma ação que você deseja executar em uma ou mais entidades - por exemplo, você pode querer ligar uma luz ou desligar um ventilador. Nesse caso, você definirá duas intenções: uma para ligar um dispositivo e outro para desligar um dispositivo. Para cada intenção, você especificará a amostra<em line="48"> enunciados </em>que indicam o tipo de linguagem usada para indicar a intenção. </p>
+<ol line="50"> 
+<li line="50"> No painel à esquerda, clique<strong line="50"> Intenções </strong>. Em seguida, clique<strong line="50"> Criar </strong>, e adicione uma intenção com o nome<strong line="50"> switch_on </strong>e clique<strong line="50"> Feito </strong>. </li>
+<li line="51"> Sob o<strong line="51"> Exemplos </strong>indo e o<strong line="51"> Exemplo de entrada do usuário </strong>subtítulo, digite o enunciado*<strong line="51"> Ligue a luz*** e pressione </strong>Digitar**Para enviar esse enunciado à lista. </li>
+<li line="52"> No<em line="52"> Ligue a luz </em>enunciado, clique na palavra &ldquo;luz&rdquo; e atribua -a ao<strong line="52"> dispositivo </strong>entidade<strong line="52"> luz </strong>valor. </li>
+<li line="53"> Adicione um segundo enunciado ao<strong line="53"> switch_on </strong>intenção, com a frase***Ligue o ventilador***. Em seguida, atribua a palavra &ldquo;fã&rdquo; ao <strong line="53"> dispositivo </strong> entidade **Valor do ventilador **. </li>
+<li line="54"> No painel à esquerda, clique<strong line="54"> Intenções </strong>e clique<strong line="54"> Criar </strong>, para adicionar uma segunda intenção com o nome<strong line="54"> switch_off </strong>. </li>
+<li line="55"> No<strong line="55"> Enunciados </strong>página para o<strong line="55"> switch_off </strong>intenção, adicione o enunciado*<strong line="55"> Desligue a luz*** e atribuir a palavra &ldquo;luz&rdquo; ao </strong>dispositivo<strong line="55"> entidade </strong>luz**valor. </li>
+<li line="56"> Adicione um segundo enunciado ao<strong line="56"> switch_off </strong>intenção, com a frase***Desligue o ventilador***. Em seguida, conecte a palavra &ldquo;fã&rdquo; ao <strong line="56"> dispositivo </strong> entidade **Valor do ventilador **. </li>
+ </ol>
+<h3 id="treine-e-teste-o-modelo-de-idioma" line="58"> <a href="#treine-e-teste-o-modelo-de-idioma" class="header_no_underline" line="58"> Treine e teste o modelo de idioma </a> </h3>
+<p line="60"> Agora você está pronto para usar os dados que você forneceu na forma de entidades, intenções e uterâncias para treinar o modelo de idioma para o seu aplicativo. </p>
+<ol line="62"> 
+<li line="62"> No topo da página de compreensão do idioma para o seu aplicativo, clique<strong line="62"> Trem </strong>Para treinar o modelo de idioma </li>
+<li line="63"> Quando o modelo for treinado, clique<strong line="63"> Teste </strong>e use o painel de teste para ver a intenção prevista para as frases a seguir:
+<ul line="64"> 
+<li line="64"> <em line="64"> Ligue a luz </em> </li>
+<li line="65"> <em line="65"> Desligue o ventilador </em> </li>
+<li line="66"> <em line="66"> Desligue a lâmpada </em> </li>
+<li line="67"> <em line="67"> Ligue o AC </em> </li>
+ </ul>
+ </li>
+<li line="68"> Feche o painel de teste. </li>
+ </ol>
+<h3 id="publique-o-modelo-e-configure-pontos-de-extremidade" line="70"> <a href="#publique-o-modelo-e-configure-pontos-de-extremidade" class="header_no_underline" line="70"> Publique o modelo e configure pontos de extremidade </a> </h3>
+<p line="72"> Para usar seu modelo treinado em um aplicativo cliente, você deve publicá -lo como um ponto final no qual os aplicativos do cliente podem enviar novos enunciados; a partir da qual os intenções e os comuns serão previstos. </p>
+<ol line="74"> 
+<li line="74"> No topo da página de compreensão do idioma para o seu aplicativo, clique<strong line="74"> Publicar </strong>. Em seguida, selecione<strong line="74"> Slot de produção </strong>e clique<strong line="74"> Feito </strong>. </li>
+<li line="75"> Depois que o modelo foi publicado, no topo da página de entendimento do idioma para o seu aplicativo, clique<strong line="75"> Gerenciar </strong>. Então no<strong line="75"> Informações do aplicativo </strong>guia, observe o<strong line="75"> ID do aplicativo </strong>para o seu aplicativo. Copie isso e cole -o no código abaixo para substituir<strong line="75"> Your_lu_app_id </strong>. </li>
+<li line="76"> No<strong line="76"> Recursos do Azure </strong>guia, observe o<strong line="76"> Chave primária </strong>e<strong line="76"> URL do terminal </strong>para o seu recurso de previsão. Copie -os e coloque -os no código abaixo, substituindo<strong line="76"> Your_lu_key </strong>e<strong line="76"> Your_lu_endpoint </strong>. </li>
+<li line="77"> Execute a célula abaixo clicando em seu<strong line="77"> Execute a célula </strong>(▷) botão (à esquerda da célula) e, quando solicitado, insira o texto<em line="77"> Ligue a luz </em>. O texto é interpretado pelo seu modelo de compreensão do idioma e uma imagem apropriada é exibida. </li>
+ </ol>
+<pre line="80"> <code class="language-python" line="80"> from python_code import luis
+import matplotlib.pyplot as plt
+from PIL import Image
+import os
+%matplotlib inline
+
+try:
+    # Set up API configuration
+    luis_app_id = 'YOUR_LU_APP_ID'
+    luis_key = 'YOUR_LU_KEY'
+    luis_endpoint = 'YOUR_LU_ENDPOINT'
+
+    # prompt for a command
+    command = input('Please enter a command: \n')
+
+    # get the predicted intent and entity (code in python_code.home_auto.py)
+    action = luis.get_intent(luis_app_id, luis_key, luis_endpoint, command)
+
+    # display an appropriate image
+    img_name = action + '.jpg'
+    img = Image.open(os.path.join(&quot;data&quot;, &quot;luis&quot; ,img_name))
+    plt.axis('off')
+    plt. imshow(img)
+except Exception as ex:
+    print(ex)
+ </code> </pre>
+<p line="108"> Reencontre a célula acima, tentando as seguintes frases: </p>
+<ul line="110"> 
+<li line="110"> <em line="110"> acender a luz </em> </li>
+<li line="111"> <em line="111"> Apoie a lâmpada </em> </li>
+<li line="112"> <em line="112"> Ligue o ventilador </em> </li>
+<li line="113"> <em line="113"> Ligue a luz </em> </li>
+<li line="114"> <em line="114"> Desligue a luz </em> </li>
+<li line="115"> <em line="115"> Desligue o ventilador </em> </li>
+<li line="116"> <em line="116"> Ligue o CA </em> </li>
+ </ul>
+<blockquote line="118"> 
+<p line="118"> <strong line="118"> Observação </strong>: Se você está curioso<strong line="118"> luis.py </strong>arquivo no<strong line="118"> python_code </strong>pasta. </p>
+ </blockquote>
+<h2 id="adicione-controle-de-voz" line="120"> <a href="#adicione-controle-de-voz" class="header_no_underline" line="120"> Adicione controle de voz </a> </h2>
+<p line="122"> Até agora, vimos como analisar o texto; Mas os sistemas cada vez mais AI permitem que os humanos se comuniquem com os serviços de software por meio do reconhecimento de fala. Para apoiar isso, o<strong line="122"> Discurso </strong>O serviço cognitivo fornece uma maneira simples de transcrever a linguagem falada para o texto. </p>
+<h3 id="crie-um-recurso-de-serviços-cognitivos" line="124"> <a href="#crie-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="124"> Crie um recurso de serviços cognitivos </a> </h3>
+<p line="126"> Se você ainda não possui um, use as seguintes etapas para criar um<strong line="126"> Serviços cognitivos </strong>Recurso em sua assinatura do Azure: </p>
+<ol line="128"> 
+<li line="128"> Em outra guia do navegador, abra o portal do Azure em<a href="https://portal.azure.com" line="128"> https://portal.azure.com </a>, assinando com sua conta da Microsoft. </li>
+<li line="129"> Clique no<strong line="129"> ＋ Crie um recurso </strong>Botão, pesquise<em line="129"> Serviços cognitivos </em>e criar um<strong line="129"> Serviços cognitivos </strong>Recurso com as seguintes configurações:
+<ul line="130"> 
+<li line="130"> <strong line="130"> Nome </strong>:<em line="130"> Digite um nome único </em>. </li>
+<li line="131"> <strong line="131"> Subscrição </strong>:<em line="131"> Sua assinatura do Azure </em>. </li>
+<li line="132"> <strong line="132"> Localização </strong>:<em line="132"> Qualquer local disponível </em>. </li>
+<li line="133"> <strong line="133"> Nível de preço </strong>: S0 </li>
+<li line="134"> <strong line="134"> Grupo de recursos </strong>:<em line="134"> Crie um grupo de recursos com um nome único </em>. </li>
+ </ul>
+ </li>
+<li line="135"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no<strong line="135"> Início rápido </strong>Página, observe as chaves e o terminal. Você precisará disso para se conectar ao seu recurso de serviços cognitivos a partir de aplicativos do cliente. </li>
+ </ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="137"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="137"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos </a> </h3>
+<p line="139"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação: </p>
+<ol line="141"> 
+<li line="141"> No portal do Azure, no<strong line="141"> Chaves e terminal </strong>página para seu recurso de serviço cognitivo, copie o<strong line="141"> Chave1 </strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="141"> Your_cog_key </strong>. </li>
+<li line="142"> Copie o<strong line="142"> Endpoint </strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="142"> Your_cog_endpoint </strong>. </li>
+<li line="143"> Copie o<strong line="143"> Localização </strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="143"> Your_cog_region </strong>. </li>
+<li line="144"> Execute o código na célula abaixo. </li>
+ </ol>
+<pre line="146"> <code class="language-python" line="146"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+cog_region = 'YOUR_COG_REGION'
+
+print('Ready to use cognitive services in {} using key {}'.format(cog_region, cog_key))
+ </code> </pre>
+<p line="154"> Para usar o serviço de fala em seu recurso de Serviços Cognitivos, você precisará instalar o SDK da fala de serviços cognitivos do Azure. </p>
+<pre line="156"> <code class="language-python" line="156"> !pip install azure.cognitiveservices.speech
+ </code> </pre>
+<p line="160"> Agora execute a célula abaixo para transcrever o discurso de um arquivo de áudio e use -o como um comando para o seu aplicativo de compreensão do idioma. </p>
+<pre line="162"> <code class="language-python" line="162"> from python_code import luis
+import os
+import IPython
+import os
+from azure.cognitiveservices.speech import SpeechConfig, SpeechRecognizer, AudioConfig
+
+try:   
+
+    # Get spoken command from audio file
+    file_name = 'light-on.wav'
+    audio_file = os.path.join('data', 'luis', file_name)
+
+    # Configure speech recognizer
+    speech_config = SpeechConfig(cog_key, cog_region)
+    audio_config = AudioConfig(filename=audio_file) # Use file instead of default (microphone)
+    speech_recognizer = SpeechRecognizer(speech_config, audio_config)
+
+    # Use a one-time, synchronous call to transcribe the speech
+    speech = speech_recognizer.recognize_once()
+
+    # Get the predicted intent and entity (code in python_code.home_auto.py)
+    action = luis.get_intent(luis_app_id, luis_key, luis_endpoint, speech.text)
+
+    # Get the appropriate image
+    img_name = action + '.jpg'
+
+    # Play audio and display image
+    IPython.display.display(IPython.display.Audio(audio_file, autoplay=True),
+                            IPython.display.Image(data=os.path.join(&quot;data&quot;, &quot;luis&quot; ,img_name)))
+except Exception as ex:
+    print(ex)
+ </code> </pre>
+<p line="196"> Tente modificar a célula acima para usar o<strong line="196"> Light-off.wav </strong>arquivo de áudio. </p>
+<h2 id="saber-mais" line="198"> <a href="#saber-mais" class="header_no_underline" line="198"> Saber mais </a> </h2>
+<p line="200"> Saiba mais sobre o entendimento da linguagem em <a href="https://docs.microsoft.com/azure/cognitive-services/luis/" line="200"> Documentos do serviço </a> </p>
+<p line="202"> <a href="03a%20-%20QnA%20Bot.html" line="202"> Próxima Aula </a> </p>
+<pre line="204"> <code line="204">  </code>
+<p><a href="index.html">Início</a></p>
+ </pre>
+<p>``` </p>
+ </body>
+ </html>

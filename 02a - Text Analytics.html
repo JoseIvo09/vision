@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visão Computacional com Azure</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="análise-de-texto" line="0"> <a href="#análise-de-texto" class="header_no_underline" line="0"> Análise de texto </a> </h1>
+<p line="2"> O processamento de linguagem natural (PNL) é um ramo da inteligência artificial (AI) que lida com a linguagem escrita e falada. Você pode usar o PNL para criar soluções que extraem significado semântico do texto ou fala, ou que formulam respostas significativas na linguagem natural. </p>
+<p line="4"> Microsoft Azure<em line="4"> Serviços cognitivos </em>inclui o<em line="4"> Análise de texto </em>Serviço, que fornece alguns recursos de NLP prontos para uso, incluindo a identificação de frases-chave no texto e a classificação do texto com base no sentimento. </p>
+<p line="6"> <img src="./images/NLP.jpg" alt="Um robô lendo um caderno" line="6" /> </p>
+<p line="8"> Por exemplo, suponha que o fictício<em line="8"> Viagem de Margie </em>A organização incentiva os clientes a enviar análises para estadias de hotel. Você pode usar o serviço de análise de texto para resumir as revisões extraindo frases -chave, determinar quais revisões são positivas e quais são negativas ou analisar o texto de revisão para menções de entidades conhecidas, como locais ou pessoas. </p>
+<h2 id="ver-documentos-de-revisão" line="10"> <a href="#ver-documentos-de-revisão" class="header_no_underline" line="10"> Ver documentos de revisão </a> </h2>
+<p line="12"> Vamos começar dando uma olhada em algumas avaliações de hotéis que foram deixadas pelos clientes. </p>
+<p line="14"> Os comentários estão em arquivos de texto. Para vê -los, basta executar o código abaixo clicando no<strong line="14"> Execute a célula </strong>(▷) botão à esquerda da célula. </p>
+<pre line="16"> <code class="language-python" line="16"> import os
+
+# Read the reviews in the /data/reviews folder
+reviews_folder = os.path.join('data', 'text', 'reviews')
+
+# Create a collection of reviews with id (file name) and text (contents) properties
+reviews = []
+for file_name in os.listdir(reviews_folder):
+    review_text = open(os.path.join(reviews_folder, file_name)).read()
+    review = {&quot;id&quot;: file_name, &quot;text&quot;: review_text}
+    reviews.append(review)
+
+for review_num in range(len(reviews)):
+    # print the review text
+    print('{}\n{}\n'.format(reviews[review_num]['id'], reviews[review_num]['text']))
+ </code> </pre>
+<h2 id="crie-um-recurso-de-serviços-cognitivos" line="34"> <a href="#crie-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="34"> Crie um recurso de serviços cognitivos </a> </h2>
+<p line="36"> Para analisar o texto nessas revisões, você pode usar o<strong line="36"> Análise de texto </strong>Serviço cognitivo. Para usar isso, você precisa provisionar um<strong line="36"> Análise de texto </strong>ou<strong line="36"> Serviços cognitivos </strong>Recurso na sua assinatura do Azure (use um recurso de análise de texto se este for o único serviço que você planeja usar ou deseja rastrear seu uso separadamente; caso contrário, poderá usar um recurso de serviços cognitivos para combinar o serviço de análise de texto com outros serviços cognitivos - permitindo que os desenvolvedores usem um único ponto final e chave para acessá -los.) </p>
+<p line="38"> Se você ainda não possui um, use as seguintes etapas para criar um<strong line="38"> Serviços cognitivos </strong>Recurso em sua assinatura do Azure: </p>
+<ol line="40"> 
+<li line="40"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="40"> https://portal.azure.com </a>, fazendo login com sua conta da Microsoft. </li>
+<li line="41"> Clique no<strong line="41"> ＋ Crie um recurso </strong>Botão, pesquise<em line="41"> Serviços cognitivos </em>e criar um<strong line="41"> Serviços cognitivos </strong>Recurso com as seguintes configurações:
+<ul line="42"> 
+<li line="42"> <strong line="42"> Nome </strong>:<em line="42"> Digite um nome único </em>. </li>
+<li line="43"> <strong line="43"> Subscrição </strong>:<em line="43"> Sua assinatura do Azure </em>. </li>
+<li line="44"> <strong line="44"> Localização </strong>:<em line="44"> Qualquer local disponível </em>. </li>
+<li line="45"> <strong line="45"> Nível de preço </strong>: S0 </li>
+<li line="46"> <strong line="46"> Grupo de recursos </strong>:<em line="46"> Crie um grupo de recursos com um nome único </em>. </li>
+ </ul>
+ </li>
+<li line="47"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no<strong line="47"> Visão geral </strong>página, clique no link para gerenciar as chaves do serviço. Você precisará do terminal e das chaves para conectar -se ao seu recurso de serviços cognitivos dos aplicativos do cliente. </li>
+ </ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="49"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="49"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos </a> </h3>
+<p line="51"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação: </p>
+<ol line="53"> 
+<li line="53"> No portal do Azure, no<strong line="53"> Chaves e terminal </strong>página para seu recurso de serviço cognitivo, copie o<strong line="53"> Chave1 </strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="53"> Your_cog_key </strong>. </li>
+<li line="54"> Copie o<strong line="54"> endpoint </strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="54"> Your_cog_endpoint </strong>. </li>
+<li line="55"> Execute o código na célula abaixo clicando em seu botão verde <span style = "cor: verde">  &amp;#9655  </span>. </li>
+ </ol>
+<pre line="57"> <code class="language-python" line="57"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+
+print('Ready to use cognitive services at {} using key {}'.format(cog_endpoint, cog_key))
+ </code> </pre>
+<p line="64"> Para usar o serviço de análise de texto em seu recurso de serviços cognitivos, você precisará instalar o SDK do Azure Cognitive Services Analytics. </p>
+<pre line="66"> <code class="language-python" line="66"> ! pip install azure-cognitiveservices-language-textanalytics
+ </code> </pre>
+<h2 id="detectar-linguagem" line="70"> <a href="#detectar-linguagem" class="header_no_underline" line="70"> Detectar linguagem </a> </h2>
+<p line="71"> Vamos começar identificando o idioma em que essas revisões estão escritas. </p>
+<pre line="73"> <code class="language-python" line="73"> import os
+from azure.cognitiveservices.language.textanalytics import TextAnalyticsClient
+from msrest.authentication import CognitiveServicesCredentials
+
+# Get a client for your text analytics cognitive service resource
+text_analytics_client = TextAnalyticsClient(endpoint=cog_endpoint,
+                                            credentials=CognitiveServicesCredentials(cog_key))
+
+# Analyze the reviews you read from the /data/reviews folder earlier
+language_analysis = text_analytics_client.detect_language(documents=reviews)
+
+# print detected language details for each review
+for review_num in range(len(reviews)):
+    # print the review id
+    print(reviews[review_num]['id'])
+
+    # Get the language details for this review
+    lang = language_analysis.documents[review_num].detected_languages[0]
+    print(' - Language: {}\n - Code: {}\n - Score: {}\n'.format(lang.name, lang.iso6391_name, lang.score))
+
+    # Add the detected language code to the collection of reviews (so we can do further analysis)
+    reviews[review_num][&quot;language&quot;] = lang.iso6391_name
+ </code> </pre>
+<h2 id="extraia-frases--chave" line="98"> <a href="#extraia-frases--chave" class="header_no_underline" line="98"> Extraia frases -chave </a> </h2>
+<p line="100"> Agora você pode analisar o texto nas análises do cliente para identificar frases -chave que dão alguma indicação dos principais pontos de discussão. </p>
+<pre line="102"> <code class="language-python" line="102"> # # Use the client and reviews you created in the previous code cell to get key phrases
+key_phrase_analysis = text_analytics_client.key_phrases(documents=reviews)
+
+# print key phrases for each review
+for review_num in range(len(reviews)):
+    # print the review id
+    print(reviews[review_num]['id'])
+
+    # Get the key phrases in this review
+    print('\nKey Phrases:')
+    key_phrases = key_phrase_analysis.documents[review_num].key_phrases
+    # Print each key phrase
+    for key_phrase in key_phrases:
+        print('\t', key_phrase)
+    print('\n')
+ </code> </pre>
+<p line="120"> As frases -chave podem ajudá -lo a entender os pontos de discussão mais importantes em cada revisão. Por exemplo, uma revisão que contém uma frase &ldquo;pessoal útil&rdquo; ou &ldquo;serviço ruim&rdquo; pode fornecer uma indicação de algumas das principais preocupações do revisor. </p>
+<h2 id="determinar-o-sentimento" line="122"> <a href="#determinar-o-sentimento" class="header_no_underline" line="122"> Determinar o sentimento </a> </h2>
+<p line="124"> Pode ser útil classificar as críticas como<em line="124"> positivo </em>ou<em line="124"> negativo </em>com base em a<em line="124"> Pontuação de sentimentos </em>. Novamente, você pode usar o serviço de análise de texto para fazer isso. </p>
+<pre line="126"> <code class="language-python" line="126"> # Use the client and reviews you created previously to get sentiment scores
+sentiment_analysis = text_analytics_client.sentiment(documents=reviews)
+
+# Print the results for each review
+for review_num in range(len(reviews)):
+
+    # Get the sentiment score for this review
+    sentiment_score = sentiment_analysis.documents[review_num].score
+
+    # classifiy 'positive' if more than 0.5, 
+    if sentiment_score &lt; 0.5:
+        sentiment = 'negative'
+    else:
+        sentiment = 'positive'
+
+    # print file name and sentiment
+    print('{} : {} ({})'.format(reviews[review_num]['id'], sentiment, sentiment_score))
+ </code> </pre>
+<h2 id="extrair-entidades-conhecidas" line="146"> <a href="#extrair-entidades-conhecidas" class="header_no_underline" line="146"> Extrair entidades conhecidas </a> </h2>
+<p line="148"> <em line="148"> Entidades </em>são coisas que podem ser mencionadas no texto que fazem referência a algum tipo de item comumente compreendido. Por exemplo, um local, uma pessoa ou uma data. Suponhamos que você esteja interessado em datas e lugares mencionados nas análises - você pode usar o código a seguir para encontrá -las. </p>
+<pre line="150"> <code class="language-python" line="150"> # Use the client and reviews you created previously to get named entities
+entity_analysis = text_analytics_client.entities(documents=reviews)
+
+# Print the results for each review
+for review_num in range(len(reviews)):
+    print(reviews[review_num]['id'])
+    # Get the named entitites in this review
+    entities = entity_analysis.documents[review_num].entities
+    for entity in entities:
+        # Only get location entitites
+        if entity.type in ['DateTime','Location']:
+            link = '(' + entity.wikipedia_url + ')' if entity.wikipedia_id is not None else ''
+            print(' - {}: {} {}'.format(entity.type, entity.name, link))
+ </code> </pre>
+<p line="166"> Observe que algumas entidades são suficientemente conhecidas para ter uma página da Wikipedia associada; nesse caso, o serviço de análise de texto retorna o URL para essa página. </p>
+<h2 id="saber-mais" line="168"> <a href="#saber-mais" class="header_no_underline" line="168"> Saber mais </a> </h2>
+<p line="170"> Para obter mais informações sobre o serviço de análise de texto, consulte<a href="https://docs.microsoft.com/azure/cognitive-services/text-analytics/" line="170"> a documentação do serviço de análise de texto </a> </p>
+<p line="172"> <a href="02b%20-%20Speech.html" line="172"> Próxima Aula </a> </p>
+<pre line="174"> <code line="174">  </code>
+<p><a href="index.html">Início</a></p>
+ </pre>
+ </body>
+ </html>

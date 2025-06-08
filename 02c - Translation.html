@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8"> 
+  <title>Tradução </title>
+  <link rel="stylesheet" href="css/estilos.css"> 
+   </style>
+ </head>
+<body>
+<h1 id="tradução" line="0"> <a href="#tradução" class="header_no_underline" line="0"> Tradução </a> </h1>
+<p line="2"> Uma das forças motrizes que permitiu a civilização humana se desenvolver é a capacidade de se comunicar. Na maioria dos empreendimentos humanos, a comunicação é fundamental. </p>
+<p line="4"> <img src="./images/translation.jpg" alt="Um robô multilíngue" line="4" /> </p>
+<p line="6"> A inteligência artificial (IA) pode ajudar a simplificar a comunicação, traduzindo texto ou fala entre idiomas, ajudando a remover barreiras à comunicação entre países e culturas. </p>
+<h2 id="crie-um-recurso-de-serviços-cognitivos" line="8"> <a href="#crie-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="8"> Crie um recurso de serviços cognitivos </a> </h2>
+<p line="10"> No Azure, você pode usar os serviços cognitivos para traduzir entre vários idiomas. </p>
+<p line="12"> Se você ainda não possui um, use as seguintes etapas para criar um<strong line="12"> Serviços cognitivos </strong>Recurso em sua assinatura do Azure: </p>
+<ol line="14"> 
+<li line="14"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="14"> https://portal.azure.com </a>, fazendo login com sua conta da Microsoft. </li>
+<li line="15"> Clique no<strong line="15"> ＋ Crie um recurso </strong>Botão, pesquise<em line="15"> Serviços cognitivos </em>e criar um<strong line="15"> Serviços cognitivos </strong>Recurso com as seguintes configurações:
+<ul line="16"> 
+<li line="16"> <strong line="16"> Nome </strong>:<em line="16"> Digite um nome único </em>. </li>
+<li line="17"> <strong line="17"> Subscrição </strong>:<em line="17"> Sua assinatura do Azure </em>. </li>
+<li line="18"> <strong line="18"> Localização </strong>:<em line="18"> Qualquer local disponível </em>. </li>
+<li line="19"> <strong line="19"> Nível de preço </strong>: S0 </li>
+<li line="20"> <strong line="20"> Grupo de recursos </strong>:<em line="20"> Crie um grupo de recursos com um nome único </em>. </li>
+ </ul>
+ </li>
+<li line="21"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no<strong line="21"> Visão geral </strong>página, clique no link para gerenciar as chaves do serviço. Você precisará do terminal e das chaves para conectar -se ao seu recurso de serviços cognitivos dos aplicativos do cliente. </li>
+ </ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="23"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="23"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos </a> </h3>
+<p line="25"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação: </p>
+<ol line="27"> 
+<li line="27"> No portal do Azure, no<strong line="27"> Chaves e terminal </strong>página para seu recurso de serviço cognitivo, copie o<strong line="27"> Chave1 </strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="27"> Your_cog_key </strong>. </li>
+<li line="28"> Copie o<strong line="28"> endpoint </strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="28"> Your_cog_endpoint </strong>. </li>
+<li line="29"> Copie o<strong line="29"> Localização </strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="29"> Your_cog_region </strong>. </li>
+<li line="30"> Execute o código abaixo clicando no<strong line="30"> Execute a célula </strong>(▷) botão à esquerda da célula. </li>
+ </ol>
+<pre line="32"> <code class="language-python" line="32"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+cog_region = 'YOUR_COG_REGION'
+
+print('Ready to use cognitive services in {} using key {}'.format(cog_region, cog_key))
+ </code> </pre>
+<h2 id="traduzindo-texto" line="40"> <a href="#traduzindo-texto" class="header_no_underline" line="40"> Traduzindo texto </a> </h2>
+<p line="42"> Como o próprio nome sugere, o<strong line="42"> Texto do tradutor </strong>O serviço permite traduzir texto de um idioma para outro. </p>
+<p line="44"> Não há Python SDK para este serviço, mas você pode usar sua interface de repouso para enviar solicitações a um ponto final sobre o HTTP, o que é relativamente fácil de fazer no Python usando o<strong line="44"> solicitações </strong>biblioteca. As informações sobre o texto a ser traduzido e o texto traduzido resultante são trocadas no formato JSON. </p>
+<p line="46"> Execute a célula a seguir para criar uma função que faça isso e teste a função com uma tradução simples do inglês para o francês. </p>
+<pre line="48"> <code class="language-python" line="48"> # Create a function that makes a REST request to the Text Translation service
+def translate_text(cog_region, cog_key, text, to_lang='fr', from_lang='en'):
+    import requests, uuid, json
+
+    # Create the URL for the Text Translator service REST request
+    path = 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0'
+    params = '&amp;from={}&amp;to={}'.format(from_lang, to_lang)
+    constructed_url = path + params
+
+    # Prepare the request headers with Cognitive Services resource key and region
+    headers = {
+        'Ocp-Apim-Subscription-Key': cog_key,
+        'Ocp-Apim-Subscription-Region':cog_region,
+        'Content-type': 'application/json',
+        'X-ClientTraceId': str(uuid.uuid4())
+    }
+
+    # Add the text to be translated to the body
+    body = [{
+        'text': text
+    }]
+
+    # Get the translation
+    request = requests.post(constructed_url, headers=headers, json=body)
+    response = request.json()
+    return response[0][&quot;translations&quot;][0][&quot;text&quot;]
+
+
+# Test the function
+text_to_translate = &quot;Hello&quot;
+
+translation = translate_text(cog_region, cog_key, text_to_translate, to_lang='fr', from_lang='en')
+print('{} -&gt; {}'.format(text_to_translate,translation))
+ </code> </pre>
+<p line="84"> O serviço deveria ter traduzido o texto em inglês &ldquo;Hello&rdquo; para o &ldquo;Bonjour&rdquo; francês. </p>
+<p line="86"> Observe que os idiomas são especificados usando um sistema padrão de abreviações de idiomas, com<em line="86"> en </em>para inglês e<em line="86"> fr </em>para o francês. Você também pode usar abreviações que incluem culturas específicas, o que é útil quando o mesmo idioma é usado em diferentes áreas geográficas - geralmente com grafias diferentes. Por exemplo<em line="86"> en-us </em>denota inglês nos estados unidos, enquanto<em line="86"> EN-GB </em>Indica inglês na Grã -Bretanha. </p>
+<p line="88"> Execute a célula a seguir para traduzir entre inglês britânico e italiano. </p>
+<pre line="90"> <code class="language-python" line="90"> text_to_translate = &quot;Hello&quot;
+
+translation = translate_text(cog_region, cog_key, text_to_translate, to_lang='it-IT', from_lang='en-GB')
+print('{} -&gt; {}'.format(text_to_translate,translation))
+ </code> </pre>
+<p line="97"> Vamos tentar outra tradução - desta vez de inglês para chinês. </p>
+<pre line="99"> <code class="language-python" line="99"> text_to_translate = &quot;Hello&quot;
+
+translation = translate_text(cog_region, cog_key, text_to_translate, to_lang='zh-CN', from_lang='en-US')
+print('{} -&gt; {}'.format(text_to_translate,translation))
+ </code> </pre>
+<h2 id="tradução-de-fala" line="106"> <a href="#tradução-de-fala" class="header_no_underline" line="106"> Tradução de fala </a> </h2>
+<p line="108"> Você pode usar o<strong line="108"> Discurso </strong>Serviço para traduzir a linguagem falada. </p>
+<p line="110"> O serviço de fala fornece um Python SDK, que você pode usar para traduzir a entrada de fala audível de um arquivo de microfone ou áudio, então vamos instalar isso. </p>
+<pre line="112"> <code class="language-python" line="112"> ! pip install azure.cognitiveservices.speech
+ </code> </pre>
+<p line="116"> Agora você pode executar a seguinte célula para criar e testar uma função que usa o SCEAY SDK para traduzir o discurso audível. </p>
+<blockquote line="118"> 
+<p line="118"> <strong line="118"> Observação </strong>: Você precisará de alto -falantes para ouvir o áudio. </p>
+ </blockquote>
+<pre line="120"> <code class="language-python" line="120"> # Create a function to translate audio in one language to text in another
+def translate_speech(cog_region, cog_key, audio_file=None, to_lang='fr-FR', from_lang='en-US'):
+    from azure.cognitiveservices.speech import SpeechConfig, AudioConfig, ResultReason
+    from azure.cognitiveservices.speech.translation import SpeechTranslationConfig, TranslationRecognizer
+
+    # Configure the speech translation service
+    translation_config = SpeechTranslationConfig(subscription=cog_key, region=cog_region)
+    translation_config.speech_recognition_language = from_lang
+    translation_config.add_target_language(to_lang)
+
+    # Configure audio input
+    if audio_file is None:
+        audio_config = AudioConfig() # Use default input (microphone)
+    else:
+        audio_config = AudioConfig(filename=audio_file) # Use file input
+
+    # Create a translation recognizer and use it to translate speech input
+    recognizer = TranslationRecognizer(translation_config, audio_config)
+    result = recognizer.recognize_once()
+
+    # Did we get it?
+    translation = ''
+    speech_text = ''
+    if result.reason == ResultReason.TranslatedSpeech:
+        speech_text = result.text
+        translation =  result.translations[to_lang]
+    elif result.reason == ResultReason.RecognizedSpeech:
+        speech_text = result.text
+        translation =  'Unable to translate speech'
+    else:
+        translation = 'Unknown'
+        speech_text = 'Unknown'
+
+    # rturn the translation
+    return speech_text, translation
+    
+
+# Test the function
+import os, IPython
+
+file_name = 'english.wav'
+file_path = os.path.join('data', 'translation', file_name)
+speech, translated_speech = translate_speech(cog_region, cog_key, file_path, to_lang='es', from_lang='en-US')
+result = '{} -&gt; {}'.format(speech, translated_speech)
+
+# Play audio and show translated text
+IPython.display.display(IPython.display.Audio(file_path, autoplay=True),
+                        IPython.display.HTML(result))
+ </code> </pre>
+<p line="171"> Observe que o idioma &ldquo;to&rdquo; deve ser identificado usando um código de idioma de 2 caracteres (por exemplo<em line="171"> en </em>), enquanto o idioma &ldquo;de&rdquo; deve incluir o indicador de cultura (por exemplo<em line="171"> en-us </em>). </p>
+<p line="173"> Vamos tentar traduzir de francês para inglês. </p>
+<pre line="175"> <code class="language-python" line="175"> import os, IPython
+
+file_name = 'french.wav'
+file_path = os.path.join('data', 'translation', file_name)
+speech, translated_speech = translate_speech(cog_region, cog_key, file_path, to_lang='en', from_lang='fr-FR')
+result = '{} -&gt; {}'.format(speech, translated_speech)
+
+# Play audio and show translated text
+IPython.display.display(IPython.display.Audio(file_path, autoplay=True),
+                        IPython.display.HTML(result))
+ </code> </pre>
+<h2 id="saber-mais" line="188"> <a href="#saber-mais" class="header_no_underline" line="188"> Saber mais </a> </h2>
+<p line="190"> Você pode aprender mais sobre o<a href="https://docs.microsoft.com/azure/cognitive-services/translator/" line="190"> Texto do tradutor </a>e<a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/index-speech-translation" line="190"> Tradução com o serviço de fala </a>na documentação do serviço. </p>
+<p line="192"> <a href="02d%20-%20Language%20Understanding.html" line="192"> Próxima Aula </a> </p>
+<pre line="194"> <code line="194">  </code>
+<p><a href="index.html">Início</a></p>
+ </pre>
+ </body>
+ </html>

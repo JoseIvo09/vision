@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova: Visão Computacional com Azure</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1>Prova: Visão Computacional com Azure</h1>
+    <div class="alerta">
+      ⚠️  Atenção   ⚠️
+Para passar para a próxima aula é necessário acertar no mínimo 15 questões
+    </div>
+    
+    <form id="quizForm" onsubmit="event.preventDefault(); corrigir();">
+
+      <div class="pergunta ativa" id="q1">
+        <p><strong>1. O que é visão computacional?</strong></p>
+        <label><input type="radio" name="q1" value="a"> Um programa de edição de vídeo</label><br>
+        <label><input type="radio" name="q1" value="b"> Um modelo para reconhecimento de voz</label><br>
+        <label><input type="radio" name="q1" value="c"> Uma área da IA que interpreta imagens e vídeos</label><br>
+        <label><input type="radio" name="q1" value="d"> Um hardware para câmeras inteligentes</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+      </div>
+
+      <div class="pergunta" id="q2">
+        <p><strong>2. Qual serviço do Azure é especializado em visão computacional?</strong></p>
+        <label><input type="radio" name="q2" value="a"> Azure Text Analytics</label><br>
+        <label><input type="radio" name="q2" value="b"> Azure Bot Service</label><br>
+        <label><input type="radio" name="q2" value="c"> Computer Vision</label><br>
+        <label><input type="radio" name="q2" value="d"> Azure SQL Vision</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q3">
+        <p><strong>3. Quais dados são essenciais para usar o serviço Computer Vision?</strong></p>
+        <label><input type="radio" name="q3" value="a"> Apenas a imagem</label><br>
+        <label><input type="radio" name="q3" value="b"> Nome de usuário e senha</label><br>
+        <label><input type="radio" name="q3" value="c"> Endpoint e chave de autenticação</label><br>
+        <label><input type="radio" name="q3" value="d"> Código do cartão de crédito</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q4">
+        <p><strong>4. Quais funcionalidades o serviço pode realizar?</strong></p>
+        <label><input type="radio" name="q4" value="a"> Apenas leitura de texto</label><br>
+        <label><input type="radio" name="q4" value="b"> Descrever imagens, identificar objetos, rostos e conteúdos sensíveis</label><br>
+        <label><input type="radio" name="q4" value="c"> Somente reconhecimento facial</label><br>
+        <label><input type="radio" name="q4" value="d"> Traduzir vídeos</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q5">
+        <p><strong>5. O que representa a imagem digital analisada pelo serviço?</strong></p>
+        <label><input type="radio" name="q5" value="a"> Um código hexadecimal</label><br>
+        <label><input type="radio" name="q5" value="b"> Uma sequência de texto plano</label><br>
+        <label><input type="radio" name="q5" value="c"> Um array de valores numéricos de pixels</label><br>
+        <label><input type="radio" name="q5" value="d"> Um link com metadados</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q6">
+        <p><strong>6. Qual é a principal vantagem de usar serviços cognitivos como o Computer Vision no Azure?</strong></p>
+        <label><input type="radio" name="q6" value="a"> Permitir acesso remoto à rede privada</label><br>
+        <label><input type="radio" name="q6" value="b"> Fornecer modelos prontos para análise de imagem</label><br>
+        <label><input type="radio" name="q6" value="c"> Criar máquinas virtuais para execução local</label><br>
+        <label><input type="radio" name="q6" value="d"> Reduzir o consumo de energia do dispositivo</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q7">
+        <p><strong>7. Qual comando em Python instala a biblioteca para usar o serviço?</strong></p>
+        <label><input type="radio" name="q7" value="a"> pip install azure-ai-core</label><br>
+        <label><input type="radio" name="q7" value="b"> pip install vision-analyzer</label><br>
+        <label><input type="radio" name="q7" value="c"> pip install azure-cognitiveservices-vision-computervision</label><br>
+        <label><input type="radio" name="q7" value="d"> pip install computervision-core</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q8">
+        <p><strong>8. Qual objeto é utilizado para abrir uma imagem em binário no Python?</strong></p>
+        <label><input type="radio" name="q8" value="a"> open("caminho", "rt")</label><br>
+        <label><input type="radio" name="q8" value="b"> read_file()</label><br>
+        <label><input type="radio" name="q8" value="c"> open("caminho", "rb")</label><br>
+        <label><input type="radio" name="q8" value="d"> Image.open_bin()</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q9">
+        <p><strong>9. Qual biblioteca permite autenticar no serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q9" value="a"> AzureAuthService</label><br>
+        <label><input type="radio" name="q9" value="b"> CognitiveServicesCredentials</label><br>
+        <label><input type="radio" name="q9" value="c"> OpenCVAuth</label><br>
+        <label><input type="radio" name="q9" value="d"> AzureTokenManager</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q10">
+        <p><strong>10. Quais recursos podem ser extraídos com 'analyze_image_in_stream'?</strong></p>
+        <label><input type="radio" name="q10" value="a"> Apenas texto e idade</label><br>
+        <label><input type="radio" name="q10" value="b"> Localização e rede social</label><br>
+        <label><input type="radio" name="q10" value="c"> Tags, objetos, rostos, conteúdo adulto, descrição</label><br>
+        <label><input type="radio" name="q10" value="d"> Som apenas</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q11">
+        <p><strong>11. Qual é o propósito da variável <code>features</code> no código de análise?</strong></p>
+        <label><input type="radio" name="q11" value="a"> Definir o número de imagens</label><br>
+        <label><input type="radio" name="q11" value="b"> Informar o caminho do arquivo</label><br>
+        <label><input type="radio" name="q11" value="c"> Especificar quais características da imagem devem ser analisadas</label><br>
+        <label><input type="radio" name="q11" value="d"> Determinar o idioma da legenda</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q12">
+        <p><strong>12. O que representa a função <code>describe_image_in_stream</code>?</strong></p>
+        <label><input type="radio" name="q12" value="a"> Aplica filtros visuais na imagem</label><br>
+        <label><input type="radio" name="q12" value="b"> Gera uma legenda descritiva da imagem</label><br>
+        <label><input type="radio" name="q12" value="c"> Exclui imagens duplicadas</label><br>
+        <label><input type="radio" name="q12" value="d"> Conecta o cliente ao Azure Portal</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q13">
+        <p><strong>13. Qual imagem foi usada como exemplo inicial para análise?</strong></p>
+        <label><input type="radio" name="q13" value="a"> /data/vision/store_cam2.jpg</label><br>
+        <label><input type="radio" name="q13" value="b"> /data/vision/teste1.jpg</label><br>
+        <label><input type="radio" name="q13" value="c"> /data/vision/store_cam1.jpg</label><br>
+        <label><input type="radio" name="q13" value="d"> /images/test.jpg</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q14">
+        <p><strong>14. O que o método <code>show_image_caption()</code> faz?</strong></p>
+        <label><input type="radio" name="q14" value="a"> Remove imagens não utilizadas</label><br>
+        <label><input type="radio" name="q14" value="b"> Exibe a imagem com a legenda gerada</label><br>
+        <label><input type="radio" name="q14" value="c"> Mostra os logs de erro do sistema</label><br>
+        <label><input type="radio" name="q14" value="d"> Inicia o servidor local do Azure</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q15">
+        <p><strong>15. O que representa a chave do recurso no Azure?</strong></p>
+        <label><input type="radio" name="q15" value="a"> Uma senha para acesso à internet</label><br>
+        <label><input type="radio" name="q15" value="b"> Um identificador de usuário do Windows</label><br>
+        <label><input type="radio" name="q15" value="c"> Um código de acesso ao serviço cognitivo</label><br>
+        <label><input type="radio" name="q15" value="d"> Um número de IP fixo</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q16">
+        <p><strong>16. Qual biblioteca importa o cliente do serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q16" value="a"> azure.cognitiveservices.vision.computervision</label><br>
+        <label><input type="radio" name="q16" value="b"> openai.vision</label><br>
+        <label><input type="radio" name="q16" value="c"> azure.vision.ml.core</label><br>
+        <label><input type="radio" name="q16" value="d"> ms.azure.imagemanager</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q17">
+        <p><strong>17. O que representa a variável <code>computervision_client</code>?</strong></p>
+        <label><input type="radio" name="q17" value="a"> Um objeto que armazena imagens</label><br>
+        <label><input type="radio" name="q17" value="b"> Um cliente para conectar e usar o serviço Computer Vision</label><br>
+        <label><input type="radio" name="q17" value="c"> Um dicionário de imagens no portal</label><br>
+        <label><input type="radio" name="q17" value="d"> Um tipo de login do Azure</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q18">
+        <p><strong>18. Qual a finalidade do método <code>analyze_image_in_stream()</code>?</strong></p>
+        <label><input type="radio" name="q18" value="a"> Fazer upload de imagens para nuvem</label><br>
+        <label><input type="radio" name="q18" value="b"> Aplicar efeitos visuais nas imagens</label><br>
+        <label><input type="radio" name="q18" value="c"> Analisar diversas características da imagem</label><br>
+        <label><input type="radio" name="q18" value="d"> Reduzir a resolução de imagens</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q19">
+        <p><strong>19. Qual opção NÃO é uma funcionalidade do serviço Computer Vision?</strong></p>
+        <label><input type="radio" name="q19" value="a"> Leitura de texto (OCR)</label><br>
+        <label><input type="radio" name="q19" value="b"> Geração de legendas</label><br>
+        <label><input type="radio" name="q19" c> Reconhecimento facial</label><br>
+        <label><input type="radio" name="q19" value="d"> Impressão de imagens em papel</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+      </div>
+
+      <div class="pergunta" id="q20">
+        <p><strong>20. Onde acessar a documentação oficial do serviço Computer Vision?</strong></p>
+        <label><input type="radio" name="q20" value="a"> docs.microsoft.com/azure/cognitive-services/computer-vision</label><br>
+        <label><input type="radio" name="q20" value="b"> vision.computer.azure.br</label><br>
+        <label><input type="radio" name="q20" value="c"> portal.azure.microsoft/api/docs</label><br>
+        <label><input type="radio" name="q20" value="d"> learn.azure.portal/computervision</label><br><br>
+        <button type="button" onclick="anterior()">Anterior</button>
+        <button type="submit">Finalizar</button>
+      </div>
+
+    </form>
+    <div id="resultado"></div>
+      <div class="linkProximaAula" id="linkProximaAula" style="display: none; text-align: center; margin-top: 20px;">
+      <a href="01b%20-%20Image%20Classification.html">Próxima Aula</a></div>
+  </main>
+  <script src="js/script01a.js"></script>
+</body>
+</html>

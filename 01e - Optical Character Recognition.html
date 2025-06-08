@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reconhecimento Óptico de Caracteres </title>
+  <link rel="stylesheet" href="css/estilos.css">
+   </style>
+ </head>
+<body>
+<h1 id="reconhecimento-óptico-de-caracteres" line="0"> <a href="#reconhecimento-óptico-de-caracteres" class="header_no_underline" line="0"> Reconhecimento Óptico de Caracteres </a> </h1>
+<p line="2"> <img src="./images/ocr.jpg" alt="Um robô lendo um jornal" line="2" /> </p>
+<p line="4"> Um desafio comum de visão computacional é detectar e interpretar o texto em uma imagem. Esse tipo de processamento é frequentemente referido como<em line="4"> reconhecimento óptico de caracteres </em>(OCR). </p>
+<h2 id="use-o-serviço-de-visão-computacional-para-ler-o-texto-em-uma-imagem" line="6"> <a href="#use-o-serviço-de-visão-computacional-para-ler-o-texto-em-uma-imagem" class="header_no_underline" line="6"> Use o serviço de visão computacional para ler o texto em uma imagem </a> </h2>
+<p line="8"> O<strong line="8"> Visão computacional </strong>O serviço cognitivo fornece suporte para tarefas de OCR, incluindo: </p>
+<ul line="10"> 
+<li line="10"> Uma<strong line="10"> API </strong>de OCR que você pode usar para ler o texto em vários idiomas. Esta API pode ser usada de maneira síncrona e funciona bem quando você precisa detectar e ler uma pequena quantidade de texto em uma imagem. </li>
+<li line="11"> Uma<strong line="11"> API </strong>Para Ler que é otimizada para documentos maiores. Esta API é usada de forma assíncrona e pode ser usada para texto impresso e manuscrito. </li>
+ </ul>
+<p line="13"> Você pode usar este serviço criando um<strong line="13"> Visão computacional </strong>recurso ou a<strong line="13"> Serviços cognitivos </strong>recurso. </p>
+<p line="15"> Se você ainda não fez isso, crie um<strong line="15"> Serviços cognitivos </strong>Recurso na sua assinatura do Azure. </p>
+<ol line="17"> 
+<li line="17"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="17"> https://portal.azure.com </a> e faça login na sua conta da Microsoft. </li>
+<li line="18"> Clique no<strong line="18"> ＋ Crie um recurso </strong>Botão, pesquise<em line="18"> Serviços cognitivos </em>e criar um<strong line="18"> Serviços cognitivos </strong>Recurso com as seguintes configurações:
+<ul line="19"> 
+<li line="19"> <strong line="19"> Nome </strong>:<em line="19"> Digite um nome único </em>. </li>
+<li line="20"> <strong line="20"> Subscrição </strong>:<em line="20"> Sua assinatura do Azure </em>. </li>
+<li line="21"> <strong line="21"> Localização </strong>:<em line="21"> Qualquer local disponível </em>. </li>
+<li line="22"> <strong line="22"> Nível de preço </strong>: S0 </li>
+<li line="23"> <strong line="23"> Grupo de recursos </strong>:<em line="23"> Crie um grupo de recursos com um nome único </em>. </li>
+ </ul>
+ </li>
+<li line="24"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no<strong line="24"> Visão geral </strong>página, clique no link para gerenciar as chaves do serviço. Você precisará do terminal e das chaves para conectar -se ao seu recurso de serviços cognitivos dos aplicativos do cliente. </li>
+ </ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="26"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="26"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos </a> </h3>
+<p line="28"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação: </p>
+<ol line="30"> 
+<li line="30"> No portal do Azure, no<strong line="30"> Chaves e terminal </strong>página para seu recurso de serviço cognitivo, copie o<strong line="30"> Chave1 </strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="30"> Your_cog_key </strong>. </li>
+<li line="31"> Copie o<strong line="31"> endpoint </strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="31"> Your_cog_endpoint </strong>. </li>
+<li line="32"> Execute o código na célula abaixo clicando no<strong line="32"> Execute a célula </strong>Botão (▷) (à esquerda da célula). </li>
+ </ol>
+<pre line="34"> <code class="language-python" line="34"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+
+print('Ready to use cognitive services at {} using key {}'.format(cog_endpoint, cog_key))
+ </code> </pre>
+<p line="41"> Agora que você configurou a chave e o terminal, você pode usar seu recurso de serviço de visão computacional para extrair texto de uma imagem. </p>
+<p line="43"> Para fazer isso no Python, você precisará executar a célula a seguir para instalar o pacote de visão computacional de serviços cognitivos do Azure. </p>
+<pre line="45"> <code class="language-python" line="45"> ! pip install azure-cognitiveservices-vision-computervision 
+ </code> </pre>
+<p line="49"> Agora você está pronto para usar o serviço de visão computacional para ler o texto em uma imagem. </p>
+<p line="51"> Vamos começar com o<strong line="51"> OCR </strong>API, que permite que você analise síncrona uma imagem e leia qualquer texto que ela contenha. Nesse caso, você tem uma imagem de adventismo para a empresa de varejo fictícia do Northwind, que inclui algum texto. Execute a célula abaixo para lê -la. </p>
+<pre line="53"> <code class="language-python" line="53"> from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+import matplotlib.pyplot as plt
+from PIL import Image, ImageDraw
+import os
+%matplotlib inline
+
+# Get a client for the computer vision service
+computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
+
+# Read the image file
+image_path = os.path.join('data', 'ocr', 'advert.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Use the Computer Vision service to find text in the image
+read_results = computervision_client.recognize_printed_text_in_stream(image_stream)
+
+# Process the text line by line
+for region in read_results.regions:
+    for line in region.lines:
+
+        # Read the words in the line of text
+        line_text = ''
+        for word in line.words:
+            line_text += word.text + ' '
+        print(line_text.rstrip())
+
+# Open image to display it.
+fig = plt.figure(figsize=(7, 7))
+img = Image.open(image_path)
+draw = ImageDraw.Draw(img)
+plt.axis('off')
+plt.imshow(img)
+ </code> </pre>
+<p line="89"> O texto encontrado na imagem é organizado em uma estrutura hierárquica de regiões, linhas e palavras, e o código as lê para recuperar os resultados. </p>
+<p line="91"> Nos resultados, veja o texto que foi lido acima da imagem. </p>
+<h2 id="exibir-caixas-delimitadoras" line="93"> <a href="#exibir-caixas-delimitadoras" class="header_no_underline" line="93"> Exibir caixas delimitadoras </a> </h2>
+<p line="95"> Os resultados também incluem<em line="95"> caixa delimitadora </em>Coordena as linhas de texto e palavras individuais encontradas na imagem. Execute a célula abaixo para ver as caixas delimitadoras para as linhas de texto na imagem de publicidade que você recuperou acima. </p>
+<pre line="97"> <code class="language-python" line="97"> # Open image to display it.
+fig = plt.figure(figsize=(7, 7))
+img = Image.open(image_path)
+draw = ImageDraw.Draw(img)
+
+# Process the text line by line
+for region in read_results.regions:
+    for line in region.lines:
+
+        # Show the position of the line of text
+        l,t,w,h = list(map(int, line.bounding_box.split(',')))
+        draw.rectangle(((l,t), (l+w, t+h)), outline='magenta', width=5)
+
+        # Read the words in the line of text
+        line_text = ''
+        for word in line.words:
+            line_text += word.text + ' '
+        print(line_text.rstrip())
+
+# Show the image with the text locations highlighted
+plt.axis('off')
+plt.imshow(img)
+ </code> </pre>
+<p line="122"> No resultado, a caixa delimitadora para cada linha de texto é mostrada como um retângulo na imagem. </p>
+<h2 id="use-a-api-de-leitura" line="124"> <a href="#use-a-api-de-leitura" class="header_no_underline" line="124"> Use a API de leitura </a> </h2>
+<p line="126"> A API OCR que você usou anteriormente funciona bem para imagens com uma pequena quantidade de texto. Quando você precisa ler corpos maiores de texto, como documentos digitalizados, você pode usar o<strong line="126"> Ler </strong>API. Isso requer um processo de várias etapas: </p>
+<ol line="128"> 
+<li line="128"> Envie uma imagem ao serviço de visão computacional para ser lida e analisada de forma assíncrona. </li>
+<li line="129"> Aguarde a conclusão da operação de análise. </li>
+<li line="130"> Recuperar os resultados da análise. </li>
+ </ol>
+<p line="132"> Execute a célula a seguir para usar esse processo para ler o texto em uma carta digitalizada ao gerente de uma loja do Northwind Traders. </p>
+<pre line="134"> <code class="language-python" line="134"> from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
+from msrest.authentication import CognitiveServicesCredentials
+import matplotlib.pyplot as plt
+from PIL import Image
+import time
+import os
+%matplotlib inline
+
+# Read the image file
+image_path = os.path.join('data', 'ocr', 'letter.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Get a client for the computer vision service
+computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
+
+# Submit a request to read printed text in the image and get the operation ID
+read_operation = computervision_client.read_in_stream(image_stream,
+                                                      raw=True)
+operation_location = read_operation.headers[&quot;Operation-Location&quot;]
+operation_id = operation_location.split(&quot;/&quot;)[-1]
+
+# Wait for the asynchronous operation to complete
+while True:
+    read_results = computervision_client.get_read_result(operation_id)
+    if read_results.status not in [OperationStatusCodes.running]:
+        break
+    time.sleep(1)
+
+# If the operation was successfuly, process the text line by line
+if read_results.status == OperationStatusCodes.succeeded:
+    for result in read_results.analyze_result.read_results:
+        for line in result.lines:
+            print(line.text)
+
+# Open image and display it.
+print('\n')
+fig = plt.figure(figsize=(12,12))
+img = Image.open(image_path)
+plt.axis('off')
+plt.imshow(img)
+ </code> </pre>
+<p line="178"> Revise os resultados. Há uma transcrição completa da carta, que consiste principalmente de texto impresso com uma assinatura manuscrita. A imagem original da letra é mostrada abaixo dos resultados do OCR (pode ser necessário rolar para vê -la). </p>
+<h2 id="leia-o-texto-manuscrito" line="180"> <a href="#leia-o-texto-manuscrito" class="header_no_underline" line="180"> Leia o texto manuscrito </a> </h2>
+<p line="182"> No exemplo anterior, a solicitação para analisar a imagem especificou um modo de reconhecimento de texto que otimizou a operação para<em line="182"> impresso </em>texto. Observe que, apesar disso, a assinatura manuscrita foi lida. </p>
+<p line="184"> Essa capacidade de ler o texto manuscrito é extremamente útil. Por exemplo, suponha que você tenha escrito uma nota contendo uma lista de compras e deseja usar um aplicativo no seu telefone para ler a nota e transcrever o texto que ele contém. </p>
+<p line="186"> Execute a célula abaixo para ver um exemplo de uma operação de leitura para uma lista de compras manuscritas. </p>
+<pre line="188"> <code class="language-python" line="188"> from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
+from msrest.authentication import CognitiveServicesCredentials
+import matplotlib.pyplot as plt
+from PIL import Image
+import time
+import os
+%matplotlib inline
+
+# Read the image file
+image_path = os.path.join('data', 'ocr', 'note.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Get a client for the computer vision service
+computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
+
+# Submit a request to read printed text in the image and get the operation ID
+read_operation = computervision_client.read_in_stream(image_stream,
+                                                      raw=True)
+operation_location = read_operation.headers[&quot;Operation-Location&quot;]
+operation_id = operation_location.split(&quot;/&quot;)[-1]
+
+# Wait for the asynchronous operation to complete
+while True:
+    read_results = computervision_client.get_read_result(operation_id)
+    if read_results.status not in [OperationStatusCodes.running]:
+        break
+    time.sleep(1)
+
+# If the operation was successfuly, process the text line by line
+if read_results.status == OperationStatusCodes.succeeded:
+    for result in read_results.analyze_result.read_results:
+        for line in result.lines:
+            print(line.text)
+
+# Open image and display it.
+print('\n')
+fig = plt.figure(figsize=(12,12))
+img = Image.open(image_path)
+plt.axis('off')
+plt.imshow(img)
+ </code> </pre>
+<h2 id="mais-informações" line="232"> <a href="#mais-informações" class="header_no_underline" line="232"> Mais informações </a> </h2>
+<p line="234"> Para obter mais informações sobre o uso do serviço de visão computacional para OCR, consulte<a href="https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-recognizing-text" line="234"> a documentação da visão computacional </a> </p>
+ <pre>
+<p><a href="Prova_01e.html"> Exercícios</a></p>
+<p><a href="index.html"> Início</a></p>
+ </pre>
+</body>
+</html>

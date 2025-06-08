@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detectar e Analisar Rostos</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="detectar-e-analisar-rostos" line="0"> <a href="#detectar-e-analisar-rostos" class="header_no_underline" line="0"> Detectar e Analisar Rostos</a></h1>
+<p line="2"> As soluções de visão computacional geralmente exigem uma solução de inteligência artificial (AI) para poder detectar, analisar ou identificar rostos humanos. Ou, por exemplo, suponha que a empresa de varejo Northwind Traders tenha decidido implementar uma &ldquo;loja inteligente&rdquo;, na qual os serviços de IA monitoram a loja para identificar os clientes que exigem assistência e direcionar os funcionários para ajudá -los. Uma maneira de realizar isso é executar detecção e análise faciais - em outras palavras, determinar se há alguma faces nas imagens e, se assim for, analise seus recursos.</p>
+<p line="4"> <img src="./images/face_analysis.jpg" alt="Um robô analisando um rosto" line="4" /></p>
+<h2 id="use-o-serviço-cognitivo-facial-para-detectar-rostos" line="6"> <a href="#use-o-serviço-cognitivo-facial-para-detectar-rostos" class="header_no_underline" line="6"> Use o serviço cognitivo facial para detectar rostos</a></h2>
+<p line="8"> Suponha que o sistema de loja inteligente que os comerciantes da Northwind deseja criar precisam detectar clientes e analisar seus recursos faciais. No Microsoft Azure, você pode usar<strong line="8"> Face</strong>, parte dos serviços cognitivos do Azure para fazer isso.</p>
+<h3 id="crie-um-recurso-de-serviços-cognitivos" line="10"> <a href="#crie-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="10"> Crie um recurso de serviços cognitivos</a></h3>
+<p line="12"> Vamos começar criando um<strong line="12"> Serviços cognitivos</strong>Recurso na sua assinatura do Azure.</p>
+<blockquote line="14"> 
+<p line="14"> <strong line="14"> Observação</strong>: Se você já possui um recurso de serviços cognitivos, basta abrir seu<strong line="14"> Início rápido</strong>Página no portal do Azure e copie sua chave e terminal para a célula abaixo. Caso contrário, siga as etapas abaixo para criar uma.</p>
+</blockquote>
+<ol line="16"> 
+<li line="16"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="16"> https://portal.azure.com</a>, fazendo login com sua conta da Microsoft.</li>
+<li line="17"> Clique no<strong line="17"> ＋ Crie um recurso</strong>Botão, pesquise<em line="17"> Serviços cognitivos</em>e criar um<strong line="17"> Serviços cognitivos</strong>Recurso com as seguintes configurações:
+<ul line="18"> 
+<li line="18"> <strong line="18"> Nome</strong>:<em line="18"> Digite um nome único</em>.</li>
+<li line="19"> <strong line="19"> Subscrição</strong>:<em line="19"> Sua assinatura do Azure</em>.</li>
+<li line="20"> <strong line="20"> Localização</strong>:<em line="20"> Escolha qualquer região disponível</em>:</li>
+<li line="21"> <strong line="21"> Nível de preço</strong>: S0</li>
+<li line="22"> <strong line="22"> Grupo de recursos</strong>:<em line="22"> Crie um grupo de recursos com um nome único</em>.</li>
+</ul>
+</li>
+<li line="23"> Aguarde a conclusão da implantação. Em seguida, vá para o seu recurso de serviços cognitivos e no<strong line="23"> Visão geral</strong>página, clique no link para gerenciar as chaves do serviço. Você precisará do terminal e das chaves para conectar -se ao seu recurso de serviços cognitivos dos aplicativos do cliente.</li>
+</ol>
+<h3 id="obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" line="25"> <a href="#obtenha-a-chave-e-o-endpoint-para-o-seu-recurso-de-serviços-cognitivos" class="header_no_underline" line="25"> Obtenha a chave e o endpoint para o seu recurso de serviços cognitivos</a></h3>
+<p line="27"> Para usar seu recurso de serviços cognitivos, os aplicativos do cliente precisam de seu terminal e chave de autenticação:</p>
+<ol line="29"> 
+<li line="29"> No portal do Azure, no<strong line="29"> Chaves e terminal</strong>página para seu recurso de serviço cognitivo, copie o<strong line="29"> Chave1</strong>para o seu recurso e cole -o no código abaixo, substituindo<strong line="29"> Your_cog_key</strong>.</li>
+<li line="30"> Copie o<strong line="30"> endpoint</strong>para o seu recurso e colar -o no código abaixo, substituindo<strong line="30"> Your_cog_endpoint</strong>.</li>
+<li line="31"> Execute o código na célula abaixo clicando na célula de execução <span> &amp;#9655 </span> Botão (no canto superior esquerdo da célula).</li>
+</ol>
+<pre line="33"> <code class="language-python" line="33"> cog_key = 'YOUR_COG_KEY'
+cog_endpoint = 'YOUR_COG_ENDPOINT'
+
+print('Ready to use cognitive services at {} using key {}'.format(cog_endpoint, cog_key))
+</code></pre>
+<p line="40"> Para usar o serviço FACE em seu recurso de Serviços Cognitivos, você precisará instalar o pacote de face do Azure Cognitive Services.</p>
+<pre line="42"> <code class="language-python" line="42"> ! pip install azure-cognitiveservices-vision-face
+</code></pre>
+<p line="46"> Agora que você tem um recurso de serviços cognitivos e o pacote SDK instalado, você pode usar o serviço FACE para detectar rostos humanos na loja.</p>
+<p line="48"> Execute a célula de código abaixo para ver um exemplo.</p>
+<pre line="50"> <code class="language-python" line="50"> from azure.cognitiveservices.vision.face import FaceClient
+from msrest.authentication import CognitiveServicesCredentials
+from python_code import faces
+import os
+%matplotlib inline
+
+# Create a face detection client.
+face_client = FaceClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
+
+# Open an image
+image_path = os.path.join('data', 'face', 'store_cam2.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Detect faces
+detected_faces = face_client.face.detect_with_stream(image=image_stream)
+
+# Display the faces (code in python_code/faces.py)
+faces.show_faces(image_path, detected_faces)
+</code></pre>
+<p line="71"> Cada face detectada recebe um ID exclusivo, para que seu aplicativo possa identificar cada face individual que foi detectada.</p>
+<p line="73"> Execute a célula abaixo para ver os IDs para mais alguns rostos de compradores.</p>
+<pre line="75"> <code class="language-python" line="75"> # Open an image
+image_path = os.path.join('data', 'face', 'store_cam3.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Detect faces
+detected_faces = face_client.face.detect_with_stream(image=image_stream)
+
+# Display the faces (code in python_code/faces.py)
+faces.show_faces(image_path, detected_faces, show_id=True)
+</code></pre>
+<h2 id="analisar-atributos-faciais" line="87"> <a href="#analisar-atributos-faciais" class="header_no_underline" line="87"> Analisar atributos faciais</a></h2>
+<p line="89"> O rosto pode fazer muito mais do que simplesmente detectar rostos. Também pode analisar as características e expressões faciais para sugerir idade e estado emocional; Por exemplo, execute o código abaixo para analisar os atributos faciais de um comprador.</p>
+<pre line="91"> <code class="language-python" line="91"> # Open an image
+image_path = os.path.join('data', 'face', 'store_cam1.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+
+# Detect faces and specified facial attributes
+attributes = ['age', 'emotion']
+detected_faces = face_client.face.detect_with_stream(image=image_stream, return_face_attributes=attributes)
+
+# Display the faces and attributes (code in python_code/faces.py)
+faces.show_face_attributes(image_path, detected_faces)
+</code></pre>
+<p line="104"> Com base nas pontuações da emoção detectadas para o cliente na imagem, o cliente parece muito feliz com a experiência de compra.</p>
+<h2 id="encontre-rostos-semelhantes" line="106"> <a href="#encontre-rostos-semelhantes" class="header_no_underline" line="106"> Encontre rostos semelhantes</a></h2>
+<p line="108"> Os IDs da face criados para cada face detectada são usados ​​para identificar individualmente as detecções de face. Você pode usar esses IDs para comparar um rosto detectado com faces detectadas anteriormente e encontrar rostos com recursos semelhantes.</p>
+<p line="110"> Por exemplo, execute a célula abaixo para comparar o comprador em uma imagem com os compradores em outro e encontre um rosto correspondente.</p>
+<pre line="112"> <code class="language-python" line="112"> # Get the ID of the first face in image 1
+image_1_path = os.path.join('data', 'face', 'store_cam3.jpg')
+image_1_stream = open(image_1_path, &quot;rb&quot;)
+image_1_faces = face_client.face.detect_with_stream(image=image_1_stream)
+face_1 = image_1_faces[0]
+
+# Get the face IDs in a second image
+image_2_path = os.path.join('data', 'face', 'store_cam2.jpg')
+image_2_stream = open(image_2_path, &quot;rb&quot;)
+image_2_faces = face_client.face.detect_with_stream(image=image_2_stream)
+image_2_face_ids = list(map(lambda face: face.face_id, image_2_faces))
+
+# Find faces in image 2 that are similar to the one in image 1
+similar_faces = face_client.face.find_similar(face_id=face_1.face_id, face_ids=image_2_face_ids)
+
+# Show the face in image 1, and similar faces in image 2(code in python_code/face.py)
+faces.show_similar_faces(image_1_path, face_1, image_2_path, image_2_faces, similar_faces)
+</code></pre>
+<h2 id="reconhecer-rostos" line="132"> <a href="#reconhecer-rostos" class="header_no_underline" line="132"> Reconhecer rostos</a></h2>
+<p line="134"> Até agora, você viu que o rosto pode detectar rostos e recursos faciais e pode identificar duas faces semelhantes entre si. Você pode dar as coisas um passo adiante ao suplementar um<em line="134"> reconhecimento facial</em>Solução em que você treina cara para reconhecer o rosto de uma pessoa específica. Isso pode ser útil em vários cenários, como marcar automaticamente fotografias de amigos em um aplicativo de mídia social ou usar o reconhecimento facial como parte de um sistema de verificação de identidade biométrica.</p>
+<p line="136"> Para ver como isso funciona, suponhamos que a Northwind Traders Company deseja usar o reconhecimento facial para garantir que apenas funcionários autorizados no departamento de TI possam acessar sistemas seguros.</p>
+<p line="138"> Começaremos criando um<em line="138"> grupo de pessoas</em>para representar os funcionários autorizados.</p>
+<pre line="140"> <code class="language-python" line="140"> group_id = 'employee_group_id'
+try:
+    # Delete group if it already exists
+    face_client.person_group.delete(group_id)
+except Exception as ex:
+    print(ex.message)
+finally:
+    face_client.person_group.create(group_id, 'employees')
+    print ('Group created!')
+</code></pre>
+<p line="152"> Agora que o<em line="152"> grupo de pessoas</em>existe, podemos adicionar um<em line="152"> pessoa</em>Para cada funcionário, queremos incluir no grupo e, em seguida, registre várias fotografias de cada pessoa para que o rosto possa aprender as características faciais distintas de cada pessoa. Idealmente, as imagens devem mostrar a mesma pessoa em poses diferentes e com diferentes expressões faciais.</p>
+<p line="154"> Adicionaremos um único funcionário chamado Wendell e registraremos três fotografias do funcionário.</p>
+<pre line="156"> <code class="language-python" line="156"> import matplotlib.pyplot as plt
+from PIL import Image
+import os
+%matplotlib inline
+
+# Add a person (Wendell) to the group
+wendell = face_client.person_group_person.create(group_id, 'Wendell')
+
+# Get photo's of Wendell
+folder = os.path.join('data', 'face', 'wendell')
+wendell_pics = os.listdir(folder)
+
+# Register the photos
+i = 0
+fig = plt.figure(figsize=(8, 8))
+for pic in wendell_pics:
+    # Add each photo to person in person group
+    img_path = os.path.join(folder, pic)
+    img_stream = open(img_path, &quot;rb&quot;)
+    face_client.person_group_person.add_face_from_stream(group_id, wendell.person_id, img_stream)
+
+    # Display each image
+    img = Image.open(img_path)
+    i +=1
+    a=fig.add_subplot(1,len(wendell_pics), i)
+    a.axis('off')
+    imgplot = plt.imshow(img)
+plt.show()
+</code></pre>
+<p line="187"> Com a pessoa adicionada e fotografias registradas, agora podemos treinar o rosto para reconhecer cada pessoa.</p>
+<pre line="189"> <code class="language-python" line="189"> face_client.person_group.train(group_id)
+print('Trained!')
+</code></pre>
+<p line="194"> Agora, com o modelo treinado, você pode usá -lo para identificar faces reconhecidas em uma imagem.</p>
+<pre line="196"> <code class="language-python" line="196"> # Get the face IDs in a second image
+image_path = os.path.join('data', 'face', 'employees.jpg')
+image_stream = open(image_path, &quot;rb&quot;)
+image_faces = face_client.face.detect_with_stream(image=image_stream)
+image_face_ids = list(map(lambda face: face.face_id, image_faces))
+
+# Get recognized face names
+face_names = {}
+recognized_faces = face_client.face.identify(image_face_ids, group_id)
+for face in recognized_faces:
+    person_name = face_client.person_group_person.get(group_id, face.candidates[0].person_id).name
+    face_names[face.face_id] = person_name
+
+# show recognized faces
+faces.show_recognized_faces(image_path, image_faces, face_names)
+
+
+</code></pre>
+<h2 id="saber-mais" line="216"> <a href="#saber-mais" class="header_no_underline" line="216"> Saber mais</a></h2>
+<p line="218"> Para saber mais sobre o serviço cognitivo de rosto, consulte o<a href="https://docs.microsoft.com/azure/cognitive-services/face/" line="218"> Documentação de rosto</a></p>
+ <pre>
+<p><a href="Prova_01d.html"> Exercícios</a></p>
+<p><a href="index.html"> Início</a></p>
+ </pre>
+</body>
+</html>

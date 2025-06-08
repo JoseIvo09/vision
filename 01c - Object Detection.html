@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detecção de Objetos</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="detecção-de-objetos" line="0"> <a href="#detecção-de-objetos" class="header_no_underline" line="0"> Detecção de Objetos </a> </h1>
+<p line="2"> <em line="2"> Detecção de objeto </em> é uma forma de visão computacional na qual um modelo de aprendizado de máquina é treinado para classificar instâncias individuais de objetos em uma imagem e indicar uma <em line="2"> caixa delimitadora </em> que marca sua localização. Você pode pensar nisso como uma progressão da <em line="2"> Classificação da imagem </em> (na qual o modelo responde à pergunta &ldquo;O que é uma imagem?&rdquo;) Para criar soluções onde podemos perguntar ao modelo &ldquo;Quais objetos estão nesta imagem e onde estão eles?&rdquo;. </p>
+<p line="4"> <img src="./images/object-detection.jpg" alt="Um robô identificando frutas" line="4" /> </p>
+<p line="6"> Por exemplo, um supermercado pode usar um modelo de detecção de objetos para implementar um sistema de check -out automatizado que digitalize uma correia transportadora usando uma câmera e pode identificar itens específicos sem a necessidade de colocar cada item na correia e digitalizá -los individualmente. </p>
+<p line="8"> O <strong line="8"> Visão Custom </strong> Serviço Cognitivo no Microsoft Azure fornece uma solução baseada em nuvem para criar e publicar modelos de detecção de objetos personalizados. </p>
+<h2 id="crie-um-recurso-de-visão-personalizado" line="10"> <a href="#crie-um-recurso-de-visão-personalizado" class="header_no_underline" line="10"> Crie um recurso de visão personalizado </a> </h2>
+<p line="12"> Para usar o Serviço de Visão Personalizada, você precisa de um recurso do Azure que possa usar para treinar um modelo e um recurso com o qual você pode publicá -lo para que os aplicativos usem. Você pode usar o mesmo recurso para cada uma dessas tarefas ou pode usar recursos diferentes para cada um para alocar custos, desde que os dois recursos sejam criados na mesma região. O recurso para (ou ambos) tarefas pode ser um recurso geral <strong line="12"> Cognitive Services </strong> ou um recurso específico <strong line="12"> de visão personalizada </strong>. Use as seguintes instruções para criar um novo recurso <strong line="12"> Visão personalizada </strong> (ou você pode usar um recurso existente, se tiver um). </p>
+<ol line="14"> 
+<li line="14"> 
+<p line="14"> Em uma nova guia do navegador, abra o portal do Azure no link <a href="https://portal.azure.com" line="14"> https://portal.azure.com </a> e faça login usando a conta da Microsoft associada à sua assinatura do Azure. </p>
+ </li>
+<li line="15"> 
+<p line="15"> Selecione o botão <strong line="15"> ＋Crie um recurso </strong>, pesquise <em line="15"> Visão personalizada </em> e crie um recurso <strong line="15"> de visão personalizada </strong> com as seguintes configurações: </p>
+<ul line="16"> 
+<li line="16"> <strong line="16"> Criar opções </strong>: Ambos </li>
+<li line="17"> <strong line="17"> assinatura </strong>: <em line="17"> Sua assinatura do Azure </em> </li>
+<li line="18"> <strong line="18"> Grupo de recursos </strong>: <em line="18"> Crie um novo grupo de recursos com um nome exclusivo </em> </li>
+<li line="19"> <strong line="19"> Nome </strong>: <em line="19"> Digite um nome único </em> </li>
+<li line="20"> <strong line="20"> Local de treinamento </strong>: <em line="20"> Escolha qualquer região disponível </em> </li>
+<li line="21"> <strong line="21"> Pacotes e preços de treinamento </strong>: F0 </li>
+<li line="22"> <strong line="22"> Local de previsão </strong>: <em line="22"> O mesmo que o local de treinamento </em> </li>
+<li line="23"> <strong line="23"> Nível de preços de previsão </strong>: f0 </li>
+ </ul>
+<blockquote line="25"> 
+<p line="25"> <strong line="25"> Nota </strong>: Se você já possui um serviço de visão personalizado F0 em sua assinatura, selecione <strong line="25"> S0 </strong> para este. </p>
+ </blockquote>
+ </li>
+<li line="27"> 
+<p line="27"> Aguarde o recurso a ser criado. </p>
+ </li>
+ </ol>
+<h2 id="crie-um-projeto-de-visão-personalizado" line="29"> <a href="#crie-um-projeto-de-visão-personalizado" class="header_no_underline" line="29"> Crie um projeto de visão personalizado </a> </h2>
+<p line="31"> Para treinar um modelo de detecção de objetos, você precisa criar um projeto de visão personalizado com base no seu recurso de treinamento. Para fazer isso, você usará o portal de visão personalizado. </p>
+<ol line="33"> 
+<li line="33"> Em uma nova guia do navegador, abra o Custom Vision portal no link <a href="https://customvision.ai" line="33"> https://customvision.ai </a>  e faça login usando a conta da Microsoft associada à sua assinatura do Azure. </li>
+<li line="34"> Crie um novo projeto com as seguintes configurações:
+<ul line="35"> 
+<li line="35"> <strong line="35"> Nome </strong>: Detecção de supermercado </li>
+<li line="36"> <strong line="36"> Descrição </strong>: Detecção de objetos para mantimentos. </li>
+<li line="37"> <strong line="37"> Recurso </strong>:<em line="37"> O recurso de visão personalizado que você criou anteriormente </em> </li>
+<li line="38"> <strong line="38"> Tipos de projeto </strong>: Detecção de objetos </li>
+<li line="39"> <strong line="39"> Domínios </strong>: Geral </li>
+ </ul>
+ </li>
+<li line="40"> Aguarde o projeto ser criado e aberto no navegador. </li>
+ </ol>
+<h2 id="adicionar-e-marcar-imagens" line="42"> <a href="#adicionar-e-marcar-imagens" class="header_no_underline" line="42"> Adicionar e marcar imagens </a> </h2>
+<p line="44"> Para treinar um modelo de detecção de objetos, você precisa fazer upload de imagens que contêm as classes que deseja que o modelo identifique e as identifique para indicar caixas delimitadoras para cada instância do objeto. </p>
+<ol line="46"> 
+<li line="46"> Faça o download e extraia as imagens de treinamento de <a href="https://aka.ms/fruit-objects" line="46"> https://aka.ms/fruit-objects </a>. A pasta extraída contém uma coleção de imagens de frutas. </li>
+<li line="47"> No portal de visão personalizado, no seu projeto de detecção de objetos, selecione <strong line="47"> Adicione imagens </strong> e faça o upload de todas as imagens na pasta extraída. </li>
+<li line="48"> Depois que as imagens foram enviadas, selecione a primeira a abri -la. </li>
+<li line="49"> Segure o mouse sobre qualquer objeto na imagem até que uma região detectada automaticamente seja exibida como a imagem abaixo. Em seguida, selecione o objeto e, se necessário, redimensione a região para cercá -lo. </li>
+ </ol>
+<p line="51"> <img src="./images/object-region.jpg" alt="A região padrão para um objeto" line="51" /> </p>
+<p line="53"> Como alternativa, você pode simplesmente arrastar o objeto para criar uma região. </p>
+<ol start="5" line="55"> 
+<li line="55"> Quando a região envolver o objeto, adicione uma nova tag com o tipo de objeto apropriado (<em line="55"> Apple </em>,<em line="55"> banana </em>ou<em line="55"> laranja </em>) como mostrado aqui: </li>
+ </ol>
+<p line="57"> <img src="./images/object-tag.jpg" alt="Um objeto marcado em uma imagem" line="57" /> </p>
+<ol start="6" line="59"> 
+<li line="59"> Selecione e marque uns aos outros no objeto na imagem, redimensionando as regiões e adicionando novas tags conforme necessário. </li>
+ </ol>
+<p line="61"> <img src="./images/object-tags.jpg" alt="Dois objetos marcados em uma imagem" line="61" /> </p>
+<ol start="7" line="63"> 
+<li line="63"> 
+<p line="63"> Use o link <strong line="63"> &gt; </strong> à direita para ir para a próxima imagem e marcar seus objetos. Em seguida, continue trabalhando em toda a coleção de imagens, marcando cada maçã, banana e laranja. </p>
+ </li>
+<li line="65"> 
+<p line="65"> Quando você terminar de marcar a última imagem, feche o <strong line="65"> Image Detail </strong> e na página <strong line="65"> Training Images </strong>, em <strong line="65"> Tags </strong>, selecione <strong line="65"> Tagged </strong> para ver todas as suas imagens marcadas: </p>
+ </li>
+ </ol>
+<p line="67"> <img src="./images/tagged-images.jpg" alt="Imagens marcadas em um projeto" line="67" /> </p>
+<h2 id="treine-e-teste-um-modelo" line="69"> <a href="#treine-e-teste-um-modelo" class="header_no_underline" line="69"> Treine e teste um modelo </a> </h2>
+<p line="71"> Agora que você marcou as imagens em seu projeto, está pronto para treinar um modelo. </p>
+<ol line="73"> 
+<li line="73"> No projeto de visão personalizada, clique em <strong line="73"> Train </strong> para treinar um modelo de detecção de objetos usando as imagens marcadas. Selecione a opção <strong line="73"> Quick Training </strong>. </li>
+<li line="74"> Aguarde a conclusão do treinamento (pode levar dez minutos ou mais) e, em seguida, revise as métricas <em line="74"> Precision </em>, <em line="74"> Recall </em> e <em line="74"> mAP </em> de desempenho - elas medem a precisão da previsão do modelo de classificação e devem ser altas. </li>
+<li line="75"> No canto superior direito da página, clique em <strong line="75"> Quick Test </strong> e, na caixa <strong line="75"> Image URL </strong>, digite <code line="75"> https://aka.ms/Apple-orange </code>
+ e visualize a previsão gerada. 
+Em seguida, feche a janela <strong line="75"> Quick Test </strong>. </li>
+ </ol>
+<h2 id="publicar-e-consumir-o-modelo-de-detecção-de-objetos" line="77"> <a href="#publicar-e-consumir-o-modelo-de-detecção-de-objetos" class="header_no_underline" line="77"> Publicar e consumir o modelo de detecção de objetos </a> </h2>
+<p line="79"> Agora você está pronto para publicar seu modelo treinado e usá -lo em um aplicativo cliente. </p>
+<ol line="81"> 
+<li line="81"> No canto superior esquerdo da página <strong line="81"> de desempenho </strong>, clique em <strong line="81"> 🗸 Publique </strong> para publicar o modelo treinado com as seguintes configurações:
+<ul line="82"> 
+<li line="82"> <strong line="82"> Nome do modelo </strong>: Detect-produce </li>
+<li line="83"> <strong line="83"> Recurso de previsão </strong>: <em line="83"> Sua visão personalizada </em> <em line="83"> PREFIÇÃO </em> <em line="83"> RESCESSO </em>. </li>
+ </ul>
+ </li>
+<li line="84"> Após a publicação, clique no ícone<em line="84"> Configurações </em>(⚙) no canto superior direito da página <strong line="84"> de desempenho </strong> para visualizar as configurações do projeto. Em seguida, em <strong line="84"> general </strong> (à esquerda), copie o <strong line="84"> ID do projeto </strong> e cole -o na célula de código abaixo, substituindo <strong line="84"> your_project_id </strong>. </li>
+ </ol>
+<blockquote line="86"> 
+<p line="86"> (*Se você usou um recurso <strong line="86"> Cognitive Services </strong> em vez de criar um recurso <strong line="86"> de visão personalizada </strong> no início deste exercício, você pode copiar sua chave e endpoint do lado direito das configurações do projeto, colar -o na célula de código abaixo e executá -la para ver os resultados. </p>
+ </blockquote>
+<ol start="3" line="88"> 
+<li line="88"> No canto superior esquerdo da página de configurações <strong line="88"> do projeto </strong>, clique no ícone<em line="88"> Projects Projects </em>(👁) para retornar à página inicial do portal de visão personalizada, onde seu projeto está listado agora. </li>
+<li line="89"> Na página inicial do portal de visão personalizada, no canto superior direito, clique no ícone <em line="89"> Configurações </em> (⚙) para visualizar as configurações do seu serviço de visão personalizada. Em seguida, em <strong line="89"> Recursos </strong>, expanda seu <em line="89"> prediction </em> resource (<u>not </u> O recurso de treinamento) e copie os valores de <strong line="89"> Key </strong> e <strong line="89"> Endpoint </strong> para a célula de código abaixo, substituindo <strong line="89"> YOUR_KEY </strong>  e <strong line="89"> YOUR_ENDPOINT </strong>. </li>
+<li line="90"> Execute a célula do código abaixo clicando no botão Executar <span>&amp;#9655 </span> (no canto superior esquerdo da célula) para definir as variáveis ​​para os valores do seu projeto ID, chave e ponto final. </li>
+ </ol>
+<pre line="92"> <code class="language-python" line="92"> project_id = 'YOUR_PROJECT_ID' # Replace with your project ID
+cv_key = 'YOUR_KEY' # Replace with your prediction resource primary key
+cv_endpoint = 'YOUR_ENDPOINT' # Replace with your prediction resource endpoint
+
+model_name = 'detect-produce' # this must match the model name you set when publishing your model iteration exactly (including case)!
+print('Ready to predict using model {} in project {}'.format(model_name, project_id))
+ </code> </pre>
+<p line="101"> Para usar o Serviço de Visão Custom do Python, você precisar </p>
+<pre line="103"> <code class="language-python" line="103"> !pip install azure-cognitiveservices-vision-customvision
+ </code> </pre>
+<p line="107"> Agora você pode usar sua chave e endpoint com um cliente de visão personalizado para se conectar ao seu modelo de detecção de objeto de visão personalizado. </p>
+<p line="109"> Execute a seguinte célula de código, que usa seu modelo para detectar itens individuais de produzir em uma imagem. </p>
+<blockquote line="111"> 
+<p line="111"> <strong line="111"> Nota </strong>: Não se preocupe muito com os detalhes do código. Ele usa o Python SDK para o serviço de visão personalizada para enviar uma imagem ao seu modelo e recuperar previsões para objetos detectados. Cada previsão consiste em um nome de classe (<em line="111"> Apple </em>,<em line="111"> banana </em>ou<em line="111"> laranja </em>) e<em line="111"> coordenadas da caixa delimitadora </em>que indicam onde na imagem o objeto previsto foi detectado. O código usa essas informações para desenhar uma caixa rotulada em torno de cada objeto na imagem. </p>
+ </blockquote>
+<pre line="113"> <code class="language-python" line="113"> from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+from msrest.authentication import ApiKeyCredentials
+from matplotlib import pyplot as plt
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+import os
+%matplotlib inline
+
+# Load a test image and get its dimensions
+test_img_file = os.path.join('data', 'object-detection', 'produce.jpg')
+test_img = Image.open(test_img_file)
+test_img_h, test_img_w, test_img_ch = np.array(test_img).shape
+
+# Get a prediction client for the object detection model
+credentials = ApiKeyCredentials(in_headers={&quot;Prediction-key&quot;: cv_key})
+predictor = CustomVisionPredictionClient(endpoint=cv_endpoint, credentials=credentials)
+
+print('Detecting objects in {} using model {} in project {}...'.format(test_img_file, model_name, project_id))
+
+# Detect objects in the test image
+with open(test_img_file, mode=&quot;rb&quot;) as test_data:
+    results = predictor.detect_image(project_id, model_name, test_data)
+
+# Create a figure to display the results
+fig = plt.figure(figsize=(8, 8))
+plt.axis('off')
+
+# Display the image with boxes around each detected object
+draw = ImageDraw.Draw(test_img)
+lineWidth = int(np.array(test_img).shape[1]/100)
+object_colors = {
+    &quot;apple&quot;: &quot;lightgreen&quot;,
+    &quot;banana&quot;: &quot;yellow&quot;,
+    &quot;orange&quot;: &quot;orange&quot;
+}
+for prediction in results.predictions:
+    color = 'white' # default for 'other' object tags
+    if (prediction.probability*100) &gt; 50:
+        if prediction.tag_name in object_colors:
+            color = object_colors[prediction.tag_name]
+        left = prediction.bounding_box.left * test_img_w 
+        top = prediction.bounding_box.top * test_img_h 
+        height = prediction.bounding_box.height * test_img_h
+        width =  prediction.bounding_box.width * test_img_w
+        points = ((left,top), (left+width,top), (left+width,top+height), (left,top+height),(left,top))
+        draw.line(points, fill=color, width=lineWidth)
+        plt.annotate(prediction.tag_name + &quot;: {0:.2f}%&quot;.format(prediction.probability * 100),(left,top), backgroundcolor=color)
+plt.imshow(test_img)
+
+ </code> </pre>
+<p line="165"> Veja as previsões resultantes, que mostram os objetos detectados e a probabilidade de cada previsão. </p>
+ <pre>
+<p><a href="Prova_01c.html"> Exercícios</a></p>
+<p><a href="index.html"> Início</a></p>
+ </pre>
+</body>
+</html>

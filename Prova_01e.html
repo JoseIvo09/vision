@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova: 01e - Optical Character Recognition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Prova: 01e - Optical Character Recognition</h1>
+    <div class="alerta">
+      ⚠️  Atenção   ⚠️
+Para passar para a próxima aula é necessário acertar no mínimo 15 questões
+    </div>
+    
+    <form id="quizForm" onsubmit="event.preventDefault(); corrigir();">
+
+      <div class="pergunta ativa" id="q1">
+        <p><strong>1. O que significa OCR?</strong></p>
+        <label><input type="radio" name="q1" value="a"> Optical Code Recognition</label><br>
+        <label><input type="radio" name="q1" value="b"> Optical Character Recognition</label><br>
+        <label><input type="radio" name="q1" value="c"> Optical Camera Reader</label><br>
+        <label><input type="radio" name="q1" value="d"> Optical Content Reader</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+    </div>
+
+    <div class="pergunta" id="q2">
+        <p><strong>2. Qual API é recomendada para documentos maiores?</strong></p>
+        <label><input type="radio" name="q2" value="a"> OCR API</label><br>
+        <label><input type="radio" name="q2" value="b"> Vision API</label><br>
+        <label><input type="radio" name="q2" value="c"> Read API</label><br>
+        <label><input type="radio" name="q2" value="d"> Text API</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q3">
+        <p><strong>3. Qual biblioteca Python é usada para acessar o serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q3" value="a"> azure-cognitiveservices-vision-computervision</label><br>
+        <label><input type="radio" name="q3" value="b"> azure-vision</label><br>
+        <label><input type="radio" name="q3" value="c"> azure-ai-tools</label><br>
+        <label><input type="radio" name="q3" value="d"> azure-cognitive-vision</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q4">
+        <p><strong>4. Qual é o nível de preço recomendado para criar um recurso de Serviços Cognitivos no Azure?</strong></p>
+        <label><input type="radio" name="q4" value="a"> S1</label><br>
+        <label><input type="radio" name="q4" value="b"> S2</label><br>
+        <label><input type="radio" name="q4" value="c"> S0</label><br>
+        <label><input type="radio" name="q4" value="d"> S3</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q5">
+        <p><strong>5. Qual serviço cognitivo fornece suporte para tarefas de OCR?</strong></p>
+        <label><input type="radio" name="q5" value="a"> Visão computacional</label><br>
+        <label><input type="radio" name="q5" value="b"> Serviços de linguagem</label><br>
+        <label><input type="radio" name="q5" value="c"> Serviços de tradução</label><br>
+        <label><input type="radio" name="q5" value="d"> Serviços de fala</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q6">
+        <p><strong>6. Qual API é otimizada para documentos maiores?</strong></p>
+        <label><input type="radio" name="q6" value="a"> OCR API</label><br>
+        <label><input type="radio" name="q6" value="b"> Read API</label><br>
+        <label><input type="radio" name="q6" value="c"> Vision API</label><br>
+        <label><input type="radio" name="q6" value="d"> Text API</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q7">
+        <p><strong>7. Qual é a função da API OCR?</strong></p>
+        <label><input type="radio" name="q7" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q7" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q7" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q7" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q8">
+        <p><strong>8. Qual é a função da API Read?</strong></p>
+        <label><input type="radio" name="q8" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q8" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q8" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q8" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q9">
+        <p><strong>9. Qual é o primeiro passo para usar o serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q9" value="a"> Criar um recurso de Serviços Cognitivos no Azure</label><br>
+        <label><input type="radio" name="q9" value="b"> Instalar a biblioteca Python</label><br>
+        <label><input type="radio" name="q9" value="c"> Ler a documentação</label><br>
+        <label><input type="radio" name="q9" value="d"> Configurar a chave e o endpoint</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q10">
+        <p><strong>10. Qual é o comando para instalar a biblioteca de visão computacional no Python?</strong></p>
+        <label><input type="radio" name="q10" value="a"> pip install azure-vision</label><br>
+        <label><input type="radio" name="q10" value="b"> pip install azure-cognitiveservices-vision-computervision</label><br>
+        <label><input type="radio" name="q10" value="c"> pip install azure-ai-tools</label><br>
+        <label><input type="radio" name="q10" value="d"> pip install azure-cognitive-vision</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q11">
+        <p><strong>11. Qual é a função da API OCR?</strong></p>
+        <label><input type="radio" name="q11" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q11" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q11" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q11" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q12">
+        <p><strong>12. Qual é a função da API Read?</strong></p>
+        <label><input type="radio" name="q12" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q12" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q12" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q12" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q13">
+        <p><strong>13. Qual é o primeiro passo para usar o serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q13" value="a"> Criar um recurso de Serviços Cognitivos no Azure</label><br>
+        <label><input type="radio" name="q13" value="b"> Instalar a biblioteca Python</label><br>
+        <label><input type="radio" name="q13" value="c"> Ler a documentação</label><br>
+        <label><input type="radio" name="q13" value="d"> Configurar a chave e o endpoint</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q14">
+        <p><strong>14. Qual é o comando para instalar a biblioteca de visão computacional no Python?</strong></p>
+        <label><input type="radio" name="q14" value="a"> pip install azure-vision</label><br>
+        <label><input type="radio" name="q14" value="b"> pip install azure-cognitiveservices-vision-computervision</label><br>
+        <label><input type="radio" name="q14" value="c"> pip install azure-ai-tools</label><br>
+        <label><input type="radio" name="q14" value="d"> pip install azure-cognitive-vision</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q15">
+        <p><strong>15. Qual é a função da API OCR?</strong></p>
+        <label><input type="radio" name="q15" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q15" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q15" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q15" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q16">
+        <p><strong>16. Qual é a função da API Read?</strong></p>
+        <label><input type="radio" name="q16" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q16" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q16" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q16" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q17">
+        <p><strong>17. Qual é o primeiro passo para usar o serviço de visão computacional?</strong></p>
+        <label><input type="radio" name="q17" value="a"> Criar um recurso de Serviços Cognitivos no Azure</label><br>
+        <label><input type="radio" name="q17" value="b"> Instalar a biblioteca Python</label><br>
+        <label><input type="radio" name="q17" value="c"> Ler a documentação</label><br>
+        <label><input type="radio" name="q17" value="d"> Configurar a chave e o endpoint</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q18">
+        <p><strong>18. Qual é o comando para instalar a biblioteca de visão computacional no Python?</strong></p>
+        <label><input type="radio" name="q18" value="a"> pip install azure-vision</label><br>
+        <label><input type="radio" name="q18" value="b"> pip install azure-cognitiveservices-vision-computervision</label><br>
+        <label><input type="radio" name="q18" value="c"> pip install azure-ai-tools</label><br>
+        <label><input type="radio" name="q18" value="d"> pip install azure-cognitive-vision</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q19">
+        <p><strong>19. Qual é a função da API OCR?</strong></p>
+        <label><input type="radio" name="q19" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q19" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q19" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q19" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+    <div class="pergunta" id="q20">
+        <p><strong>20. Qual é a função da API Read?</strong></p>
+        <label><input type="radio" name="q20" value="a"> Detectar e ler uma pequena quantidade de texto em uma imagem</label><br>
+        <label><input type="radio" name="q20" value="b"> Detectar e ler grandes documentos</label><br>
+        <label><input type="radio" name="q20" value="c"> Traduzir texto</label><br>
+        <label><input type="radio" name="q20" value="d"> Gerar texto</label><br><br>
+        <button type="button" onclick="anterior()">Anterior</button>
+        <button type="submit">Finalizar</button>
+      </div>
+
+    </form>
+    <div id="resultado"></div>
+      <div class="linkProximaAula" id="linkProximaAula" style="display: none; text-align: center; margin-top: 20px;">
+      <a href="01f%20-%20Receipts%20with%20Form%20Recognizer.html">Próxima Aula</a></div>
+  </main>
+   <script src="js/script01e.js"></script>
+</body>
+</html>

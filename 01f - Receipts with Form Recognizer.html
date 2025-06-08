@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Analisando Recibos com Reconhecimento de Formulário</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="analisando-recibos-com-reconhecimento-de-formulário" line="0"> <a href="#analisando-recibos-com-reconhecimento-de-formulário" class="header_no_underline" line="0"> Analisando Recibos com Reconhecimento de Formulário </a> </h1>
+<p line="2"> <img src="./images/receipt_analysis.jpg" alt="Um robô segurando um recibo" line="2" /> </p>
+<p line="4"> No campo da visão artificial (AI) de visão computacional, o reconhecimento de caracteres óptico (OCR) é comumente usado para ler documentos impressos ou manuscritos. Freqüentemente, o texto é simplesmente extraído dos documentos para um formato que pode ser usado para processamento ou análise adicional. </p>
+<p line="6"> Um cenário de OCR mais avançado é a extração de informações dos formulários, como pedidos de compra ou faturas, com um entendimento semântico do que os campos no formulário representam. O<strong line="6"> RECONHECIDO DE FORMULHOS </strong>O serviço é projetado especificamente para esse tipo de problema de IA. </p>
+<h2 id="veja-um-recibo" line="8"> <a href="#veja-um-recibo" class="header_no_underline" line="8"> Veja um recibo </a> </h2>
+<p line="10"> Neste exemplo, você usará o modelo interno do reconhecimento de formulário para analisar recibos. </p>
+<p line="12"> Clique no<strong line="12"> Execute a célula </strong>(▷) Botão (à esquerda da célula) abaixo para executá -lo e ver um exemplo de um recibo que você usará o reconhecimento do formulário para analisar. </p>
+<pre line="14"> <code class="language-python" line="14"> import matplotlib.pyplot as plt
+from PIL import Image
+import os
+%matplotlib inline
+
+
+# Load and display a receipt image
+fig = plt.figure(figsize=(6, 6))
+image_path = os.path.join('data', 'form-receipt', 'receipt.jpg')
+img = Image.open(image_path)
+plt.axis('off')
+plt.imshow(img)
+ </code> </pre>
+<h2 id="crie-um-recurso-de-reconhecimento-de-formulário" line="29"> <a href="#crie-um-recurso-de-reconhecimento-de-formulário" class="header_no_underline" line="29"> Crie um recurso de reconhecimento de formulário </a> </h2>
+<p line="31"> Comece criando um recurso de reconhecimento de formulário em sua assinatura do Azure: </p>
+<ol line="33"> 
+<li line="33"> Em outra guia do navegador, abra o portal do Azure em <a href="https://portal.azure.com" line="33"> https://portal.azure.com </a>, fazendo login com sua conta da Microsoft. </li>
+<li line="34"> Selecione**+ Crie um recurso**e procurar por<em line="34"> RECONHECIDO DE FORMULHOS </em>. </li>
+<li line="35"> Na lista de serviços, selecione<strong line="35"> RECONHECIDO DE FORMULHOS </strong>. </li>
+<li line="36"> No<strong line="36"> RECONHECIDO DE FORMULHOS </strong>lâmina, selecione<strong line="36"> Criar </strong>. </li>
+<li line="37"> No<strong line="37"> Criar </strong>lâmina, insira os seguintes detalhes e selecione<strong line="37"> Criar </strong> </li>
+ </ol>
+<ul line="38"> 
+<li line="38"> <strong line="38"> Nome </strong>: Um nome único para o seu serviço </li>
+<li line="39"> <strong line="39"> Subscrição </strong>: Sua assinatura do Azure </li>
+<li line="40"> <strong line="40"> Localização </strong>: Qualquer local disponível </li>
+<li line="41"> <strong line="41"> Nível de preço </strong>: F0 </li>
+<li line="42"> <strong line="42"> Grupo de recursos </strong>: O grupo de recursos existente que você usou anteriormente </li>
+<li line="43"> <strong line="43"> Eu confirmei que li e entendi o aviso abaixo </strong>: Selecionado. </li>
+ </ul>
+<ol start="6" line="44"> 
+<li line="44"> Aguarde a criação do serviço. </li>
+<li line="45"> Veja o seu recém -criado serviço de reconhecimento de formulário no portal do Azure e no<strong line="45"> Chaves e terminal </strong>página, copie o<strong line="45"> Chave1 </strong>e<strong line="45"> Endpoint </strong>valores e colá -los na célula de código abaixo, substituindo<strong line="45"> Your_form_key </strong>e<strong line="45"> Your_form_endpoint </strong>. </li>
+ </ol>
+<pre line="47"> <code class="language-python" line="47"> form_key = 'YOUR_FORM_KEY'
+form_endpoint = 'YOUR_FORM_ENDPOINT'
+
+print('Ready to use form recognizer at {} using key {}'.format(form_endpoint, form_key))
+ </code> </pre>
+<p line="54"> Para usar seu recurso de reconhecimento de formulário do Pythoin, você precisará instalar o SDK do Azure Form Reconhecer. </p>
+<pre line="56"> <code class="language-python" line="56"> ! pip install azure_ai_formrecognizer
+ </code> </pre>
+<h2 id="analisar-um-recibo" line="60"> <a href="#analisar-um-recibo" class="header_no_underline" line="60"> Analisar um recibo </a> </h2>
+<p line="62"> Agora você está pronto para usar o reconhecedor do formulário para analisar um recibo. </p>
+<pre line="64"> <code class="language-python" line="64"> import os
+from azure.ai.formrecognizer import FormRecognizerClient
+from azure.core.credentials import AzureKeyCredential
+
+# Create a client for the form recognizer service
+form_recognizer_client = FormRecognizerClient(endpoint=form_endpoint, credential=AzureKeyCredential(form_key))
+
+try:
+    print(&quot;Analyzing receipt...&quot;)
+    # Get the receipt image file
+    image_path = os.path.join('data', 'form-receipt', 'receipt.jpg')
+
+    # Submit the file data to form recognizer
+    with open(image_path, &quot;rb&quot;) as f:
+        analyze_receipt = form_recognizer_client.begin_recognize_receipts(receipt=f)
+    
+    # Get the results
+    receipt_data = analyze_receipt.result()
+
+    # Print the extracted data for the first (and only) receipt
+    receipt = receipt_data[0]
+    receipt_type = receipt.fields.get(&quot;ReceiptType&quot;)
+    if receipt_type:
+        print(&quot;Receipt Type: {}&quot;.format(receipt_type.value))
+    merchant_address = receipt.fields.get(&quot;MerchantAddress&quot;)
+    if merchant_address:
+        print(&quot;Merchant Address: {}&quot;.format(merchant_address.value))
+    merchant_phone = receipt.fields.get(&quot;MerchantPhoneNumber&quot;)
+    if merchant_phone:
+        print(&quot;Merchant Phone: {}&quot;.format(merchant_phone.value))
+    transaction_date = receipt.fields.get(&quot;TransactionDate&quot;)
+    if transaction_date:
+        print(&quot;Transaction Date: {}&quot;.format(transaction_date.value))
+    print(&quot;Receipt items:&quot;)
+    items = receipt.fields.get(&quot;Items&quot;)
+    if items:
+        for idx, item in enumerate(receipt.fields.get(&quot;Items&quot;).value):
+            print(&quot;\tItem #{}&quot;.format(idx+1))
+            item_name = item.value.get(&quot;Name&quot;)
+            if item_name:
+                print(&quot;\t - Name: {}&quot;.format(item_name.value))
+            item_total_price = item.value.get(&quot;TotalPrice&quot;)
+            if item_total_price:
+                print(&quot;\t - Price: {}&quot;.format(item_total_price.value))
+    subtotal = receipt.fields.get(&quot;Subtotal&quot;)
+    if subtotal:
+        print(&quot;Subtotal: {} &quot;.format(subtotal.value))
+    tax = receipt.fields.get(&quot;Tax&quot;)
+    if tax:
+        print(&quot;Tax: {}&quot;.format(tax.value))
+    total = receipt.fields.get(&quot;Total&quot;)
+    if total:
+        print(&quot;Total: {}&quot;.format(total.value))
+
+except Exception as ex:
+    print('Error:', ex)
+
+ </code> </pre>
+<p line="124"> Observe que o reconhecimento de formulário é capaz de interpretar os dados no formulário, identificando corretamente o endereço do comerciante e o número de telefone e a data e hora da transação, bem como os itens de linha, subtotal, impostos e valores totais. </p>
+<h2 id="mais-informações" line="126"> <a href="#mais-informações" class="header_no_underline" line="126"> Mais informações </a> </h2>
+<p line="128"> Para obter mais informações sobre o serviço de reconhecimento de formulários, consulte<a href="https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/index" line="128"> a documentação do reconhecimento de formulário </a> </p>
+<p line="130"> <a href="02a%20-%20Text%20Analytics.html" line="130"> Próxima Aula </a> </p>
+<pre line="132"> <code line="132">  </code>
+<p><a href="index.html">Início</a></p>
+ </pre>
+ </body>
+ </html>

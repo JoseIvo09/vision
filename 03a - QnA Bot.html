@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visão Computacional com Azure</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  </style>
+</head>
+<body>
+<h1 id="ai-conversacional" line="0"> <a href="#ai-conversacional" class="header_no_underline" line="0"> AI conversacional </a> </h1>
+<p line="2"> Pense na frequência com que você se comunica com outras pessoas por meio de mensagens instantâneas, mídias sociais, email ou outras tecnologias on -line. Para muitos de nós, é a nossa forma de contato. Quando você tem uma pergunta no trabalho, pode entrar em contato com um colega usando uma mensagem de bate -papo, que pode usar em dispositivos móveis, para que esteja sempre em contato. </p>
+<p line="4"> <img src="./images/conversational_ai.jpg" alt="Um humano e um robô tendo uma conversa" line="4" /> </p>
+<p line="6"> Os bots são agentes de IA que se comunicam usando esses tipos de canais, permitindo um envolvimento natural e conversacional com os serviços de software. </p>
+<h2 id="crie-uma-base-de-conhecimento-de-fabricante-de-qna" line="8"> <a href="#crie-uma-base-de-conhecimento-de-fabricante-de-qna" class="header_no_underline" line="8"> Crie uma base de conhecimento de fabricante de QNA </a> </h2>
+<p line="10"> Para cenários de suporte ao cliente, é comum criar um bot que possa interpretar e responder a perguntas frequentes por meio de uma janela de bate -papo, email ou interface de voz. Subjacente à interface bot, há uma base de conhecimento de perguntas e respostas apropriadas que o bot pode procurar respostas adequadas. </p>
+<p line="12"> O serviço de fabricante de QNA é um serviço cognitivo no Azure que permite criar rapidamente uma base de conhecimento, digitando pares de perguntas e respostas ou em um documento ou página da web existente. Em seguida, ele pode usar alguns recursos de processamento de linguagem natural embutidos para interpretar perguntas e encontrar respostas apropriadas. </p>
+<ol line="14"> 
+<li line="14"> Abra outra guia do navegador e vá para o portal da QNA Maker em <a href="https://qnamaker.ai" line="14"> https://qnamaker.ai </a>. Entrar no uso da conta da Microsoft associada à sua assinatura do Azure. </li>
+<li line="15"> No portal da QNA Maker, selecione<strong line="15"> Crie uma base de conhecimento </strong>. </li>
+<li line="16"> Se você não criou anteriormente um recurso de serviço QNA, selecione<strong line="16"> Crie um serviço QNA </strong>. O portal do Azure será aberto em outra guia para que você possa criar um serviço de fabricante de QNA na sua assinatura. Use as seguintes configurações: </li>
+ </ol>
+<ul line="17"> 
+<li line="17"> <strong line="17"> Nome </strong>:<em line="17"> Um nome único para o seu recurso QNA </em> </li>
+<li line="18"> <strong line="18"> Subscrição </strong>:<em line="18"> Sua assinatura do Azure </em> </li>
+<li line="19"> <strong line="19"> Nível de preço </strong>: F0 </li>
+<li line="20"> <strong line="20"> Grupo de recursos </strong>:<em line="20"> Selecione um grupo de recursos existente ou crie um novo </em> </li>
+<li line="21"> <strong line="21"> Azure Search Pricing Nível </strong>: F </li>
+<li line="22"> <strong line="22"> Localização de pesquisa do Azure </strong>:<em line="22"> Qualquer local disponível </em> </li>
+<li line="23"> <strong line="23"> Nome do aplicativo </strong>:<em line="23"> O mesmo que ** nome ** (&ldquo;.AzureWebsites.net&rdquo; será anexado automaticamente) </em> </li>
+<li line="24"> <strong line="24"> Localização do site </strong>:<em line="24"> O mesmo que ** Localização de pesquisa do Azure ** </em> </li>
+<li line="25"> <strong line="25"> Insights de aplicativos </strong>: Desativar </li>
+ </ul>
+<blockquote line="27"> 
+<p line="27"> <strong line="27"> Observação </strong>: Se você já provisionou um nível livre<strong line="27"> Fabricante de QNA </strong>ou<strong line="27"> Pesquisa do Azure </strong>Recursos, sua cota pode não permitir que você crie outra. Nesse caso, selecione um nível diferente<strong line="27"> F0 </strong>/<strong line="27"> F </strong>. </p>
+ </blockquote>
+<ol start="4" line="29"> 
+<li line="29"> Aguarde a implantação do serviço QNA e os recursos relacionados para concluir no portal do Azure. </li>
+<li line="30"> Retorne à guia do portal do QNA Maker e no<strong line="30"> Etapa 2 </strong>Seção, clique em<strong line="30"> Atualizar </strong>Para atualizar a lista de recursos de serviço QNA disponíveis. </li>
+<li line="31"> Conecte seu serviço QNA ao seu KB, selecionando as seguintes opções: </li>
+ </ol>
+<ul line="32"> 
+<li line="32"> <strong line="32"> ID do diretório do Microsoft Azure </strong>:<em line="32"> O ID do diretório do Azure para sua assinatura </em> </li>
+<li line="33"> <strong line="33"> Nome da assinatura do Azure </strong>:<em line="33"> Sua assinatura do Azure </em> </li>
+<li line="34"> <strong line="34"> Serviço do Azure QNA </strong>:<em line="34"> O recurso de serviço QNA que você criou na etapa anterior </em> </li>
+<li line="35"> <strong line="35"> Linguagem </strong>: Inglês </li>
+ </ul>
+<blockquote line="37"> 
+<p line="37"> <strong line="37"> Dica </strong>: Se uma mensagem informando que a função não tiver permissão para executar a ação é exibida, atualize a página do navegador para o portal da QNA Maker. </p>
+ </blockquote>
+<ol start="7" line="39"> 
+<li line="39"> No<strong line="39"> Etapa 3 </strong>Seção, insira o nome<strong line="39"> Margie&rsquo;s Travel KB </strong>. </li>
+<li line="40"> No<strong line="40"> Etapa 4 </strong>Seção, na<strong line="40"> Url </strong>caixa, tipo <a href = ''><em line="40"> <a href="https://github.com/microsoftdocs/ai-fundamentals/raw/master/data/qna_bot/margies_faq.docx" line="40"> https://github.com/microsoftdocs/ai-fundamentals/raw/master/data/qna_bot/margies_faq.docx </a> </em> </a> e clique**+ Adicione URL**. Então abaixo<strong line="40"> Chit-Chat </strong>, selecione<strong line="40"> Profissional </strong>. </li>
+<li line="41"> No<strong line="41"> Etapa 5 </strong>Seção, clique em<strong line="41"> Crie seu KB </strong>. </li>
+<li line="42"> Aguarde um minuto ou mais enquanto sua base de conhecimento for criada. Em seguida, revise as perguntas e respostas que foram importadas do documento de Perguntas frequentes e das respostas profissionais predefinidas com Chit-Chat. </li>
+ </ol>
+<h2 id="edite-a-base-de-conhecimento" line="44"> <a href="#edite-a-base-de-conhecimento" class="header_no_underline" line="44"> Edite a base de conhecimento </a> </h2>
+<p line="46"> Sua base de conhecimento é baseada nos detalhes do documento de FAQ e em algumas respostas predefinidas. Você pode adicionar pares personalizados de perguntas e respostas para complementá-las. </p>
+<ol line="48"> 
+<li line="48"> Clique**+ Adicione o par qNA**. </li>
+<li line="49"> No<strong line="49"> Pergunta </strong>Caixa, digite <code line="49"> hello </code>. Em seguida, clique**+ Adicione fraseada alternativa**e digite <code line="49"> oi </code>. </li>
+<li line="50"> No<strong line="50"> Responder </strong>Caixa, digite <code line="50"> hello </code>. </li>
+ </ol>
+<h2 id="treine-e-teste-a-base-de-conhecimento" line="52"> <a href="#treine-e-teste-a-base-de-conhecimento" class="header_no_underline" line="52"> Treine e teste a base de conhecimento </a> </h2>
+<p line="54"> Agora que você tem uma base de conhecimento, pode testá -lo no portal da QNA Maker. </p>
+<ol line="56"> 
+<li line="56"> No canto superior direito da página, clique<strong line="56"> Salve e treine </strong>para treinar sua base de conhecimento. </li>
+<li line="57"> Após a conclusão do treinamento, clique<strong line="57"> ← Teste </strong>Para abrir o painel de teste. </li>
+<li line="58"> No painel de teste, na parte inferior, entre na mensagem<em line="58"> Oi </em>. A resposta<strong line="58"> Olá </strong>deve ser devolvido. </li>
+<li line="59"> No painel de teste, na parte inferior, entre na mensagem<em line="59"> Eu quero reservar um voo </em>. Uma resposta apropriada das perguntas frequentes deve ser retornada. </li>
+<li line="60"> Quando terminar de testar a base de conhecimento, clique<strong line="60"> → Teste </strong>Para fechar o painel de teste. </li>
+ </ol>
+<h2 id="crie-um-bot-para-a-base-de-conhecimento" line="62"> <a href="#crie-um-bot-para-a-base-de-conhecimento" class="header_no_underline" line="62"> Crie um bot para a base de conhecimento </a> </h2>
+<p line="64"> A base de conhecimento fornece um serviço de back-end que os aplicativos do cliente podem usar para responder a perguntas através de algum tipo de interface do usuário. Geralmente, esses aplicativos de clientes são bots. Para disponibilizar a base de conhecimento para um bot, você deve publicá -lo como um serviço que pode ser acessado pelo HTTP. Você pode usar o serviço do Azure Bot para criar e hospedar um bot que use a base de conhecimento para responder às perguntas do usuário. </p>
+<ol line="66"> 
+<li line="66"> No topo da página da QNA, clique<strong line="66"> Publicar </strong>. Então no<strong line="66"> Margies viajam KB </strong>página, clique<strong line="66"> Publicar </strong>. </li>
+<li line="67"> Depois que o serviço foi implantado, clique<strong line="67"> Criar bot </strong>. Isso abre o portal do Azure em uma nova guia Browser para que você possa criar um bot de aplicativo da web na sua assinatura do Azure. </li>
+<li line="68"> No portal do Azure, crie um bot de aplicativo da web com as seguintes configurações (a maioria delas será preenchida para você): </li>
+ </ol>
+<ul line="69"> 
+<li line="69"> <strong line="69"> Alça de bot </strong>:<em line="69"> Um nome único para o seu bot </em> </li>
+<li line="70"> <strong line="70"> Subscrição </strong>:<em line="70"> Sua assinatura do Azure </em> </li>
+<li line="71"> <strong line="71"> Grupo de recursos </strong>:<em line="71"> O grupo de recursos que contêm seu recurso de fabricante de QNA </em> </li>
+<li line="72"> <strong line="72"> Localização </strong>:<em line="72"> O mesmo local do seu serviço de fabricante de QNA </em>. </li>
+<li line="73"> <strong line="73"> Nível de preço </strong>: F0 </li>
+<li line="74"> <strong line="74"> Nome do aplicativo </strong>:<em line="74"> O mesmo que o <strong line="74"> Alça de bot </strong> com * .azurewebsites.net </em>anexado automaticamente </li>
+<li line="75"> <strong line="75"> Idioma sdk </strong>:<em line="75"> Escolha C# ou Node.js </em> </li>
+<li line="76"> <strong line="76"> Chave de autenticação QNA </strong>:<em line="76"> Isso deve ser definido automaticamente para a chave de autenticação para sua base de conhecimento QNA </em> </li>
+<li line="77"> <strong line="77"> App Service Plan/Localização </strong>:<em line="77"> Isso deve ser definido automaticamente para um plano e localização adequados </em> </li>
+<li line="78"> <strong line="78"> Insights de aplicativos </strong>: Desligado </li>
+<li line="79"> <strong line="79"> ID do aplicativo da Microsoft e senha </strong>: Criar automaticamente o ID do aplicativo e a senha. </li>
+ </ul>
+<ol start="4" line="80"> 
+<li line="80"> Aguarde o seu bot ser criado (o ícone de notificação no canto superior direito, que parece uma campainha, será animado enquanto você espera). Então, na notificação de que a implantação foi concluída, clique<strong line="80"> Vá para o recurso </strong>(ou alternativamente, na página inicial, clique**Grupos de recursos*, Abra o grupo de recursos onde você criou o bot de aplicativo da web e clique nele.) </li>
+<li line="81"> Na lâmina do seu bot, veja o<strong line="81"> Teste no bate -papo da web </strong>página, e aguarde até que o bot seja exibido a mensagem<strong line="81"> Olá e bem -vindo! </strong>(Pode levar alguns segundos para inicializar). </li>
+<li line="82"> Use a interface de bate -papo de teste para garantir que o seu bot responda às perguntas da sua base de conhecimento, conforme o esperado. Por exemplo, tente enviar<em line="82"> Eu preciso cancelar meu hotel </em>. </li>
+ </ol>
+<h2 id="acesse-o-bot-através-de-um-canal" line="84"> <a href="#acesse-o-bot-através-de-um-canal" class="header_no_underline" line="84"> Acesse o bot através de um canal </a> </h2>
+<p line="86"> Um bot pode ser usado para fornecer uma interface para os usuários através de um ou mais<em line="86"> canais </em>. Por exemplo, o mesmo bot pode suportar interações por meio de uma interface de bate -papo na web, email e equipes da Microsoft. </p>
+<ol line="88"> 
+<li line="88"> No portal do Azure, na lâmina do seu bot, veja o<strong line="88"> Canais </strong>página. </li>
+<li line="89"> Observe que o<strong line="89"> Chat da web </strong>O canal foi adiado automaticamente e que outros canais para plataformas de comunicação comuns estão disponíveis. </li>
+<li line="90"> Ao lado do<strong line="90"> Chat da web </strong>canal, clique<strong line="90"> Editar </strong>. Isso abre uma página com as configurações necessárias para incorporar seu bot em uma página da web. Para incorporar seu bot, você precisa do código de incorporação HTML fornecido, bem como uma das teclas secretas geradas para o seu bot. </li>
+<li line="91"> Copie o<strong line="91"> Código de incorporação </strong>E cole-o na célula abaixo, substituindo o comentário <code line="91"> &lt;!-Código de incorporação vai aqui-&gt; </code>. </li>
+<li line="92"> Clique<strong line="92"> Mostrar </strong>Para uma das suas chaves secretas (não importa qual) e copie -as. Em seguida, cole -o no seu código de incorporação HTML abaixo, substituindo <code line="92"> seu_SEGREDO_Aqui </code>. </li>
+<li line="93"> Mude o<strong line="93"> altura da minia </strong>valor em seu código HTML para<strong line="93"> 200px </strong>(em vez do padrão 500px padrão). Isso ajudará a garantir que a interface HTML seja visível sem rolar. </li>
+<li line="94"> Execute a célula abaixo clicando no<strong line="94"> Execute a célula </strong>(▷) Botão à esquerda da célula para renderizar o HTML. </li>
+<li line="95"> Na interface de bate -papo html, teste o bot enviando uma pergunta, como<em line="95"> Quem é Margie?<em line="95"> ou </em>A que destinos posso ir? </em>(Quando o bot inicializa, pode responder com a mensagem<em line="95"> Olá e bem -vindo </em>Além de responder sua pergunta.). </li>
+ </ol>
+<pre line="98"> <code class="language-python" line="98"> %%html
+
+&lt;!-- EMBED CODE GOES HERE --&gt;
+ </code> </pre>
+<p line="104"> Experimente o bot. Você provavelmente descobrirá que ele pode responder a perguntas das perguntas frequentes com bastante precisão, mas terá capacidade limitada de interpretar perguntas com as quais não foi treinada. Você sempre pode usar o portal da QNA Maker para editar a base de conhecimento para melhorá -lo e republicá -lo. </p>
+<h2 id="saber-mais" line="106"> <a href="#saber-mais" class="header_no_underline" line="106"> Saber mais </a> </h2>
+<ul line="108"> 
+<li line="108"> Para saber mais sobre o serviço de fabricante de qna, visualize<a href="https://docs.microsoft.com/azure/cognitive-services/qnamaker/" line="108"> a documentação do fabricante de QNA </a>. </li>
+<li line="109"> Para saber mais sobre o serviço Microsoft Bot, visualize<a href="https://azure.microsoft.com/services/bot-service/" line="109"> a página de serviço do Azure Bot </a>. </li>
+ </ul>
+<p line="111"> <a line="111">  </a> </p>
+<pre line="113"> <code line="113">  </code>
+<p><a href="index.html"> Início </a> </p> </pre>
+ </body>
+ </html>
