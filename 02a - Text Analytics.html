@@ -4,7 +4,47 @@
   <meta charset="UTF-8">
   <title>Visão Computacional com Azure</title>
   <link rel="stylesheet" href="css/estilos.css">
-  </style>
+<style>
+  .botoes-finais {
+    display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .botao-link {
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 40px;
+    background-color: #0009E3;
+    color: white;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    transform: scale(1.8); /* Aumenta o tamanho do botão */
+    display: flex-block;
+  }
+
+  .botao-link:hover {
+    background-color: #001233;
+  }
+
+    footer {
+      background-color: #003366;
+      font-size: 32px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+</style>
 </head>
 <body>
 <h1 id="análise-de-texto" line="0"> <a href="#análise-de-texto" class="header_no_underline" line="0"> Análise de texto </a> </h1>
@@ -145,9 +185,17 @@ for review_num in range(len(reviews)):
 <p line="166"> Observe que algumas entidades são suficientemente conhecidas para ter uma página da Wikipedia associada; nesse caso, o serviço de análise de texto retorna o URL para essa página. </p>
 <h2 id="saber-mais" line="168"> <a href="#saber-mais" class="header_no_underline" line="168"> Saber mais </a> </h2>
 <p line="170"> Para obter mais informações sobre o serviço de análise de texto, consulte<a href="https://docs.microsoft.com/azure/cognitive-services/text-analytics/" line="170"> a documentação do serviço de análise de texto </a> </p>
-<p line="172"> <a href="02b%20-%20Speech.html" line="172"> Próxima Aula </a> </p>
-<pre line="174"> <code line="174">  </code>
-<p><a href="index.html">Início</a></p>
- </pre>
- </body>
- </html>
+  <!-- Botões final da página -->
+  <div class="botoes-finais">
+    <a href="Prova_02a.html" class="botao-link">Exercícios</a>
+  </div>
+  <div class="botoes-finais">
+    <a href="index.html" class="botao-link">Início</a>
+  </div>
+  <footer>
+    <p>&copy; 2025 Sinnomar Silva Lino</p>
+
+    <p>Curso Online Tradicional. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
