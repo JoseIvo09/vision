@@ -1,4 +1,5 @@
 body {
+  display: run-in;
   font-family: Arial, sans-serif;
   line-height: 1.6;
   padding: 2rem;
@@ -16,7 +17,6 @@ h1, h2, h3 {
 figure {
   margin: 2rem 0;
   text-align: center;
-  transform: scale(1.4); /* Aumenta o tamanho do botão */
 }
 
 figcaption {
@@ -25,12 +25,17 @@ figcaption {
 }
 
 img {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   max-width: 100%;
   height: auto;
 }
 
 pre {
-  background: #eee;
+  background: #000DD5;
+  color: #fff;
   padding: 1rem;
   overflow-x: auto;
   border-radius: 5px;
