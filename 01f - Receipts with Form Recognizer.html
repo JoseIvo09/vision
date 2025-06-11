@@ -4,7 +4,47 @@
   <meta charset="UTF-8">
   <title>Analisando Recibos com Reconhecimento de Formulário</title>
   <link rel="stylesheet" href="css/estilos.css">
-  </style>
+<style>
+  .botoes-finais {
+    display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .botao-link {
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 40px;
+    background-color: #0009E3;
+    color: white;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    transform: scale(1.8); /* Aumenta o tamanho do botão */
+    display: flex-block;
+  }
+
+  .botao-link:hover {
+    background-color: #001233;
+  }
+
+    footer {
+      background-color: #003366;
+      font-size: 32px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+</style>
 </head>
 <body>
 <h1 id="analisando-recibos-com-reconhecimento-de-formulário" line="0"> <a href="#analisando-recibos-com-reconhecimento-de-formulário" class="header_no_underline" line="0"> Analisando Recibos com Reconhecimento de Formulário </a> </h1>
@@ -119,9 +159,17 @@ except Exception as ex:
 <p line="124"> Observe que o reconhecimento de formulário é capaz de interpretar os dados no formulário, identificando corretamente o endereço do comerciante e o número de telefone e a data e hora da transação, bem como os itens de linha, subtotal, impostos e valores totais. </p>
 <h2 id="mais-informações" line="126"> <a href="#mais-informações" class="header_no_underline" line="126"> Mais informações </a> </h2>
 <p line="128"> Para obter mais informações sobre o serviço de reconhecimento de formulários, consulte<a href="https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/index" line="128"> a documentação do reconhecimento de formulário </a> </p>
-<p line="130"> <a href="02a%20-%20Text%20Analytics.html" line="130"> Próxima Aula </a> </p>
-<pre line="132"> <code line="132">  </code>
-<p><a href="index.html">Início</a></p>
- </pre>
- </body>
- </html>
+  <!-- Botões final da página -->
+  <div class="botoes-finais">
+    <a href="Prova_01f.html" class="botao-link">Exercícios</a>
+  </div>
+  <div class="botoes-finais">
+    <a href="index.html" class="botao-link">Início</a>
+  </div>
+  <footer>
+    <p>&copy; 2025 Sinnomar Silva Lino</p>
+
+    <p>Curso Online Tradicional. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
