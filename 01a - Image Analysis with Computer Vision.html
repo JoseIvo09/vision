@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Visão Computacional com Azure</title>
+  <title>Classificação de Imagens</title>
   <link rel="stylesheet" href="CSS/estilos.css">
 <style>
   .botoes-finais {
@@ -47,134 +47,179 @@
 </style>
 </head>
 <body>
-<h1 id="image-analysis-with-the-computer-vision-service" line="0"> <a href="#image-analysis-with-the-computer-vision-service" class="header_no_underline" line="0"> Image Analysis with the Computer Vision Service </a> </h1>
-<p line="2"> <img src="./images/computer_vision.jpg" alt="A robot holding a picture" line="2" /> </p>
-<p line="4"> <em line="4"> Computer Vision </em> é um ramo da inteligência artificial (IA) que explora o desenvolvimento de sistemas de IA que podem &ldquo;ver&rdquo; o mundo, seja em tempo real por meio de uma câmera ou analisando imagens e vídeos. Isso é possível porque imagens digitais são essencialmente apenas arrays de valores numéricos de pixels, e podemos usar esses valores como <em line="4"> features </em> para treinar modelos de machine learning que classificam imagens, detectam objetos e até geram descrições de fotos. </p>
-<h2 id="use-o-serviço-cognitivo-de-visão-computacional" line="6"> <a href="#use-o-serviço-cognitivo-de-visão-computacional" class="header_no_underline" line="6"> Use o Serviço Cognitivo de Visão Computacional </a> </h2>
-<p line="8"> O Microsoft Azure inclui vários <em line="8"> serviços cognitivos </em> que encapsulam funções comuns de IA, incluindo alguns que ajudam a construir soluções de visão computacional. </p>
-<p line="10"> O serviço cognitivo <em line="10"> Computer Vision </em> é um bom ponto de partida para nossa exploração de visão computacional no Azure. Ele usa modelos pré-treinados para analisar imagens e extrair informações. </p>
-<p line="12"> Por exemplo, suponha que a Northwind Traders deseje implementar uma &ldquo;loja inteligente&rdquo;, na qual serviços de IA monitoram a loja para identificar clientes que precisam de ajuda e direcionam funcionários para atendê-los. Usando o serviço Computer Vision, imagens capturadas por câmeras podem ser analisadas para fornecer descrições úteis do que está sendo retratado. </p>
-<h3 id="criar-um-recurso-de-serviços-cognitivos" line="14"> <a href="#criar-um-recurso-de-serviços-cognitivos" class="header_no_underline" line="14"> Criar um recurso de Serviços Cognitivos </a> </h3>
-<p line="16"> Vamos começar criando um recurso de <strong line="16"> Serviços Cognitivos </strong> na sua assinatura Azure: </p>
-<ol line="18"> 
-<li line="18"> 
-<p line="18"> Em outra aba do navegador, abra o portal do Azure: <a href="https://portal.azure.com" line="18"> https://portal.azure.com </a> e faça login com sua conta Microsoft. </p>
+<h1 id="classificação-de-imagens" line="0"> <a href="#classificação-de-imagens" class="header_no_underline" line="0"> Classificação de Imagens </a> </h1>
+<p line="2"> O serviço cognitivo <em line="2"> Visão Computacional </em> da Microsoft oferece modelos pré-construídos úteis para trabalhar com imagens, mas muitas vezes você precisará treinar seu próprio modelo. Por exemplo, suponha que a empresa varejista Northwind Traders queira criar um sistema de checkout automatizado que identifique os itens de supermercado com base em uma imagem tirada por uma câmera no caixa. Para isso, será necessário treinar um modelo de classificação que consiga identificar o item sendo comprado. </p>
+<p line="4"> <img src="./images/image-classification.jpg" alt="Um robô segurando uma prancheta, classificando imagens de uma maçã, uma banana e uma laranja" line="4" /> </p>
+<p line="6"> No Azure, você pode usar o serviço cognitivo <em line="6"> <strong line="6"> Custom Vision </strong> </em> para treinar um modelo de classificação de imagens com base em imagens existentes. Existem dois elementos para criar uma solução de classificação de imagem: primeiro, você deve treinar um modelo para reconhecer diferentes classes usando imagens existentes. Depois que o modelo estiver treinado, será necessário publicá-lo como um serviço para ser consumido por aplicações. </p>
+<h2 id="criar-um-recurso-do-custom-vision" line="8"> <a href="#criar-um-recurso-do-custom-vision" class="header_no_underline" line="8"> Criar um recurso do Custom Vision </a> </h2>
+<p line="10"> Para usar o serviço Custom Vision, você precisa de um recurso do Azure que possa usar para <em line="10"> treinar </em> um modelo e outro recurso com o qual possa <em line="10"> publicá-lo </em> para uso em aplicações. O recurso para ambas as tarefas pode ser um recurso geral de <strong line="10"> Serviços Cognitivos </strong>, ou um recurso específico de <strong line="10"> Custom Vision </strong>. Você pode usar o mesmo recurso para ambas as tarefas ou recursos diferentes (na mesma região) para gerenciar os custos separadamente. </p>
+<p line="12"> Use as instruções abaixo para criar um novo recurso <strong line="12"> Custom Vision </strong>: </p>
+<ol line="14"> 
+<li line="14"> 
+<p line="14"> Em uma nova aba do navegador, acesse o portal do Azure em <a href="https://portal.azure.com" line="14"> https://portal.azure.com </a> e entre com a conta da Microsoft associada à sua assinatura do Azure. </p>
  </li>
-<li line="19"> 
-<p line="19"> Clique em <strong line="19"> ＋Criar um recurso </strong>, procure por <em line="19"> Cognitive Services </em> e crie um recurso com as seguintes configurações: </p>
-<ul line="21"> 
-<li line="21"> <strong line="21"> Nome </strong>: <em line="21"> Informe um nome exclusivo </em> </li>
-<li line="22"> <strong line="22"> Assinatura </strong>: <em line="22"> Sua assinatura Azure </em> </li>
-<li line="23"> <strong line="23"> Localização </strong>: <em line="23"> Escolha uma região disponível </em> </li>
-<li line="24"> <strong line="24"> Camada de preços </strong>: S0 </li>
-<li line="25"> <strong line="25"> Grupo de recursos </strong>: <em line="25"> Crie um grupo com nome exclusivo </em> </li>
- </ul>
+<li line="16"> 
+<p line="16"> Clique no botão <strong line="16"> + Criar um recurso </strong>, pesquise por <em line="16"> custom vision </em> e crie um recurso <strong line="16"> Custom Vision </strong> com as seguintes configurações: </p>
+<ul line="18"> 
+<li line="18"> 
+<p line="18"> <strong line="18"> Opções de criação </strong>: Ambos </p>
+ </li>
+<li line="20"> 
+<p line="20"> <strong line="20"> Assinatura </strong>: <em line="20"> Sua assinatura do Azure </em> </p>
+ </li>
+<li line="22"> 
+<p line="22"> <strong line="22"> Grupo de recursos </strong>: <em line="22"> Crie um novo grupo com nome exclusivo </em> </p>
+ </li>
+<li line="24"> 
+<p line="24"> <strong line="24"> Nome </strong>: <em line="24"> Insira um nome exclusivo </em> </p>
  </li>
 <li line="26"> 
-<p line="26"> Aguarde a conclusão da implantação. Vá para o recurso e, na página <strong line="26"> Visão geral </strong>, clique no link para gerenciar as chaves do serviço. Você precisará do endpoint e das chaves para conectar seu aplicativo cliente ao recurso. </p>
+<p line="26"> <strong line="26"> Local de treinamento </strong>: <em line="26"> Escolha uma região disponível </em> </p>
+ </li>
+<li line="28"> 
+<p line="28"> <strong line="28"> Camada de preços para treinamento </strong>: F0 </p>
+ </li>
+<li line="30"> 
+<p line="30"> <strong line="30"> Local de previsão </strong>: <em line="30"> Mesma região do recurso de treinamento </em> </p>
+ </li>
+<li line="32"> 
+<p line="32"> <strong line="32"> Camada de preços para previsão </strong>: F0 </p>
+ </li>
+ </ul>
+<blockquote line="34"> 
+<p line="34"> <strong line="34"> Nota </strong>: Se você já tiver um serviço Custom Vision F0 na sua assinatura, selecione <strong line="34"> S0 </strong> para este. </p>
+ </blockquote>
+ </li>
+<li line="36"> 
+<p line="36"> Aguarde a criação dos recursos. Note que dois recursos do Custom Vision serão provisionados: um para treinamento e outro para previsão. Você pode vê-los navegando até o grupo de recursos onde foram criados. </p>
  </li>
  </ol>
-<h3 id="obter-a-chave-e-o-endpoint-do-recurso" line="28"> <a href="#obter-a-chave-e-o-endpoint-do-recurso" class="header_no_underline" line="28"> Obter a Chave e o Endpoint do recurso </a> </h3>
-<p line="30"> Para usar o recurso de serviços cognitivos, as aplicações precisam do <em line="30"> endpoint </em> e da <em line="30"> chave de autenticação </em>: </p>
-<ol line="32"> 
-<li line="32"> No portal do Azure, vá para a página <strong line="32"> Chaves e Endpoint </strong> do recurso e copie a <strong line="32"> Chave1 </strong>, substituindo <strong line="32"> YOUR_COG_KEY </strong> no código abaixo. </li>
-<li line="33"> Copie o <strong line="33"> endpoint </strong> do recurso e substitua <strong line="33"> YOUR_COG_ENDPOINT </strong>. </li>
-<li line="34"> Execute o código abaixo selecionando a célula e clicando no botão <strong line="34"> Executar célula </strong> (▶) à esquerda da célula. </li>
+<h2 id="criar-um-projeto-no-custom-vision" line="38"> <a href="#criar-um-projeto-no-custom-vision" class="header_no_underline" line="38"> Criar um projeto no Custom Vision </a> </h2>
+<p line="40"> Para treinar um modelo de detecção de objetos, você precisa criar um projeto no Custom Vision com base no seu recurso de treinamento. Para isso, use o portal do Custom Vision: </p>
+<ol line="42"> 
+<li line="42"> 
+<p line="42"> Baixe e extraia as imagens de treinamento de <a href="https://aka.ms/fruit-images" line="42"> https://aka.ms/fruit-images </a>. </p>
+ </li>
+<li line="44"> 
+<p line="44"> Em outra aba do navegador, acesse o portal do Custom Vision em <a href="https://customvision.ai" line="44"> https://customvision.ai </a>. Se solicitado, faça login com sua conta Microsoft associada à assinatura do Azure e aceite os termos de uso. </p>
+ </li>
+<li line="46"> 
+<p line="46"> No portal do Custom Vision, crie um novo projeto com as seguintes configurações: </p>
+<ul line="48"> 
+<li line="48"> <strong line="48"> Nome </strong>: Grocery Checkout </li>
+<li line="49"> <strong line="49"> Descrição </strong>: Classificação de imagem para itens de supermercado </li>
+<li line="50"> <strong line="50"> Recurso </strong>: <em line="50"> O recurso Custom Vision que você criou anteriormente </em> </li>
+<li line="51"> <strong line="51"> Tipo de Projeto </strong>: Classificação </li>
+<li line="52"> <strong line="52"> Tipo de Classificação </strong>: Multiclasse (uma etiqueta por imagem) </li>
+<li line="53"> <strong line="53"> Domínio </strong>: Comida (Food) </li>
+ </ul>
+ </li>
+<li line="55"> 
+<p line="55"> Clique em <strong line="55"> $+$ Adicionar imagens </strong> e selecione todos os arquivos da pasta <strong line="55"> apple </strong> que você extraiu anteriormente. Faça o upload das imagens, especificando a etiqueta <em line="55"> apple </em>, assim: </p>
+ </li>
  </ol>
-<pre line="36"> <code class="language-python" line="36"> cog_key = 'YOUR_COG_KEY'
-cog_endpoint = 'YOUR_COG_ENDPOINT'
+<p line="57"> <img src="./images/upload_apples.jpg" alt="Upload de maçãs com etiqueta apple" line="57" /> </p>
+<ol start="5" line="59"> 
+<li line="59"> Repita o passo anterior para enviar as imagens da pasta <strong line="59"> banana </strong> com a etiqueta <em line="59"> banana </em>, e da pasta <strong line="59"> orange </strong> com a etiqueta <em line="59"> orange </em>. </li>
+<li line="60"> Explore as imagens que você enviou para o projeto Custom Vision – deve haver 15 imagens de cada classe, como abaixo: </li>
+ </ol>
+<p line="62"> <img src="./images/fruit.jpg" alt="Imagens etiquetadas de frutas - 15 maçãs, 15 bananas e 15 laranjas" line="62" /> </p>
+<ol start="7" line="64"> 
+<li line="64"> No projeto Custom Vision, acima das imagens, clique em <strong line="64"> Treinar </strong> para treinar um modelo de classificação com base nas imagens etiquetadas. Selecione a opção <strong line="64"> Treinamento Rápido </strong>, e aguarde a conclusão da iteração de treinamento (pode levar um minuto ou mais). </li>
+<li line="65"> Quando o modelo estiver treinado, revise as métricas de desempenho <em line="65"> Precisão </em>, <em line="65"> Revocação </em> e <em line="65"> AP </em> – que medem a precisão das previsões do modelo. Todos os valores devem estar altos. </li>
+ </ol>
+<h2 id="testar-o-modelo" line="67"> <a href="#testar-o-modelo" class="header_no_underline" line="67"> Testar o modelo </a> </h2>
+<p line="69"> Antes de publicar esta iteração do modelo para uso em aplicações, você deve testá-lo. </p>
+<ol line="71"> 
+<li line="71"> Acima das métricas de desempenho, clique em <strong line="71"> Teste Rápido </strong>. </li>
+<li line="72"> No campo <strong line="72"> URL da imagem, </strong> e digite:
+<code line="72">https://aka.ms/apple-image</code>
+e clique em ➔</li>
+<li line="73"> Veja as previsões retornadas pelo seu modelo – a pontuação de probabilidade para <em line="73"> apple </em> deve ser a mais alta: </li>
+ </ol>
+<p line="75"> <img src="./images/test-apple.jpg" alt="Uma imagem com previsão de classe apple" line="75" /> </p>
+<ol start="4" line="77"> 
+<li line="77"> Feche a janela <strong line="77"> Teste Rápido </strong>. </li>
+ </ol>
+<h2 id="publicar-e-consumir-o-modelo-de-classificação-de-imagem" line="79"> <a href="#publicar-e-consumir-o-modelo-de-classificação-de-imagem" class="header_no_underline" line="79"> Publicar e consumir o modelo de classificação de imagem </a> </h2>
+<p line="81"> Agora você está pronto para publicar o modelo treinado e usá-lo em uma aplicação cliente. </p>
+<ol start="9" line="83"> 
+<li line="83"> 
+<p line="83"> Clique em <strong line="83"> 🗸 Publicar </strong> para publicar o modelo treinado com as seguintes configurações: </p>
+<ul line="85"> 
+<li line="85"> <strong line="85"> Nome do modelo </strong>: groceries </li>
+<li line="86"> <strong line="86"> Recurso de Previsão </strong>: <em line="86"> O recurso de previsão que você criou anteriormente </em> </li>
+ </ul>
+ </li>
+<li line="88"> 
+<p line="88"> Após publicar, clique no ícone de <em line="88"> configurações </em> (⚙) no canto superior direito da página <strong line="88"> Desempenho </strong> para ver as configurações do projeto. Em <strong line="88"> Geral </strong> (à esquerda), copie o <strong line="88"> ID do Projeto </strong> e cole na célula de código abaixo, substituindo <strong line="88"> YOUR_PROJECT_ID </strong>. </p>
+ </li>
+ </ol>
+<p line="90"> <img src="./images/cv_project_settings.jpg" alt="ID do projeto nas configurações" line="90" /> </p>
+<blockquote line="92"> 
+<p line="92"> <em line="92"> <strong line="92"> Nota </strong>: Se você usou um recurso de <strong line="92"> Serviços Cognitivos </strong> em vez de criar um recurso de <strong line="92"> Custom Vision </strong>, você pode copiar sua chave e endpoint do lado direito das configurações do projeto, colá-los na célula de código abaixo e executá-la para ver os resultados. Caso contrário, continue os passos abaixo para obter a chave e o endpoint do recurso de previsão. </em> </p>
+ </blockquote>
+<ol start="11" line="94"> 
+<li line="94"> No canto superior esquerdo da página de configurações do projeto, clique no ícone <em line="94"> Galeria de Projetos </em> (👁) para voltar à página inicial do portal Custom Vision, onde seu projeto agora estará listado. </li>
+<li line="95"> Na página inicial do portal, no canto superior direito, clique no ícone de <em line="95"> configurações </em> (⚙) para ver as configurações do seu serviço Custom Vision. Em <strong line="95"> Recursos </strong>, expanda seu recurso de <em line="95"> previsão </em> (<strong line="95"> não </strong> o de treinamento) e copie os valores de <strong line="95"> Chave </strong> e <strong line="95"> Endpoint </strong> para a célula de código abaixo, substituindo <strong line="95"> YOUR_KEY </strong> e <strong line="95"> YOUR_ENDPOINT </strong>. </li>
+ </ol>
+<p line="97"> <img src="./images/cv_settings.jpg" alt="Chave e endpoint do recurso de previsão" line="97" /> </p>
+<ol start="13" line="99"> 
+<li line="99"> Execute a célula de código abaixo clicando no botão <strong line="99"> Executar célula </strong> (▷) para definir as variáveis com os valores do seu projeto. </li>
+ </ol>
+<pre line="101"> <code class="language-python" line="101"> project_id = 'YOUR_PROJECT_ID'
+cv_key = 'YOUR_KEY'
+cv_endpoint = 'YOUR_ENDPOINT'
 
-print('Ready to use cognitive services at {} using key {}'.format(cog_endpoint, cog_key))
+model_name = 'groceries'  # Deve coincidir com o nome definido ao publicar
+print('Pronto para prever usando o modelo {} no projeto {}'.format(model_name, project_id))
  </code> </pre>
-<p line="43"> Agora que configurou a chave e o endpoint, você pode usar o serviço para analisar uma imagem. </p>
-<p line="45"> Para isso no Python, instale o pacote: </p>
-<pre line="47"> <code class="language-python" line="47"> !pip install azure-cognitiveservices-vision-computervision
+<hr line="110" />
+<p line="112"> Para usar o serviço Custom Vision no Python, você precisa instalar o pacote <code line="112"> azure-cognitiveservices-vision-customvision </code>. </p>
+<pre line="114"> <code class="language-python" line="114"> !pip install azure-cognitiveservices-vision-customvision
  </code> </pre>
-<p line="51"> Agora você está pronto! </p>
-<p line="53"> Execute o código abaixo para obter uma descrição de uma imagem localizada em <em line="53"> /data/vision/store_cam1.jpg </em>: </p>
-<pre line="55"> <code class="language-python" line="55"> from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-from msrest.authentication import CognitiveServicesCredentials
-from python_code import vision
+<hr line="118" />
+<p line="120"> Agora você pode usar sua chave e endpoint com um cliente Custom Vision para se conectar ao modelo de classificação publicado. </p>
+<p line="122"> Execute o código abaixo para classificar uma seleção de imagens de teste usando seu modelo publicado. </p>
+<blockquote line="124"> 
+<p line="124"> <strong line="124"> Nota </strong>: Não se preocupe com os detalhes do código. Ele usa o SDK de Visão Computacional para Python para obter uma previsão de classe para cada imagem da pasta <code line="124"> /data/image-classification/test-fruit </code>. </p>
+ </blockquote>
+<pre line="126"> <code class="language-python" line="126"> from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+from msrest.authentication import ApiKeyCredentials
+import matplotlib.pyplot as plt
+from PIL import Image
 import os
 %matplotlib inline
 
-01 - Caminho da imagem
+# Caminho das imagens de teste
+test_folder = os.path.join('data', 'image-classification', 'test-fruit')
+test_images = os.listdir(test_folder)
 
-image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
+# Criar cliente de previsão
+credentials = ApiKeyCredentials(in_headers={&quot;Prediction-key&quot;: cv_key})
+custom_vision_client = CustomVisionPredictionClient(endpoint=cv_endpoint, credentials=credentials)
 
-02 - Cliente do serviço
-
-computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
-
-03 - Obter descrição
-
-image_stream = open(image_path, &quot;rb&quot;)
-description = computervision_client.describe_image_in_stream(image_stream)
-
-04 - Mostrar imagem e legenda
-
-vision.show_image_caption(image_path, description)
- </code>
-</pre>
-<p line="76"> Isso parece razoavelmente preciso. </p>
-<p line="78"> Vamos tentar com outra imagem: </p>
-<pre line="80"> <code class="language-python" line="80"> 01 - Caminho da nova imagem
-
-image_path = os.path.join('data', 'vision', 'store_cam2.jpg')
-
-02 - Obter descrição
-
-image_stream = open(image_path, &quot;rb&quot;)
-description = computervision_client.describe_image_in_stream(image_stream)
-
-03 - Mostrar imagem e legenda
-
-vision.show_image_caption(image_path, description)
- </code>
-</pre>
-<p line="92"> Mais uma vez, a legenda sugerida parece bastante precisa. </p>
-<h2 id="analisar-características-da-imagem" line="94"> <a href="#analisar-características-da-imagem" class="header_no_underline" line="94"> Analisar características da imagem </a> </h2>
-<p line="96"> Até agora, você usou o serviço para gerar legendas descritivas. Mas ele pode fazer muito mais. Pode, por exemplo: </p>
-<ul line="98"> 
-<li line="98"> Detectar objetos comuns e suas localizações </li>
-<li line="99"> Detectar rostos e estimar idade </li>
-<li line="100"> Detectar conteúdo adulto, sugestivo ou violento </li>
-<li line="101"> Gerar tags para facilitar buscas </li>
- </ul>
-<p line="103"> Execute o código abaixo para analisar uma imagem de um cliente: </p>
-<pre line="105"> <code class="language-python" line="105"> 01 -  Caminho da imagem
-
-image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
-
-02 - Características a serem analisadas
-
-features = ['Description', 'Tags', 'Adult', 'Objects', 'Faces']
-
-03 - Analisar imagem
-
-image_stream = open(image_path, &quot;rb&quot;)
-analysis = computervision_client.analyze_image_in_stream(image_stream, visual_features=features)
-
-04 - Mostrar resultados
-
-vision.show_image_analysis(image_path, analysis)
- </code>
-</pre>
-<h2 id="saiba-mais" line="120"> <a href="#saiba-mais" class="header_no_underline" line="120"> Saiba Mais </a> </h2>
-<p line="122"> Além das funcionalidades já vistas, o serviço também pode: </p>
-<ul line="124"> 
-<li line="124"> Identificar celebridades </li>
-<li line="125"> Detectar logotipos </li>
-<li line="126"> Fazer OCR (leitura de texto) </li>
- </ul>
-  <p>Para saber mais, veja a 
-    <a href="https://docs.microsoft.com/azure/cognitive-services/computer-vision/">
-      Documentação do Computer Vision
-    </a>
-  </p>
+# Exibir resultados
+fig = plt.figure(figsize=(16, 8))
+print('Classificando imagens em {} ...'.format(test_folder))
+for i in range(len(test_images)):
+    image_contents = open(os.path.join(test_folder, test_images[i]), &quot;rb&quot;)
+    classification = custom_vision_client.classify_image(project_id, model_name, image_contents.read())
+    prediction = classification.predictions[0].tag_name
+    img = Image.open(os.path.join(test_folder, test_images[i]))
+    a = fig.add_subplot(len(test_images)/3, 3, i + 1)
+    a.axis('off')
+    plt.imshow(img)
+    a.set_title(prediction)
+plt.show()
+ </code> </pre>
+<hr line="157" />
+<h2 id="saiba-mais" line="159"> <a href="#saiba-mais" class="header_no_underline" line="159"> Saiba mais </a> </h2>
+<p line="161"> O serviço Custom Vision oferece mais recursos do que exploramos neste exercício. Por exemplo, você também pode usá-lo para criar modelos de <em line="161"> detecção de objetos </em>, que não apenas classificam os objetos em imagens, mas também identificam <em line="161"> áreas delimitadoras </em> que mostram a localização do objeto. </p>
+<p line="163"> Para saber mais, veja a <a href="https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/home" line="163"> documentação do Custom Vision </a>. </p>
   <!-- Botões final da página -->
   <div class="botoes-finais">
-    <a href="Prova_01a.html" class="botao-link">Exercícios</a>
+    <a href="Prova_01b.html" class="botao-link">Exercícios</a>
   </div>
   <div class="botoes-finais">
     <a href="index.html" class="botao-link">Início</a>
