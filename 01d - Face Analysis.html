@@ -4,7 +4,47 @@
   <meta charset="UTF-8">
   <title>Detectar e Analisar Rostos</title>
   <link rel="stylesheet" href="css/estilos.css">
-  </style>
+<style>
+  .botoes-finais {
+    display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .botao-link {
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 40px;
+    background-color: #0009E3;
+    color: white;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    transform: scale(1.8); /* Aumenta o tamanho do botão */
+    display: flex-block;
+  }
+
+  .botao-link:hover {
+    background-color: #001233;
+  }
+
+    footer {
+      background-color: #003366;
+      font-size: 32px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+</style>
 </head>
 <body>
 <h1 id="detectar-e-analisar-rostos" line="0"> <a href="#detectar-e-analisar-rostos" class="header_no_underline" line="0"> Detectar e Analisar Rostos</a></h1>
@@ -183,9 +223,18 @@ faces.show_recognized_faces(image_path, image_faces, face_names)
 </code></pre>
 <h2 id="saber-mais" line="216"> <a href="#saber-mais" class="header_no_underline" line="216"> Saber mais</a></h2>
 <p line="218"> Para saber mais sobre o serviço cognitivo de rosto, consulte o<a href="https://docs.microsoft.com/azure/cognitive-services/face/" line="218"> Documentação de rosto</a></p>
- <pre>
-<p><a href="Prova_01d.html"> Exercícios</a></p>
-<p><a href="index.html"> Início</a></p>
- </pre>
+  <!-- Botões final da página -->
+  <div class="botoes-finais">
+    <a href="Prova_01d.html" class="botao-link">Exercícios</a>
+  </div>
+  <div class="botoes-finais">
+    <a href="index.html" class="botao-link">Início</a>
+  </div>
+  <footer>
+    <p>&copy; 2025 Sinnomar Silva Lino</p>
+
+    <p>Curso Online Tradicional. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
+
