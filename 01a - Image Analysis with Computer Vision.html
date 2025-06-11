@@ -4,33 +4,46 @@
   <meta charset="UTF-8">
   <title>Visão Computacional com Azure</title>
   <link rel="stylesheet" href="CSS/estilos.css">
-
-  <style>
+<style>
   .botoes-finais {
     display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
     justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    gap: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 
   .botao-link {
-    font-size: 18px;
-    padding: 16px 32px;
-    background-color: #001F3F;
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 40px;
+    background-color: #0009E3;
     color: white;
     text-decoration: none;
-    border: none;
+    border: 3px solid #fff;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
-    transform: scale(2.1); /* Aumenta o tamanho do botão */
-    display: inline-block;
+    transform: scale(1.8); /* Aumenta o tamanho do botão */
+    display: flex-block;
   }
 
   .botao-link:hover {
     background-color: #001233;
   }
+
+    footer {
+      background-color: #003366;
+      font-size: 32px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
 </style>
 </head>
 <body>
@@ -85,31 +98,40 @@ from python_code import vision
 import os
 %matplotlib inline
 
-# Caminho da imagem
+01 - Caminho da imagem
+
 image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
 
-# Cliente do serviço
+02 - Cliente do serviço
+
 computervision_client = ComputerVisionClient(cog_endpoint, CognitiveServicesCredentials(cog_key))
 
-# Obter descrição
+03 - Obter descrição
+
 image_stream = open(image_path, &quot;rb&quot;)
 description = computervision_client.describe_image_in_stream(image_stream)
 
-# Mostrar imagem e legenda
+04 - Mostrar imagem e legenda
+
 vision.show_image_caption(image_path, description)
- </code> </pre>
+ </code>
+</pre>
 <p line="76"> Isso parece razoavelmente preciso. </p>
 <p line="78"> Vamos tentar com outra imagem: </p>
-<pre line="80"> <code class="language-python" line="80"> # Caminho da nova imagem
+<pre line="80"> <code class="language-python" line="80"> 01 - Caminho da nova imagem
+
 image_path = os.path.join('data', 'vision', 'store_cam2.jpg')
 
-# Obter descrição
+02 - Obter descrição
+
 image_stream = open(image_path, &quot;rb&quot;)
 description = computervision_client.describe_image_in_stream(image_stream)
 
-# Mostrar imagem e legenda
+03 - Mostrar imagem e legenda
+
 vision.show_image_caption(image_path, description)
- </code> </pre>
+ </code>
+</pre>
 <p line="92"> Mais uma vez, a legenda sugerida parece bastante precisa. </p>
 <h2 id="analisar-características-da-imagem" line="94"> <a href="#analisar-características-da-imagem" class="header_no_underline" line="94"> Analisar características da imagem </a> </h2>
 <p line="96"> Até agora, você usou o serviço para gerar legendas descritivas. Mas ele pode fazer muito mais. Pode, por exemplo: </p>
@@ -120,19 +142,24 @@ vision.show_image_caption(image_path, description)
 <li line="101"> Gerar tags para facilitar buscas </li>
  </ul>
 <p line="103"> Execute o código abaixo para analisar uma imagem de um cliente: </p>
-<pre line="105"> <code class="language-python" line="105"> # Caminho da imagem
+<pre line="105"> <code class="language-python" line="105"> 01 -  Caminho da imagem
+
 image_path = os.path.join('data', 'vision', 'store_cam1.jpg')
 
-# Características a serem analisadas
+02 - Características a serem analisadas
+
 features = ['Description', 'Tags', 'Adult', 'Objects', 'Faces']
 
-# Analisar imagem
+03 - Analisar imagem
+
 image_stream = open(image_path, &quot;rb&quot;)
 analysis = computervision_client.analyze_image_in_stream(image_stream, visual_features=features)
 
-# Mostrar resultados
+04 - Mostrar resultados
+
 vision.show_image_analysis(image_path, analysis)
- </code> </pre>
+ </code>
+</pre>
 <h2 id="saiba-mais" line="120"> <a href="#saiba-mais" class="header_no_underline" line="120"> Saiba Mais </a> </h2>
 <p line="122"> Além das funcionalidades já vistas, o serviço também pode: </p>
 <ul line="124"> 
@@ -145,11 +172,17 @@ vision.show_image_analysis(image_path, analysis)
       Documentação do Computer Vision
     </a>
   </p>
-
   <!-- Botões final da página -->
   <div class="botoes-finais">
     <a href="Prova_01a.html" class="botao-link">Exercícios</a>
+  </div>
+  <div class="botoes-finais">
     <a href="index.html" class="botao-link">Início</a>
   </div>
+  <footer>
+    <p>&copy; 2025 Sinnomar Silva Lino</p>
+
+    <p>Curso Online Tradicional. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
