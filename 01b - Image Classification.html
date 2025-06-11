@@ -4,7 +4,47 @@
   <meta charset="UTF-8">
   <title>Classificação de Imagens</title>
   <link rel="stylesheet" href="css/estilos.css">
-  </style>
+<style>
+  .botoes-finais {
+    display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .botao-link {
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 40px;
+    background-color: #0009E3;
+    color: white;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    transform: scale(1.8); /* Aumenta o tamanho do botão */
+    display: flex-block;
+  }
+
+  .botao-link:hover {
+    background-color: #001233;
+  }
+
+    footer {
+      background-color: #003366;
+      font-size: 32px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+</style>
 </head>
 <body>
 <h1 id="classificação-de-imagens" line="0"> <a href="#classificação-de-imagens" class="header_no_underline" line="0"> Classificação de Imagens </a> </h1>
@@ -177,9 +217,17 @@ plt.show()
 <h2 id="saiba-mais" line="159"> <a href="#saiba-mais" class="header_no_underline" line="159"> Saiba mais </a> </h2>
 <p line="161"> O serviço Custom Vision oferece mais recursos do que exploramos neste exercício. Por exemplo, você também pode usá-lo para criar modelos de <em line="161"> detecção de objetos </em>, que não apenas classificam os objetos em imagens, mas também identificam <em line="161"> áreas delimitadoras </em> que mostram a localização do objeto. </p>
 <p line="163"> Para saber mais, veja a <a href="https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/home" line="163"> documentação do Custom Vision </a>. </p>
- <pre>
-<p><a href="Prova_01b.html"> Exercícios</a></p>
-<p><a href="index.html"> Início</a></p>
- </pre>
+  <!-- Botões final da página -->
+  <div class="botoes-finais">
+    <a href="Prova_01b.html" class="botao-link">Exercícios</a>
+  </div>
+  <div class="botoes-finais">
+    <a href="index.html" class="botao-link">Início</a>
+  </div>
+  <footer>
+    <p>&copy; 2025 Sinnomar Silva Lino</p>
+
+    <p>Curso Online Tradicional. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
