@@ -49,7 +49,7 @@ function corrigir() {
     const respostaSelecionada = document.querySelector(`input[name="q${i}"]:checked`);
 
     // Verifica se uma resposta foi selecionada e se ela é a correta
-    if (respostaSelecionada && respostaSelecionada.value === respostasCorretas[`q${i}`]) {
+    if (respostaSelecionada && respostaSelecionada.value === respostas[`q${i}`]) {
       acertos++;
     }
   }
