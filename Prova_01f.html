@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova: 01f - Optical Character Recognition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Prova: 01f - Optical Character Recognition</h1>
+    <div class="alerta">
+      ⚠️  Atenção   ⚠️
+Para passar para a próxima aula é necessário acertar no mínimo 15 questões
+    </div>
+    
+    <form id="quizForm" onsubmit="event.preventDefault(); corrigir();">
+
+      <div class="pergunta" id="q1">
+  <p><strong>1. O que é OCR?</strong></p>
+  <label><input type="radio" name="q1" value="a"> Uma tecnologia para editar imagens</label><br>
+  <label><input type="radio" name="q1" value="b"> Um método de reconhecimento facial</label><br>
+  <label><input type="radio" name="q1" value="c"> Um sistema para capturar vídeos</label><br>
+  <label><input type="radio" name="q1" value="d"> Uma técnica de leitura de texto impresso ou manuscrito</label><br><br>
+  <button type="button" onclick="proxima()">Próxima</button>
+</div>
+
+<div class="pergunta" id="q2">
+  <p><strong>2. Qual objetivo principal do serviço de reconhecimento de formulários?</strong></p>
+  <label><input type="radio" name="q2" value="a"> Editar PDFs automaticamente</label><br>
+  <label><input type="radio" name="q2" value="b"> Armazenar vídeos em nuvem</label><br>
+  <label><input type="radio" name="q2" value="c"> Extrair informações estruturadas de documentos</label><br>
+  <label><input type="radio" name="q2" value="d"> Substituir bancos de dados</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q3">
+  <p><strong>3. Qual é o serviço da Azure usado para análise de recibos?</strong></p>
+  <label><input type="radio" name="q3" value="a"> Azure Blob Storage</label><br>
+  <label><input type="radio" name="q3" value="b"> Azure Form Recognizer</label><br>
+  <label><input type="radio" name="q3" value="c"> Azure DevOps</label><br>
+  <label><input type="radio" name="q3" value="d"> Azure Functions</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<!-- A partir daqui, questões seguem o mesmo padrão -->
+
+<div class="pergunta" id="q4">
+  <p><strong>4. O que o serviço de Form Recognizer pode identificar em um recibo?</strong></p>
+  <label><input type="radio" name="q4" value="a"> Apenas imagens</label><br>
+  <label><input type="radio" name="q4" value="b"> Apenas o preço total</label><br>
+  <label><input type="radio" name="q4" value="c"> Texto manuscrito e estruturas como itens, preços e datas</label><br>
+  <label><input type="radio" name="q4" value="d"> Vídeos de segurança</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q5">
+  <p><strong>5. Qual biblioteca Python deve ser instalada para usar o Form Recognizer?</strong></p>
+  <label><input type="radio" name="q5" value="a"> azure_ai_formrecognizer</label><br>
+  <label><input type="radio" name="q5" value="b"> azure_image_tools</label><br>
+  <label><input type="radio" name="q5" value="c"> azure_video_analysis</label><br>
+  <label><input type="radio" name="q5" value="d"> azure_machine_learning</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q6">
+  <p><strong>6. Onde você encontra a chave e o endpoint do serviço criado?</strong></p>
+  <label><input type="radio" name="q6" value="a"> Na aba "Relatórios" do Azure</label><br>
+  <label><input type="radio" name="q6" value="b"> Na seção "Chaves e terminal" do serviço</label><br>
+  <label><input type="radio" name="q6" value="c"> No e-mail de confirmação</label><br>
+  <label><input type="radio" name="q6" value="d"> No menu de configurações do computador</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q7">
+  <p><strong>7. O que você deve substituir no código Python antes de rodar o reconhecimento?</strong></p>
+  <label><input type="radio" name="q7" value="a"> O nome da imagem e o tamanho da fonte</label><br>
+  <label><input type="radio" name="q7" value="b"> A chave e o endpoint do serviço</label><br>
+  <label><input type="radio" name="q7" value="c"> A cor de fundo do gráfico</label><br>
+  <label><input type="radio" name="q7" value="d"> A versão do Python</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q8">
+  <p><strong>8. Qual é a função do método <code>begin_recognize_receipts</code>?</strong></p>
+  <label><input type="radio" name="q8" value="a"> Gerar imagens de recibo</label><br>
+  <label><input type="radio" name="q8" value="b"> Editar recibos manualmente</label><br>
+  <label><input type="radio" name="q8" value="c"> Iniciar a análise de um recibo com reconhecimento de formulário</label><br>
+  <label><input type="radio" name="q8" value="d"> Apagar os dados extraídos</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q9">
+  <p><strong>9. Quais dados podem ser extraídos de um recibo?</strong></p>
+  <label><input type="radio" name="q9" value="a"> Apenas nome do cliente</label><br>
+  <label><input type="radio" name="q9" value="b"> Somente os valores numéricos</label><br>
+  <label><input type="radio" name="q9" value="c"> Itens, endereço do comerciante, telefone e totais</label><br>
+  <label><input type="radio" name="q9" value="d"> Apenas imagens dos produtos</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q10">
+  <p><strong>10. Qual comando instala o pacote necessário para o Form Recognizer?</strong></p>
+  <label><input type="radio" name="q10" value="a"> <code>pip install azure_ai_formrecognizer</code></label><br>
+  <label><input type="radio" name="q10" value="b"> <code>pip install form_ai_sdk</code></label><br>
+  <label><input type="radio" name="q10" value="c"> <code>pip install azure_keygen</code></label><br>
+  <label><input type="radio" name="q10" value="d"> <code>pip install vision_sdk</code></label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q11">
+  <p><strong>11. Qual biblioteca é usada para criar o cliente do Form Recognizer?</strong></p>
+  <label><input type="radio" name="q11" value="a"> azure.storage.blob</label><br>
+  <label><input type="radio" name="q11" value="b"> azure.ai.formrecognizer</label><br>
+  <label><input type="radio" name="q11" value="c"> azure.core.forms</label><br>
+  <label><input type="radio" name="q11" value="d"> azure.ml.document</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q12">
+  <p><strong>12. Para exibir a imagem do recibo, qual biblioteca é utilizada?</strong></p>
+  <label><input type="radio" name="q12" value="a"> seaborn</label><br>
+  <label><input type="radio" name="q12" value="b"> opencv</label><br>
+  <label><input type="radio" name="q12" value="c"> matplotlib.pyplot</label><br>
+  <label><input type="radio" name="q12" value="d"> pytesseract</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q13">
+  <p><strong>13. Qual objeto é usado para acessar os dados do recibo no resultado?</strong></p>
+  <label><input type="radio" name="q13" value="a"> <code>receipt_data[0]</code></label><br>
+  <label><input type="radio" name="q13" value="b"> <code>receipt_info.first()</code></label><br>
+  <label><input type="radio" name="q13" value="c"> <code>data.receipt</code></label><br>
+  <label><input type="radio" name="q13" value="d"> <code>form_result</code></label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q14">
+  <p><strong>14. O que o campo <code>Subtotal</code> representa?</strong></p>
+  <label><input type="radio" name="q14" value="a"> A soma dos impostos</label><br>
+  <label><input type="radio" name="q14" value="b"> O total final com desconto</label><br>
+  <label><input type="radio" name="q14" value="c"> O valor total antes de impostos</label><br>
+  <label><input type="radio" name="q14" value="d"> O preço de um item específico</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q15">
+  <p><strong>15. Qual campo representa a data da transação?</strong></p>
+  <label><input type="radio" name="q15" value="a"> TransactionDate</label><br>
+  <label><input type="radio" name="q15" value="b"> SaleDay</label><br>
+  <label><input type="radio" name="q15" value="c"> TimeOfPurchase</label><br>
+  <label><input type="radio" name="q15" value="d"> DataFiscal</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q16">
+  <p><strong>16. O que o campo <code>Items</code> contém no recibo?</strong></p>
+  <label><input type="radio" name="q16" value="a"> A lista de funcionários do mercado</label><br>
+  <label><input type="radio" name="q16" value="b"> O nome e valor de cada item comprado</label><br>
+  <label><input type="radio" name="q16" value="c"> Apenas o total de produtos</label><br>
+  <label><input type="radio" name="q16" value="d"> Os produtos em promoção</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+    </div>
+
+<div class="pergunta" id="q17">
+  <p><strong>17. Qual comando é usado para evitar que os eixos sejam exibidos na imagem?</strong></p>
+  <label><input type="radio" name="q17" value="a"> <code>plt.clear()</code></label><br>
+  <label><input type="radio" name="q17" value="b"> <code>plt.axis('off')</code></label><br>
+  <label><input type="radio" name="q17" value="c"> <code>plt.noaxis()</code></label><br>
+  <label><input type="radio" name="q17" value="d"> <code>plt.hide_axis()</code></label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q18">
+  <p><strong>18. Qual valor deve ser selecionado no campo "Nível de preço" ao criar o serviço?</strong></p>
+  <label><input type="radio" name="q18" value="a"> S1</label><br>
+  <label><input type="radio" name="q18" value="b"> F1</label><br>
+  <label><input type="radio" name="q18" value="c"> Free</label><br>
+  <label><input type="radio" name="q18" value="d"> F0</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q19">
+  <p><strong>19. Qual biblioteca permite carregar imagens em Python no exemplo mostrado?</strong></p>
+  <label><input type="radio" name="q19" value="a"> cv2</label><br>
+  <label><input type="radio" name="q19" value="b"> PIL</label><br>
+  <label><input type="radio" name="q19" value="c"> tkinter</label><br>
+  <label><input type="radio" name="q19" value="d"> requests</label><br><br>
+        <button type="button" onclick="proxima()">Próxima</button>
+        <button type="button" onclick="anterior()">Anterior</button>
+</div>
+
+<div class="pergunta" id="q20">
+  <p><strong>20. Para que serve o reconhecimento de formulários no Azure?</strong></p>
+  <label><input type="radio" name="q20" value="a"> Gerar formulários digitais automaticamente</label><br>
+  <label><input type="radio" name="q20" value="b"> Traduzir documentos para outras línguas</label><br>
+  <label><input type="radio" name="q20" value="c"> Extrair informações estruturadas de documentos como recibos e faturas</label><br>
+  <label><input type="radio" name="q20" value="d"> Realizar backup de arquivos PDF</label><br><br>
+  <button type="button" onclick="anterior()">Anterior</button>
+        <button type="submit">Finalizar</button>
+      </div>
+
+    </form>
+    <div id="resultado"></div>
+      <div class="linkProximaAula" id="linkProximaAula" style="display: none; text-align: center; margin-top: 20px;">
+      <a href="02a%20-%20Text%20Analytics.html">Próxima Aula</a></div>
+  </main>
+   <script src="js/script01f.js"></script>
+</body>
+</html>
