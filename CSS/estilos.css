@@ -1,0 +1,67 @@
+body {
+  display: run-in;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  background-color: #f9f9f9;
+  white-space: pre-line;
+  word-break: break-word; /* opcional, ajuda em palavras longas */
+}
+
+h1, h2, h3 {
+  color: #2c3e50;
+}
+
+figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+img {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  background: #000DD5;
+  color: #fff;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 5px;
+  margin: 1rem 0;
+  white-space: pre-line;
+  word-break: break-word; /* opcional, ajuda em palavras longas */
+}
+
+code {
+  font-family: Consolas, monospace;
+}
+
+a {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul, ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
